@@ -1,0 +1,405 @@
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+}
+.hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+/* CSS-only animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+.slide-in {
+    opacity: 0;
+    animation: slideIn 0.6s ease-in-out forwards;
+}
+.scale-in {
+    opacity: 0;
+    animation: scaleIn 0.7s ease-in-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* Delayed animations for staggered effect */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Form styling */
+.input-field {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-color: #f1f5f9;
+}
+.input-field:focus {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    background-color: #ffffff;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+}
+.btn-professional {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+.btn-professional:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+}
+.btn-professional:active {
+    transform: translateY(0);
+}
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 12px;
+    transition: 0.2s ease-in-out all;
+    font-size: 14px;
+    color: #6B7280;
+}
+.input-field:focus ~ .floating-label,
+.input-field:not(:placeholder-shown) ~ .floating-label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    background: #fff;
+    padding: 0 6px;
+    color: #4F46E5;
+}
+.step-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #E5E7EB;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.step-dot.active {
+    background-color: #4F46E5;
+    transform: scale(1.2);
+}
+/* Card hover effects */
+.hover-card {
+    transition: all 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+/* Testimonial cards hover */
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+}
+.navbar-link {
+    position: relative;
+}
+.navbar-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: #4F46E5;
+    transition: width 0.3s;
+}
+.navbar-link:hover:after {
+    width: 100%;
+}
+.navbar-link.active:after {
+    width: 100%;
+}
+.service-image-container {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+.service-image-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    padding: 2rem;
+    color: white;
+}
+.badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-weight: 500;
+}
+.review-avatar {
+    width: 3rem;
+    height: 3rem;
+}
+@media (min-width: 768px) {
+    .service-image-container {
+        height: 500px;
+    }
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+}
+.hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+}
+/* CSS-only animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+.slide-in {
+    opacity: 0;
+    animation: slideIn 0.6s ease-in-out forwards;
+}
+.scale-in {
+    opacity: 0;
+    animation: scaleIn 0.7s ease-in-out forwards;
+}
+.bounce-in {
+    opacity: 0;
+    animation: bounceIn 0.7s ease-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 1; transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+/* Delayed animations for staggered effect */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Search field styling */
+.search-input {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.search-input:focus {
+    border-color: #4F46E5;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+    outline: none;
+}
+
+/* Buttons styling */
+.btn-primary {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+}
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.35);
+}
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Card hover effects */
+.hover-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Category hover effects */
+.category-hover {
+    transition: all 0.3s ease;
+}
+.category-hover:hover {
+    transform: translateY(-5px);
+    color: #4F46E5;
+}
+
+/* Testimonial cards hover */
+.testimonial-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.testimonial-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Gradient overlay for hero section */
+.hero-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fc;
+}
+.hero-bg {
+    background-image: url('https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+}
+/* CSS-only animations */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+.slide-in {
+    opacity: 0;
+    animation: slideIn 0.6s ease-in-out forwards;
+}
+.scale-in {
+    opacity: 0;
+    animation: scaleIn 0.7s ease-in-out forwards;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+    from { transform: translateX(-30px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+/* Delayed animations for staggered effect */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* Form styling */
+.input-field {
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-color: #f1f5f9;
+}
+.input-field:focus {
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    background-color: #ffffff;
+}
+.gradient-bg {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+}
+.btn-professional {
+    background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+.btn-professional:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+}
+.btn-professional:active {
+    transform: translateY(0);
+}
+.floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 12px;
+    transition: 0.2s ease-in-out all;
+    font-size: 14px;
+    color: #6B7280;
+}
+.input-field:focus ~ .floating-label,
+.input-field:not(:placeholder-shown) ~ .floating-label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    background: #fff;
+    padding: 0 6px;
+    color: #4F46E5;
+}
+.step-dot {
+    width: 12px;
+    height: 12px;
+    background-color: #E5E7EB;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.step-dot.active {
+    background-color: #4F46E5;
+    transform: scale(1.2);
+}
+/* Card hover effects */
+.hover-card {
+    transition: all 0.3s ease;
+}
+.hover-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+/* Testimonial cards hover */
+.testimonial-card {
+    transition: all 0.3s ease;
+}
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
