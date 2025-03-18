@@ -20,7 +20,7 @@ class UtilisateurRepository implements BaseRepositoryInterface
     public function Update($id,array $data)
     {
         $user  = Utilisateur::find($id);
-        $user->update();
+        $user->update($data);
 
         return $user;
     }
@@ -41,6 +41,10 @@ class UtilisateurRepository implements BaseRepositoryInterface
 
     }
 
+    public function create(array $data)
+    {
+
+    }
     public function InsertProfessional(array $datauser,array $dataprestataire)
     {
        
@@ -50,6 +54,11 @@ class UtilisateurRepository implements BaseRepositoryInterface
 
       
         prestataire::create($dataprestataire);
+    }
+
+    public function FindByEmail($email)
+    {
+        return Utilisateur::where('Email',$email)->first();
     }
 }
 

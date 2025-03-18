@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,17 @@ Route::get('/admin/dashboard',function(){
     return view('Admin.Dashboard-home');
 });
 
+Route::get('/admin/categories',function(){
+    return view('Admin.Dashboard-categorie');
+});
+
+Route::get('/admin/categories',[AdminController::class,'SelectCategories']);
+Route::post('/admin/create/categorie',[AdminController::class,'create']);
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');
+});
+
+
+Route::get('/web/account-selection',function(){
+    return view('account-choose');
 });

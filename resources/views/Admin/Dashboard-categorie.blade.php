@@ -126,6 +126,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date de création</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                                     <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    @foreach($categories as $value)
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200">
@@ -149,6 +150,7 @@
                                         </button>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -193,3 +195,4 @@
     </script>
 </body>
 </html>
+@endsection

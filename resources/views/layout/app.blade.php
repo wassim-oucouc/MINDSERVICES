@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <base href="/public">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
@@ -8,14 +9,49 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fc;
         }
-    </style>
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        /* CSS-only animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        .slide-in {
+            opacity: 0;
+            animation: slideIn 0.6s ease-in-out forwards;
+        }
+        .scale-in {
+            opacity: 0;
+            animation: scaleIn 0.7s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        /* Delayed animations for staggered effect */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
     </style>
 </head>
-<body>
+<body class="text-gray-800">
 <nav class="bg-white shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -24,28 +60,26 @@
                     <h1 class="text-xl font-bold text-indigo-600 cursor-pointer font-sans">MIND<span class="text-indigo-800">SERVICE</span></h1>
                 </a>
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="index.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
-                    <a href="services.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="providers.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
-                    <a href="about.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
-                    <a href="contact.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
+                    <a href="/" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
+                    <a href="services.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="providers.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
+                    <a href="about.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
+                    <a href="/contact" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
                 </div>
             </div>
-            <!-- Version desktop des boutons -->
             <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="#">Connexion</a>
-                <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="professional-register.html">Espace Professionnel</a>
-                <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="client-register.html">Espace Client</a>
+                <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="/login">Connexion</a>
+                <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="/pro/register">Espace Professionnel</a>
+                <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="/client/register">Espace Client</a>
             </div>
-            <div class="flex items-center sm:hidden">
-                <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
+            <div class="flex items-center sm:hidden">ton">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
+                <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-but
             </div>
         </div>
     </div>
     
-    <!-- Menu mobile modifié -->
     <div class="sm:hidden hidden" id="mobile-menu">
         <div class="pt-2 pb-3 space-y-1">
             <a href="index.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Accueil</a>
@@ -61,7 +95,6 @@
         </div>
     </div>
 </nav>
-
     @yield('content')
 
 

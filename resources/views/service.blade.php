@@ -1,504 +1,311 @@
 @extends('layout.app')
 
-
-@section('title', 'Service')
-
-
+@section('title', 'Détail du service')
 @section('content')
-<main>
-        <!-- Breadcrumb -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-            <nav class="mb-5">
-                <ol class="flex text-sm">
-                    <li class="flex items-center">
-                        <a href="index.html" class="text-gray-500 hover:text-indigo-600">Accueil</a>
-                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
-                    </li>
-                    <li class="flex items-center">
-                        <a href="services.html" class="text-gray-500 hover:text-indigo-600">Services</a>
-                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
-                    </li>
-                    <li class="flex items-center">
-                        <a href="#" class="text-gray-500 hover:text-indigo-600">Développement Web</a>
-                        <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
-                    </li>
-                    <li class="text-gray-900 font-medium">Création de Site E-commerce Premium</li>
-                </ol>
-            </nav>
-        </div>
 
-        <!-- Service Header -->
-        <div class="service-image-container" style="background-image: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');">
-            <div class="service-image-overlay">
-                <div class="max-w-7xl mx-auto">
-                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2.5 py-1 rounded-full">Développement Web</span>
-                    <h1 class="text-3xl md:text-4xl font-bold mt-2">Création de Site E-commerce Premium</h1>
-                    <div class="flex flex-wrap items-center gap-4 mt-4">
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span>Paris, France</span>
+<!-- Section principale -->
+<div class="bg-gradient-to-b from-gray-50 to-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Partie supérieure: catégorie clickable et titre -->
+        <div class="mb-6">
+            <a href="/categories/plomberie" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
+                <i class="fas fa-tag mr-2"></i> Plomberie
+            </a>
+            <h1 class="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">Réparation de fuite d'eau</h1>
+        </div>
+        
+        <!-- Contenu principal en deux colonnes -->
+        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
+            <!-- Colonne gauche (2/3) -->
+            <div class="lg:col-span-2">
+                <!-- Image principale du service -->
+                <div class="rounded-xl overflow-hidden shadow-lg mb-8">
+                    <img src="/api/placeholder/800/450" alt="Réparation de fuite d'eau" class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Prix et informations essentielles -->
+                <div class="bg-white rounded-xl p-6 shadow-md mb-8 border-l-4 border-indigo-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-gray-500 uppercase font-semibold">Tarif horaire</p>
+                            <p class="text-3xl font-bold text-gray-900">70€<span class="text-gray-500 text-xl font-normal">/heure</span></p>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-hashtag mr-2"></i>
-                            <span>75001</span>
+                        <div class="flex flex-col items-end">
+                            <div class="flex items-center mb-1">
+                                <div class="flex text-yellow-400 mr-2">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-700 font-medium">4.9</span>
+                                <span class="text-gray-500 ml-1">(128 avis)</span>
+                            </div>
+                            <p class="text-green-600 font-medium">
+                                <i class="fas fa-check-circle mr-1"></i> Disponible aujourd'hui
+                            </p>
                         </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-star text-yellow-400 mr-2"></i>
-                            <span>4.9</span>
-                            <span class="text-gray-300 ml-1">(128 avis)</span>
+                    </div>
+                </div>
+                
+                <!-- Badges et garanties -->
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-50 text-blue-700">
+                        <i class="fas fa-shield-alt mr-1.5"></i> Service garanti
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-purple-50 text-purple-700">
+                        <i class="fas fa-history mr-1.5"></i> Intervention rapide
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-green-50 text-green-700">
+                        <i class="fas fa-certificate mr-1.5"></i> Professionnel certifié
+                    </span>
+                </div>
+                
+                <!-- Description du service -->
+                <div class="bg-white rounded-xl p-6 shadow-md mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Description du service</h2>
+                    <div class="prose max-w-none text-gray-600">
+                        <p>
+                            Notre service de réparation de fuites d'eau intervient rapidement pour diagnostiquer et réparer tout type de fuite dans votre domicile. Nos plombiers certifiés disposent de l'équipement nécessaire pour détecter même les fuites les plus difficiles à repérer.
+                        </p>
+                        <p>
+                            Nous intervenons pour les fuites visibles (robinets, éviers, douches, toilettes) ainsi que pour les fuites cachées (canalisations encastrées, tuyaux souterrains). Notre expertise nous permet de minimiser les dégâts et de réaliser les réparations avec un minimum d'impact sur votre intérieur.
+                        </p>
+                    </div>
+                    
+                    <!-- Ce qui est inclus -->
+                    <h3 class="text-lg font-bold text-gray-900 mt-6 mb-3">Ce qui est inclus</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                            <span class="text-gray-600">Déplacement du plombier à votre domicile</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                            <span class="text-gray-600">Diagnostic complet pour identifier l'origine de la fuite</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                            <span class="text-gray-600">Réparation de la fuite (remplacement de joints, soudure, etc.)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                            <span class="text-gray-600">Vérification du bon fonctionnement après réparation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
+                            <span class="text-gray-600">Garantie de 6 mois sur les travaux effectués</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Galerie photos -->
+                <div class="bg-white rounded-xl p-6 shadow-md mb-8">
+                    <h2 class="text-xl font-bold text-gray-900 mb-4">Galerie photos</h2>
+                    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                        <img src="/api/placeholder/300/200" alt="Travail de plomberie 1" class="rounded-lg shadow-sm hover:opacity-90 transition-opacity cursor-pointer">
+                        <img src="/api/placeholder/300/200" alt="Travail de plomberie 2" class="rounded-lg shadow-sm hover:opacity-90 transition-opacity cursor-pointer">
+                        <img src="/api/placeholder/300/200" alt="Travail de plomberie 3" class="rounded-lg shadow-sm hover:opacity-90 transition-opacity cursor-pointer">
+                    </div>
+                </div>
+                
+                <!-- Avis clients -->
+                <div class="bg-white rounded-xl p-6 shadow-md">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-900">Avis clients</h2>
+                        <a href="#all-reviews" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les avis</a>
+                    </div>
+                    
+                    <!-- Liste des avis (3 maximum) -->
+                    <div class="space-y-6">
+                        <!-- Avis 1 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                        <span class="text-indigo-800 font-semibold">JP</span>
+                                    </div>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-medium text-gray-900">Jean-Pierre Dubois</h3>
+                                        <p class="text-sm text-gray-500">Il y a 2 jours</p>
+                                    </div>
+                                    <div class="flex text-yellow-400 mt-1">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-600">
+                                        <p>Excellent service ! J'ai appelé pour une fuite urgente sous mon évier, le plombier est intervenu dans l'heure. Très professionnel, il a identifié rapidement le problème et l'a réparé efficacement. Prix raisonnable et travail soigné.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Avis 2 -->
+                        <div class="border-b border-gray-200 pb-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                        <span class="text-indigo-800 font-semibold">SM</span>
+                                    </div>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h3 class="text-sm font-medium text-gray-900">Sophie Martin</h3>
+                                        <p class="text-sm text-gray-500">Il y a 1 semaine</p>
+                                    </div>
+                                    <div class="flex text-yellow-400 mt-1">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <div class="mt-2 text-sm text-gray-600">
+                                        <p>Très bon service, plombier compétent qui a su détecter une fuite cachée dans ma salle de bain. Intervention propre et efficace. Seul petit bémol, le prix un peu élevé.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <span class="badge absolute top-4 right-4 bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full">Vérifiée</span>
-        </div>
-
-        <!-- Service Content -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                <!-- Main Content -->
-                <div class="lg:col-span-2">
-                    <!-- Service Description -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <h2 class="text-xl font-bold mb-4">Description du service</h2>
-                        <p class="text-gray-600 mb-4">
-                            Je vous propose une création complète et sur mesure de votre site e-commerce premium, comprenant une interface utilisateur intuitive, un back-office optimisé, et une expérience d'achat fluide pour vos clients.
-                        </p>
-                        <p class="text-gray-600 mb-4">
-                            En tant que développeur web spécialisé dans le e-commerce depuis plus de 5 ans, j'accompagne les entrepreneurs et les entreprises dans la mise en place de leur boutique en ligne performante et professionnelle.
-                        </p>
-                        <p class="text-gray-600 mb-4">
-                            Mon approche combine à la fois esthétique moderne, ergonomie optimale et performance technique pour vous garantir un site e-commerce qui convertit vos visiteurs en clients.
-                        </p>
-
-                        <h3 class="text-lg font-semibold mt-6 mb-3">Ce qui est inclus :</h3>
-                        <ul class="space-y-2 text-gray-600 mb-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Design personnalisé et responsive (adapté à tous les appareils)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Configuration des méthodes de paiement (Stripe, PayPal, etc.)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Intégration des options de livraison et suivi de colis</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Optimisation SEO pour le référencement naturel</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Formation à l'utilisation du back-office (2 heures incluses)</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                <span>Support technique pendant 1 mois après livraison</span>
-                            </li>
-                        </ul>
-
-                        <h3 class="text-lg font-semibold mt-6 mb-3">Technologies utilisées :</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">WordPress</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">WooCommerce</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">PHP</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">HTML/CSS</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">JavaScript</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">MySQL</span>
-                        </div>
-
-                        <h3 class="text-lg font-semibold mt-6 mb-3">Délai de livraison :</h3>
-                        <p class="text-gray-600">
-                            Entre 3 et 5 semaines selon la complexité du projet.
-                        </p>
+            
+            <!-- Colonne droite (1/3) - Profil du prestataire et réservation -->
+            <div class="mt-10 lg:mt-0">
+                <!-- Carte prestataire -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-6">
+                    <!-- Header prestataire -->
+                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-4 text-white">
+                        <h3 class="text-lg font-medium">Prestataire du service</h3>
                     </div>
-
-    
-
-                    <!-- Reviews -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <div class="flex justify-between items-center mb-6">
-                            <h2 class="text-xl font-bold">Avis clients</h2>
-                            <div class="flex items-center">
-                                <div class="flex text-yellow-400 mr-1">
+                    
+                    <!-- Informations prestataire -->
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <div class="h-16 w-16 rounded-full overflow-hidden border-2 border-indigo-100">
+                                <img src="/api/placeholder/64/64" alt="Martin Dupont" class="h-full w-full object-cover">
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-lg font-medium text-gray-900">Martin Dupont</h4>
+                                <p class="text-gray-600">Plombier certifié</p>
+                                <div class="flex text-yellow-400 mt-1">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-900">4.9</span>
-                                <span class="text-sm text-gray-500 ml-1">(128)</span>
-                            </div>
-                        </div>
-
-                        <div class="space-y-6">
-                            <!-- Review 1 -->
-                            <div class="border-b border-gray-100 pb-6">
-                                <div class="flex items-start">
-                                    <img class="review-avatar rounded-full object-cover mr-4" 
-                                         src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                                         alt="Reviewer">
-                                    <div class="flex-1">
-                                        <div class="flex justify-between mb-1">
-                                            <h4 class="text-base font-medium">Sophie Martin</h4>
-                                            <span class="text-sm text-gray-500">Il y a 2 semaines</span>
-                                        </div>
-                                        <div class="flex text-yellow-400 text-sm mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <p class="text-gray-600">
-                                            Paul a créé un site e-commerce exceptionnel pour ma boutique de vêtements. Le design est moderne, l'interface est intuitive et les ventes ont augmenté de 40% depuis le lancement. Je recommande vivement ses services !
-                                        </p>
-                                    </div>
+                                    <span class="ml-2 text-gray-600 text-xs">4.9</span>
                                 </div>
                             </div>
-
-                            <!-- Review 2 -->
-                            <div class="border-b border-gray-100 pb-6">
-                                <div class="flex items-start">
-                                    <img class="review-avatar rounded-full object-cover mr-4" 
-                                         src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                                         alt="Reviewer">
-                                    <div class="flex-1">
-                                        <div class="flex justify-between mb-1">
-                                            <h4 class="text-base font-medium">Thomas Dubois</h4>
-                                            <span class="text-sm text-gray-500">Il y a 1 mois</span>
-                                        </div>
-                                        <div class="flex text-yellow-400 text-sm mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <p class="text-gray-600">
-                                            Excellent travail sur mon site e-commerce pour produits artisanaux. Paul a été à l'écoute de mes besoins spécifiques et a livré exactement ce que je cherchais. Le site est rapide, sécurisé et facile à utiliser.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Review 3 -->
-                            <div>
-                                <div class="flex items-start">
-                                    <img class="review-avatar rounded-full object-cover mr-4" 
-                                         src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
-                                         alt="Reviewer">
-                                    <div class="flex-1">
-                                        <div class="flex justify-between mb-1">
-                                            <h4 class="text-base font-medium">Alex Bernard</h4>
-                                            <span class="text-sm text-gray-500">Il y a 2 mois</span>
-                                        </div>
-                                        <div class="flex text-yellow-400 text-sm mb-2">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <p class="text-gray-600">
-                                            Très satisfait du résultat final. Le site est bien optimisé et fonctionne parfaitement sur tous les appareils. Le seul petit bémol est le délai qui a été un peu plus long que prévu, mais la qualité du travail compense largement ce petit retard.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="mt-6 text-center">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">
-                                Voir tous les 128 avis <i class="fas fa-chevron-right ml-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sidebar -->
-                <div class="lg:col-span-1">
-                    <!-- Booking Card -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6  top-6">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-2xl font-bold text-gray-900">À partir de 1299€</h3>
-                            <span class="text-sm text-gray-500">Prix fixe</span>
                         </div>
                         
-                        <p class="text-sm text-gray-600 mb-6">
-                            Prix final selon les fonctionnalités requises et la complexité du projet.
-                        </p>
-
-                        <h4 class="font-medium text-gray-900 mb-2">Options disponibles :</h4>
-                        <div class="space-y-2 mb-6">
-                            <div class="flex items-center justify-between">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                                    <span class="ml-2 text-sm text-gray-700">Multi-langues (+299€)</span>
-                                </label>
-                                <i class="fas fa-info-circle text-gray-400 hover:text-gray-600 cursor-pointer"></i>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                                    <span class="ml-2 text-sm text-gray-700">Module de réservation (+199€)</span>
-                                </label>
-                                <i class="fas fa-info-circle text-gray-400 hover:text-gray-600 cursor-pointer"></i>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <label class="flex items-center">
-                                    <input type="checkbox" class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                                    <span class="ml-2 text-sm text-gray-700">Maintenance mensuelle (+89€/mois)</span>
-                                </label>
-                                <i class="fas fa-info-circle text-gray-400 hover:text-gray-600 cursor-pointer"></i>
-                            </div>
+                        <!-- Localisation -->
+                        <div class="mt-6 flex items-center text-gray-700">
+                            <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
+                            <span>Paris, 75011</span>
                         </div>
-
-                        <div class="space-y-4 mb-6">
-                            <button class="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-                                Réserver maintenant
-                            </button>
-                            <button class="w-full bg-white border border-indigo-600 text-indigo-600 py-3 rounded-lg hover:bg-indigo-50 transition-colors font-medium">
-                                Contacter le prestataire
-                            </button>
-                        </div>
-
-                        <div class="space-y-3 text-sm text-gray-600">
+                        
+                        <!-- Vérifications -->
+                        <div class="mt-4 space-y-2">
                             <div class="flex items-center">
-                                <i class="fas fa-calendar-check mr-2 text-gray-400"></i>
-                                <span>98% de taux de satisfaction</span>
+                                <i class="fas fa-check-circle text-green-500 w-5"></i>
+                                <span class="ml-2 text-sm text-gray-600">Identité vérifiée</span>
                             </div>
                             <div class="flex items-center">
-                                <i class="fas fa-clock mr-2 text-gray-400"></i>
-                                <span>Délai de réponse: < 24h</span>
+                                <i class="fas fa-certificate text-green-500 w-5"></i>
+                                <span class="ml-2 text-sm text-gray-600">Certifications validées</span>
                             </div>
                             <div class="flex items-center">
-                                <i class="fas fa-shield-alt mr-2 text-gray-400"></i>
-                                <span>Paiement sécurisé</span>
+                                <i class="fas fa-thumbs-up text-green-500 w-5"></i>
+                                <span class="ml-2 text-sm text-gray-600">98% de clients satisfaits</span>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Provider Card -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <div class="text-center">
-                            <div class=" mx-auto w-20 h-20 mb-3">
-                                <img class="w-full h-full rounded-full object-cover border-2 border-indigo-100" 
-                                     src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop" 
-                                     alt="Provider Profile">
-                                <div class="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border border-white"></div>
-                            </div>
-                            <h3 class="text-lg font-semibold">Paul Martin</h3>
-                            <p class="text-sm text-gray-600 mb-2">Développeur Web</p>
-                            <div class="flex justify-center mb-3">
-                                <div class="flex text-yellow-400 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="text-xs text-gray-500 ml-1">4.8 (58 avis)</span>
-                            </div>
-                            <p class="text-sm text-gray-600 mb-4">
-                                Spécialiste en développement web et e-commerce avec 5 ans d'expérience.
-                            </p>
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
+                        
+                        <div class="mt-4">
+                            <a href="/prestataires/martin-dupont" class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
                                 Voir le profil complet
                             </a>
                         </div>
                     </div>
-
-                    <!-- Location Card -->
-                    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <h3 class="font-semibold text-gray-900 mb-3">Localisation</h3>
-                        <div class="aspect-w-16 aspect-h-9 mb-4">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.142047342126!2d2.3354330156581374!3d48.87456857928921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e38f817b573%3A0x48d69c30470e7aeb!2sOp%C3%A9ra%20Garnier!5e0!3m2!1sfr!2sfr!4v1670265332664!5m2!1sfr!2sfr" 
-                                class="w-full h-48 rounded-lg" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                        <div class="space-y-2 text-sm text-gray-600">
-                            <div class="flex items-start">
-                                <i class="fas fa-map-marker-alt mt-1 mr-2 text-gray-400"></i>
-                                <span>12 Rue de la Paix, 75001 Paris, France</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-hashtag mr-2 text-gray-400"></i>
-                                <span>Code postal: 75001</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-globe-europe mr-2 text-gray-400"></i>
-                                <span>France</span>
-                            </div>
-                            <div class="flex items-center">
-                                <i class="fas fa-building mr-2 text-gray-400"></i>
-                                <span>Paris</span>
-                            </div>
-                        </div>
-                        <div class="mt-4">
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center">
-                                <i class="fas fa-directions mr-2"></i>
-                                <span>Itinéraire</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Availability Card -->
-                    <div class="bg-white rounded-lg shadow-sm p-6">
-                        <h3 class="font-semibold text-gray-900 mb-3">Disponibilité</h3>
-                        <div class="space-y-2 text-sm text-gray-600">
-                            <div class="flex items-center justify-between">
-                                <span>Lundi - Vendredi</span>
-                                <span>09:00 - 18:00</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Samedi</span>
-                                <span>10:00 - 15:00</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span>Dimanche</span>
-                                <span class="text-red-500">Fermé</span>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-gray-100">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-sm font-medium text-gray-900">Prochaine disponibilité</span>
-                                <span class="text-sm text-green-600 font-medium">Demain</span>
-                            </div>
-                            <div class="flex space-x-2 mb-1">
-                                <span class="inline-block text-xs py-1 px-2 bg-green-100 text-green-800 rounded">10:00</span>
-                                <span class="inline-block text-xs py-1 px-2 bg-green-100 text-green-800 rounded">14:30</span>
-                                <span class="inline-block text-xs py-1 px-2 bg-green-100 text-green-800 rounded">16:15</span>
-                            </div>
-                            <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                                Voir toutes les disponibilités
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Similar Services -->
-            <div class="mt-10">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Services similaires</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Service 1 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                        <img class="h-48 w-full object-cover" 
-                             src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300&q=80" 
-                             alt="Service">
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-1">
-                                <div>
-                                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full">Développement Web</span>
-                                </div>
-                                <div class="flex text-yellow-400 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 ml-1">4.7</span>
-                                </div>
-                            </div>
-                            <h3 class="text-base font-medium text-gray-900 mt-2">Développement de Site Corporate</h3>
-                            <div class="flex items-center text-sm text-gray-600 mt-1 mb-2">
-                                <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                <span>Paris, 75002</span>
-                            </div>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-indigo-600 font-medium">À partir de 900€</span>
-                                <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">En savoir plus</a>
-                            </div>
-                        </div>
+                    
+                    <!-- Section Réservation -->
+                    <div class="p-6 bg-gray-50 border-t border-gray-100">
+                        <a href="/reservation/plomberie/123" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <i class="fas fa-calendar-check mr-2"></i> Réserver maintenant
+                        </a>
+                        
+                        <p class="text-xs text-gray-500 mt-2 text-center">
+                            Réservation gratuite, paiement après service
+                        </p>
                     </div>
                     
-                    <!-- Service 2 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                        <img class="h-48 w-full object-cover" 
-                             src="https://images.unsplash.com/photo-1540319585560-a4e19d7e8b23?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300&q=80" 
-                             alt="Service">
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-1">
-                                <div>
-                                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full">E-commerce</span>
-                                </div>
-                                <div class="flex text-yellow-400 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 ml-1">4.9</span>
-                                </div>
-                            </div>
-                            <h3 class="text-base font-medium text-gray-900 mt-2">Optimisation SEO Pour E-commerce</h3>
-                            <div class="flex items-center text-sm text-gray-600 mt-1 mb-2">
-                                <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                <span>Lyon, 69001</span>
-                            </div>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-indigo-600 font-medium">À partir de 450€</span>
-                                <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">En savoir plus</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 3 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                        <img class="h-48 w-full object-cover" 
-                             src="https://images.unsplash.com/photo-1563986768494-4dee09f4960a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300&q=80" 
-                             alt="Service">
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-1">
-                                <div>
-                                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full">Développement Web</span>
-                                </div>
-                                <div class="flex text-yellow-400 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 ml-1">4.8</span>
-                                </div>
-                            </div>
-                            <h3 class="text-base font-medium text-gray-900 mt-2">Application Web Sur Mesure</h3>
-                            <div class="flex items-center text-sm text-gray-600 mt-1 mb-2">
-                                <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                <span>Paris, 75008</span>
-                            </div>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-indigo-600 font-medium">À partir de 1500€</span>
-                                <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">En savoir plus</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Service 4 -->
-                    <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                        <img class="h-48 w-full object-cover" 
-                             src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&h=300&q=80" 
-                             alt="Service">
-                        <div class="p-4">
-                            <div class="flex justify-between items-start mb-1">
-                                <div>
-                                    <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-0.5 rounded-full">E-commerce</span>
-                                </div>
-                                <div class="flex text-yellow-400 text-xs">
-                                    <i class="fas fa-star"></i>
-                                    <span class="text-gray-600 ml-1">4.6</span>
-                                </div>
-                            </div>
-                            <h3 class="text-base font-medium text-gray-900 mt-2">Refonte Site E-commerce</h3>
-                            <div class="flex items-center text-sm text-gray-600 mt-1 mb-2">
-                                <i class="fas fa-map-marker-alt text-gray-400 mr-1"></i>
-                                <span>Marseille, 13001</span>
-                            </div>
-                            <div class="flex justify-between items-center mt-3">
-                                <span class="text-indigo-600 font-medium">À partir de 950€</span>
-                                <a href="#" class="text-xs text-indigo-600 hover:text-indigo-800 font-medium">En savoir plus</a>
-                            </div>
-                        </div>
+                    <!-- Partage -->
+                    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-center space-x-4">
+                        <button class="inline-flex items-center text-gray-700 hover:text-indigo-600">
+                            <i class="far fa-heart mr-1"></i> Favoris
+                        </button>
+                        <span class="text-gray-300">|</span>
+                        <button class="inline-flex items-center text-gray-700 hover:text-indigo-600">
+                            <i class="fas fa-share-alt mr-1"></i> Partager
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</div>
+
+<!-- Section des instructions -->
+<div class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-2xl font-bold mb-8 text-center">Comment fonctionne la réservation ?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Étape 1 -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                    1
+                </div>
+                <h3 class="text-xl font-medium mb-2">Réservez</h3>
+                <p class="text-gray-300">
+                    Choisissez une date et une heure qui vous conviennent et indiquez votre adresse.
+                </p>
+            </div>
+            
+            <!-- Étape 2 -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                    2
+                </div>
+                <h3 class="text-xl font-medium mb-2">Confirmation</h3>
+                <p class="text-gray-300">
+                    Le prestataire confirme votre rendez-vous sous 30 minutes en moyenne.
+                </p>
+            </div>
+            
+            <!-- Étape 3 -->
+            <div class="text-center">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                    3
+                </div>
+                <h3 class="text-xl font-medium mb-2">Service & Paiement</h3>
+                <p class="text-gray-300">
+                    Le service est réalisé et vous payez en ligne de façon sécurisée après la prestation.
+                </p>
+            </div>
+        </div>
+        
+        <div class="mt-10 text-center">
+            <p class="text-gray-400 max-w-3xl mx-auto">
+                Tous les services réservés via MINDSERVICE sont garantis. Si vous n'êtes pas satisfait, notre équipe interviendra pour résoudre le problème ou vous proposer un remboursement selon nos conditions de service.
+            </p>
+        </div>
+    </div>
+</div>
 @endsection

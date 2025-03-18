@@ -108,11 +108,14 @@ class AuthController extends Controller
     public function Login(Request $request)
     {
 
-        $request->validate([
+       $validate =  $request->validate([
             "Email" => "required|email",
             "Password" => "required",
         ]);
-     $user = Utilisateur::where('Email',$request->Email)->first();
+
+
+     $user = $this->UtilisateurRepository->FindByEmail($request->Email);
+
 
 
      if(!$user || !hash::check($request->Password,$user->Password))
@@ -120,30 +123,25 @@ class AuthController extends Controller
         return redirect()->back()->with('error','Email Or Password is Incorrect');
      }
 
-     else
+   else  if($user && hash::check($request->Password,$user->Password))
      {
        Auth::login($user);
-
-        $request->session()->regenerate();
-
-        $utilisateur = auth::user();
-
-        // dd($utilisateur);
-    if($user->role_id)
-    {
-      if($user->role_id == 1)
+       
+       $request->session()->regenerate();
+        
+      switch($user->role_id)
       {
+        case 1: 
         return redirect('/professional/dashboard');
-      }
-      else if($user->role_id == 2)
-      {
+        break;
+      case 2 : 
         return redirect('/client/dashboard');
-      }
-      else if($user->role_id == 3)
-      {
+        break;
+    
+     case 3 : 
         return redirect('/admin/dashboard');
+        break;
       }
-     }
     }
 
      
@@ -153,10 +151,10 @@ class AuthController extends Controller
 
     public function Logout()
     {
-        if(Auth::check)
+        if(Auth::check())
         {
+            Auth::logout();
             session::flush();
-            auth::logout();
             $request->session()->invalidate();
             return redirect('/login');
         }
