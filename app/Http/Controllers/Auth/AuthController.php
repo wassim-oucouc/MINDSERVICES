@@ -17,13 +17,13 @@ class AuthController extends Controller
     private $UtilisateurRepository;
     Private $Nom;
 
-    public function __construct(UtilisateurRepository $UtilisateurRepository)
+    public function __construct()
     {
         $this->UtilisateurRepository = new UtilisateurRepository();
     }
     public function RegisterProfessional(Request $request)
     {
-        // dd($request->Photo);
+        // dd($request->all());
        $validated =  $request->validate([
             "Prenom" => "required|string",
             "Nom" => "required|string",
@@ -40,7 +40,8 @@ class AuthController extends Controller
 
         if($validated['Photo'])
         {
-            $path = $request->file('Photo')->store('User');
+            $path = $request->file('Photo')->store('User','public');
+            // dd($path);
         }
         $user = $this->UtilisateurRepository->InsertProfessional([
            "Prenom"=>  $validated['Prenom'],
@@ -53,10 +54,10 @@ class AuthController extends Controller
            "created_at" => now(),
            "updated_at" => now(),
         ],[
-            "phone_number" => $validated['NumeroTele'],
-            "address" => $validated['Adresse'],
+            "Numero_Telephone" => $validated['NumeroTele'],
+            "Adresse" => $validated['Adresse'],
             "zip_code" => $validated['PostalCode'],
-            "city" => $validated['Ville'],
+            "Ville" => $validated['Ville'],
             "service_principal" => $validated['service'],
             "created_at" => now(),
             "updated_at" => now(),
@@ -83,7 +84,7 @@ class AuthController extends Controller
 
         if($validated['Photo'])
         {
-            $path = $request->file('Photo')->store('User');
+            $path = $request->file('Photo')->store('User','public');
             // dd($path);
         }
 
@@ -98,7 +99,7 @@ class AuthController extends Controller
              "created_at" => now(),
              'updated_at' => now(),]
             ,[
-                "Phone_number" => $validated['NumeroTele'],
+                "Numero_Telephone" => $validated['NumeroTele'],
                 "pays" => $validated['pays'],
             ]);
 

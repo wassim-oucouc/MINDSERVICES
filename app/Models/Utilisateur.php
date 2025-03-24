@@ -12,4 +12,9 @@ class Utilisateur extends Authenticatable
 
     Protected $table = "utilisateur";
     use HasFactory;
+
+    public function Role()
+    {
+        return $this->hasOne(Role::class);
+    }
 }

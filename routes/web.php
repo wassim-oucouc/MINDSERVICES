@@ -43,8 +43,45 @@ Route::get('/admin/categories',function(){
     return view('Admin.Dashboard-categorie');
 });
 
+Route::get('/admin/services',[AdminController::class,'SelectServices']);
+
+
 Route::get('/admin/categories',[AdminController::class,'SelectCategories']);
-Route::post('/admin/create/categorie',[AdminController::class,'create']);
+Route::post('/admin/create/categorie',[AdminController::class,'CreateCategorie']);
+
+Route::get('/admin/update/categorie/{id}',[AdminController::class,'update']);
+
+Route::put('/admin/update/categorie/{id}',[AdminController::class,'updatecategorie']);
+
+// Route::get('admin/delete/categorie/{id}',[AdminController::class,'deletecategorie']);
+
+
+Route::delete('admin/delete/categorie/{id}',[AdminController::class,'DestroyCategorie']);
+
+Route::get('/admin/create/service',[AdminController::class,'AddService']);
+Route::post('/admin/create/service',[AdminController::class,'CreateService']);
+
+Route::get('/admin/update/service/{id}',[AdminController::class,'UpdateService']);
+
+Route::put('/admin/update/service/{id}',[AdminController::class,'EditService']);
+
+
+Route::delete('/admin/delete/service/{id}',[AdminController::class,'DeleteService']);
+
+Route::put('/admin/uban/service/{id}',[AdminController::class,'unbanService']);
+
+Route::put('/admin/ban/service/{id}',[AdminController::class,'BanService']);
+
+Route::get('/admin/rendez-vous',[AdminController::class,'Rendez_vous']);
+
+
+Route::get('/admin/create/categorie',function(){
+    return view('/Admin.Dashboard-categorie-creation');
+});
+
+Route::get('/admin/avis',function(){
+    return view('/Admin.Dashboard-avis');
+});
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');
 });

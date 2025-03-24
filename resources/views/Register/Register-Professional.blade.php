@@ -154,6 +154,13 @@
                     </div>
                 </div>
                 <div class="md:w-3/5 p-10">
+                @if($errors->all())
+                <ul class="errorban px-4 py-2 bg-red-100">
+                                    @foreach($errors->all() as $error)
+                                        <li class="error my-2 text-red-500">{{ $error }}</li>
+                                    @endforeach
+                                @endif
+                            </ul>
                     <h2 class="text-3xl font-bold mb-2 text-gray-800">Inscription Professionnel</h2>
                     <p class="text-gray-600 mb-8">Commencez à développer votre activité dès aujourd'hui</p>
                     <form id="fullForm" method="POST" action="{{ route('registerpro') }}" enctype="multipart/form-data">
@@ -225,13 +232,7 @@
                         </div>
 
                         <div id="secondform">
-                            <ul class="px-4 py-2 bg-red-100">
-                                @if($errors->all())
-                                    @foreach($errors->all() as $error)
-                                        <li class="my-2 text-red-500">{{ $error }}</li>
-                                    @endforeach
-                                @endif
-                            </ul>
+                        
                             <div class="space-y-6">
                                 <div class="relative">
                                     <input name="Adresse" class="w-full px-4 py-3.5 rounded-lg border-2 border-transparent bg-gray-100 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all" type="text" id="adresse" placeholder=" ">

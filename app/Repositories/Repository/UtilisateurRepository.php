@@ -6,11 +6,11 @@ use App\Models\Client;
 use App\Models\prestataire;
 use App\Models\Utilisateur;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\Contracts\BaseRepositoryInterface;
+use App\Repositories\Contracts\UserInterface;
 
 
 
-class UtilisateurRepository implements BaseRepositoryInterface
+class UtilisateurRepository implements UserInterface
 {
     public function find($id)
     {
