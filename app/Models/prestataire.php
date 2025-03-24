@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class prestataire extends Model
 {
-    Protected $fillable = ['utilisateur_id','phone_number','address','zip_code','city','service_principal','created_at','updated_at'];
+    Protected $fillable = ['utilisateur_id','Numero_Telephone','Adresse','zip_code','Ville','service_principal','created_at','updated_at'];
     Protected $table = "prestataire";
     use HasFactory;
 }

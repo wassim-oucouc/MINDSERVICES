@@ -5,11 +5,11 @@ namespace  App\Repositories\Repository;
 
 use App\Models\Categorie;
 use Illuminate\Support\Facades\DB;
-use App\Repositories\Contracts\BaseRepositoryInterface;
+use App\Repositories\Contracts\CategorieInterface;
 
 
 
-class CategorieRepository implements BaseRepositoryInterface
+class CategorieRepository implements CategorieInterface
 {
     public function find($id)
     {
@@ -22,6 +22,12 @@ class CategorieRepository implements BaseRepositoryInterface
         $categorie->update($data);
 
         return $categorie;
+    }
+
+    public function GetIdByName($name)
+    {
+        $id = Categorie::select('id')->where('Nom',$name)->get('id');
+        return $id;   
     }
 
     public function Delete($id)
@@ -38,10 +44,19 @@ class CategorieRepository implements BaseRepositoryInterface
     }
 
     public function ReadCategories()
-    {
-        $categories = DB::table('categorie')->select('SELECT COUNT(service.titre),categorie.Nom AS Nom,categorie.Description AS Description,categorie.Photo AS Photo  from service inner join categorie on service.categorie_id = categorie.id');
-        dd($categories);
+    {$categories = DB::table('service')
+        ->Rightjoin('categorie', 'categorie.id', '=', 'service.categorie_id')
+        ->groupBy('categorie.id', 'categorie.Nom','categorie.Description','categorie.Photo','categorie.created_at','categorie.updated_at')  
+        ->select(
+            'categorie.Nom',
+            DB::raw('COUNT(service.titre) AS COUNT'),
+            'categorie.Description',
+            'categorie.id',
+            'categorie.Photo',
+            'categorie.created_at'
+        )
+        ->get();
+    
         return $categories;
     }
-
 }
