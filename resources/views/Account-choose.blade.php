@@ -46,13 +46,13 @@
                         <i class="fas fa-user-circle text-indigo-600 text-5xl mb-4"></i>
                         <h3 class="text-xl font-semibold text-gray-800">Compte Client</h3>
                         <p class="text-gray-600 text-center">Accédez à des services personnalisés et trouvez les meilleurs professionnels.</p>
-                        <a href="client-register.html" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">Créer un compte Client</a>
+                        <a href="/client/register" class="mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors">Créer un compte Client</a>
                     </div>
                     <div class="flex flex-col items-center p-6 bg-green-100 rounded-lg shadow-md hover:shadow-lg transition-shadow">
                         <i class="fas fa-briefcase text-green-600 text-5xl mb-4"></i>
                         <h3 class="text-xl font-semibold text-gray-800">Compte Professionnel</h3>
                         <p class="text-gray-600 text-center">Inscrivez-vous pour offrir vos services et atteindre de nouveaux clients.</p>
-                        <a href="professional-register.html" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">Créer un compte Professionnel</a>
+                        <a href="/pro/register" class="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">Créer un compte Professionnel</a>
                     </div>
                 </div>
             </div>

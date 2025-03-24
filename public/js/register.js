@@ -13,6 +13,7 @@ let Array = [];
 form2.style.display = "none";
 
 ButtonInscription.addEventListener('click', function (event) {
+
     event.preventDefault()
     if (!ValidationFormSecond()) {
         event.preventDefault()
@@ -28,6 +29,11 @@ ButtonSuivant.addEventListener('click', function (event) {
     if (ValidationFormFirst()) {
         console.log('hello');
         if (form1.style.display = "block") {
+            if( document.querySelector('.error'))
+            {
+            document.querySelector('.error').textContent = "";
+            document.querySelector('.errorban').classList.toggle('bg-red-100');
+            }
             document.querySelector('#dop').classList.toggle('active');
             document.querySelector('#text-etape').textContent = "Étape 2 : Informations Fiscal"
             form1.style.display = "none";
@@ -47,6 +53,7 @@ ButtonSuivant.addEventListener('click', function (event) {
 
 ButtonRetour.addEventListener('click', function () {
     if (form2.style.display = "block") {
+        document.querySelector('.errorban').classList.toggle('bg-red-100');
         document.querySelector('#dop').classList.toggle('active');
         document.querySelector('#text-etape').textContent = "Étape 1 : Informations de base"
         form2.style.display = "none";

@@ -17,13 +17,13 @@ class AuthController extends Controller
     private $UtilisateurRepository;
     Private $Nom;
 
-    public function __construct(UtilisateurRepository $UtilisateurRepository)
+    public function __construct()
     {
         $this->UtilisateurRepository = new UtilisateurRepository();
     }
     public function RegisterProfessional(Request $request)
     {
-        // dd($request->Photo);
+        // dd($request->all());
        $validated =  $request->validate([
             "Prenom" => "required|string",
             "Nom" => "required|string",
@@ -40,7 +40,8 @@ class AuthController extends Controller
 
         if($validated['Photo'])
         {
-            $path = $request->file('Photo')->store('User');
+            $path = $request->file('Photo')->store('User','public');
+            // dd($path);
         }
         $user = $this->UtilisateurRepository->InsertProfessional([
            "Prenom"=>  $validated['Prenom'],
@@ -53,10 +54,10 @@ class AuthController extends Controller
            "created_at" => now(),
            "updated_at" => now(),
         ],[
-            "phone_number" => $validated['NumeroTele'],
-            "address" => $validated['Adresse'],
+            "Numero_Telephone" => $validated['NumeroTele'],
+            "Adresse" => $validated['Adresse'],
             "zip_code" => $validated['PostalCode'],
-            "city" => $validated['Ville'],
+            "Ville" => $validated['Ville'],
             "service_principal" => $validated['service'],
             "created_at" => now(),
             "updated_at" => now(),
@@ -83,7 +84,7 @@ class AuthController extends Controller
 
         if($validated['Photo'])
         {
-            $path = $request->file('Photo')->store('User');
+            $path = $request->file('Photo')->store('User','public');
             // dd($path);
         }
 
@@ -98,7 +99,7 @@ class AuthController extends Controller
              "created_at" => now(),
              'updated_at' => now(),]
             ,[
-                "Phone_number" => $validated['NumeroTele'],
+                "Numero_Telephone" => $validated['NumeroTele'],
                 "pays" => $validated['pays'],
             ]);
 
@@ -108,11 +109,14 @@ class AuthController extends Controller
     public function Login(Request $request)
     {
 
-        $request->validate([
+       $validate =  $request->validate([
             "Email" => "required|email",
             "Password" => "required",
         ]);
-     $user = Utilisateur::where('Email',$request->Email)->first();
+
+
+     $user = $this->UtilisateurRepository->FindByEmail($request->Email);
+
 
 
      if(!$user || !hash::check($request->Password,$user->Password))
@@ -120,30 +124,25 @@ class AuthController extends Controller
         return redirect()->back()->with('error','Email Or Password is Incorrect');
      }
 
-     else
+   else  if($user && hash::check($request->Password,$user->Password))
      {
        Auth::login($user);
-
-        $request->session()->regenerate();
-
-        $utilisateur = auth::user();
-
-        // dd($utilisateur);
-    if($user->role_id)
-    {
-      if($user->role_id == 1)
+       
+       $request->session()->regenerate();
+        
+      switch($user->role_id)
       {
+        case 1: 
         return redirect('/professional/dashboard');
-      }
-      else if($user->role_id == 2)
-      {
+        break;
+      case 2 : 
         return redirect('/client/dashboard');
-      }
-      else if($user->role_id == 3)
-      {
+        break;
+    
+     case 3 : 
         return redirect('/admin/dashboard');
+        break;
       }
-     }
     }
 
      
@@ -153,10 +152,10 @@ class AuthController extends Controller
 
     public function Logout()
     {
-        if(Auth::check)
+        if(Auth::check())
         {
+            Auth::logout();
             session::flush();
-            auth::logout();
             $request->session()->invalidate();
             return redirect('/login');
         }
