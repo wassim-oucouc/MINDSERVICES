@@ -1,4 +1,3 @@
-console.log('hello');
 
 
 
@@ -17,7 +16,6 @@ ButtonInscription.addEventListener('click', function (event) {
     event.preventDefault()
     if (!ValidationFormSecond()) {
         event.preventDefault()
-        console.log('soso');
     }
     else {
         document.getElementById("fullForm").submit();
@@ -27,7 +25,6 @@ ButtonInscription.addEventListener('click', function (event) {
 ButtonSuivant.addEventListener('click', function (event) {
     event.preventDefault()
     if (ValidationFormFirst()) {
-        console.log('hello');
         if (form1.style.display = "block") {
             if( document.querySelector('.error'))
             {
@@ -79,7 +76,6 @@ function ValidationFormFirst() {
     let NomInput = document.querySelector('#nom').value;
     let PrenomInput = document.querySelector('#prenom').value;
     let EmailInput = document.querySelector('#email').value;
-    // console.log(EmailInput)
     let PasswordInput = document.querySelector('#password').value;
     let PhoneInput = document.querySelector('#phone').value;
     let PhotoInput = document.querySelector('#Photo').value;
@@ -95,7 +91,6 @@ function ValidationFormFirst() {
     if (PrenomInput == "" || !RegexName.test(PrenomInput)) {
         prenom.textContent = "Enter a Valid Prenom";
         document.querySelector('#prenom').style.borderColor = "red";
-        console.log(nom);
         isvalid = false;
     }
     else {
@@ -105,7 +100,6 @@ function ValidationFormFirst() {
 
     if (NomInput == "" || !RegexName.test(NomInput)) {
         nom.textContent = "Enter a Valid Name";
-        console.log(nom);
         isvalid = false;
     }
     else {
@@ -114,10 +108,8 @@ function ValidationFormFirst() {
     }
 
     if (EmailInput == "" || !RegexEmail.test(EmailInput)) {
-        console.log('hello')
         email.textContent = "Enter a Valid Email";
         document.querySelector('#email').style.borderColor = "red";
-        console.log(email)
         isvalid = false;
     }
     else {
@@ -173,7 +165,6 @@ function ValidationFormFirst() {
 function ValidationFormSecond() {
     let AdresseInput = document.querySelector('#adresse').value;
     let VilleInput = document.querySelector('#Ville').value;
-    console.log(document.querySelector('#Ville'));
     let PostalCodeInput = document.querySelector('#PostalCode').value;
     let PaysInput = document.querySelector('#pays').value;
 
@@ -186,7 +177,6 @@ function ValidationFormSecond() {
 
     if (AdresseInput == "") {
         adress.textContent = "Enter A valid Address";
-        console.log(document.querySelector('#adresse'));
         document.querySelector('#adresse').style.borderColor = "red";
         isvalid = false;
     }
@@ -197,7 +187,6 @@ function ValidationFormSecond() {
 
     if(VilleInput == "" || VilleInput.length < 2)
     {
-        console.log('fifi')
         ville.textContent = "Enter A valid City";
         document.querySelector('#Ville').style.borderColor = "red";
         isvalid = false;
@@ -232,7 +221,6 @@ function ValidationFormSecond() {
     }
 
 
-    console.log(isvalid);
     return isvalid;
 
 }
