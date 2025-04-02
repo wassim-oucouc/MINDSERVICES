@@ -153,258 +153,134 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200">
                                 <!-- Avis 1 -->
+                                 @foreach($Avis as $value)
                                 <tr class="table-row hover:bg-indigo-50 transition-colors">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
-                                            <span class="text-sm text-gray-900">#AVIS10428</span>
+                                            <span class="text-sm text-gray-900">{{$value->id}}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop" alt="Client" class="h-8 w-8 rounded-full object-cover">
+                                                <img src="/storage/{{$value->ClientPhoto}}" alt="Client" class="h-8 w-8 rounded-full object-cover">
                                             </div>
                                             <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Thomas Dupont</div>
-                                                <div class="text-xs text-gray-500">thomas.dupont@example.com</div>
+                                                <div class="text-sm font-medium text-gray-900">{{$value->ClientPrenom}}  " " {{$value->ClientNom}} </div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
                                             <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1364&auto=format&fit=crop" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
+                                                <img src="/storage{{$value->ProfessionalPhoto}}" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
                                             </div>
                                             <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Camille Laurent</div>
-                                                <div class="text-xs text-gray-500">Coach Sportif</div>
+                                                <div class="text-sm font-medium text-gray-900">{{$value->ProfessionalPrenom}}  " " {{$value->ProfessionalNom}}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Séance de coaching personnalisé</div>
+                                        <div class="text-sm text-gray-900">{{$value->titre}}</div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900 max-w-md truncate">Excellente séance de coaching ! Camille a su adapter les exercices à mes besoins spécifiques et m'a donné des conseils très utiles pour améliorer ma posture.</div>
+                                        <div class="text-sm text-gray-900 max-w-md truncate">{{$value->Commentaire}}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex text-yellow-400">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="ml-1 text-gray-900 font-medium">5.0</span>
+                                           
+  @if($value->Note == 0)
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i> 
+    <i class="far fa-star"></i> 
+    <i class="far fa-star"></i> 
+    <i class="far fa-star"></i>  
+    @elseif($value->Note == 2)
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i> 
+    <i class="far fa-star"></i> 
+    <i class="far fa-star"></i>
+    @elseif($value->Note == 3)
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="far fa-star"></i>  
+    <i class="far fa-star"></i>
+    @elseif($value->Note == 4)
+    <i class="fas fa-star"></i>  
+    <i class="fas fa-star"></i>  
+    <i class="fas fa-star"></i>  
+    <i class="fas fa-star"></i>  
+    <i class="far fa-star"></i>
+    @elseif($value->Note == 5)
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+    <i class="fas fa-star"></i>
+                                            @endif
+                                            <span class="ml-1 text-gray-900 font-medium">{{$value->Note}}</span>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="text-sm text-gray-900">15/03/2025</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
+                                        @if($value->status == "En attente")
                                         <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">En attente</span>
+                                        @elseif(($value->status == "Approuvé"))
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Approuvé</span>
+                                        @elseif(($value->status == "Refusé"))
+                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Refusé</span>
+                                        @endif
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                
+                                    <td class=" whitespace-nowrap text-right text-sm font-medium">
+                                    <div class ="flex flex-row">
+                                    @if($value->status == "En attente")
+                                    <form action="/admin/approve/avis/{{$value->id}}" method = "POST">
+                                        @csrf 
+                                        @method('PUT')
                                         <button class="text-green-600 hover:text-green-800 mx-1 px-2 py-1 bg-green-100 rounded-md">
                                             <i class="fas fa-check mr-1"></i> Accepter
                                         </button>
+                                        </form>
+                                        <form action="/refuse/avis/{{$value->id}}" method = "POST">
+                                        @csrf 
+                                        @method('PUT')
                                         <button class="text-red-600 hover:text-red-800 mx-1 px-2 py-1 bg-red-100 rounded-md">
                                             <i class="fas fa-times mr-1"></i> Refuser
                                         </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Avis 2 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
-                                            <span class="text-sm text-gray-900">#AVIS10427</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop" alt="Client" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Sophie Martin</div>
-                                                <div class="text-xs text-gray-500">sophie.martin@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Lucas Petit</div>
-                                                <div class="text-xs text-gray-500">Développeur Web</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Développement site e-commerce</div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900 max-w-md truncate">Très satisfaite du site créé par Lucas. Le design est moderne et l'interface intuitive. Quelques petits bugs à corriger mais dans l'ensemble un excellent travail.</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex text-yellow-400">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <span class="ml-1 text-gray-900 font-medium">4.0</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">14/03/2025</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Approuvé</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+</div>
+                                        @elseif($value->status == "Approuvé")
                                         <button class="text-indigo-600 hover:text-indigo-900 mx-1">
                                             <i class="fas fa-eye"></i>
                                         </button>
+                                        <form action="/admin/update/avis/{{$value->id}}" method = "POST">
+                                        @csrf
+                                        @method('put')
                                         <button class="text-indigo-600 hover:text-indigo-900 mx-1">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
+                                        </form>
+                                        <form action="/Admin/delete/avis/{{$value->id}}" method = "POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        <button type = "submit"class="text-red-600 hover:text-red-900 mx-1">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
+                                        </form>
+                
                                     </td>
+                                 
+                                    @elseif($value->status == "Refusé")
+                                        @endif
                                 </tr>
+                                @endforeach
                                 
-                                <!-- Avis 3 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
-                                            <span class="text-sm text-gray-900">#AVIS10426</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop" alt="Client" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Antoine Moreau</div>
-                                                <div class="text-xs text-gray-500">antoine.moreau@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1364&auto=format&fit=crop" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Emma Bernard</div>
-                                                <div class="text-xs text-gray-500">Architecte d'intérieur</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Consultation design d'intérieur</div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900 max-w-md truncate">Je ne suis pas totalement satisfait de la prestation. Plusieurs de mes demandes n'ont pas été prises en compte et le résultat final ne correspond pas à mes attentes. La communication aurait pu être meilleure.</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex text-yellow-400">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <span class="ml-1 text-gray-900 font-medium">2.0</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">13/03/2025</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">En attente</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-green-600 hover:text-green-800 mx-1 px-2 py-1 bg-green-100 rounded-md">
-                                            <i class="fas fa-check mr-1"></i> Accepter
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-800 mx-1 px-2 py-1 bg-red-100 rounded-md">
-                                            <i class="fas fa-times mr-1"></i> Refuser
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Avis 4 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
-                                            <span class="text-sm text-gray-900">#AVIS10425</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop" alt="Client" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Julie Leroy</div>
-                                                <div class="text-xs text-gray-500">julie.leroy@example.com</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1287&auto=format&fit=crop" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Paul Martin</div>
-                                                <div class="text-xs text-gray-500">Photographe</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Séance photo professionnelle</div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="text-sm text-gray-900 max-w-md truncate">Séance photo incroyable ! Paul a un véritable talent pour capturer les émotions et mettre à l'aise ses clients. Les photos sont magnifiques et livrées dans le délai promis. Je recommande vivement !</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex text-yellow-400">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="ml-1 text-gray-900 font-medium">5.0</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">12/03/2025</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Approuvé</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                              
 
                 <!-- Pagination -->
                 <div class="flex justify-between items-center mt-8">

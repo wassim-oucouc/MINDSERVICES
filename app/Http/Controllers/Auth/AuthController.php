@@ -17,9 +17,9 @@ class AuthController extends Controller
     private $UtilisateurRepository;
     Private $Nom;
 
-    public function __construct()
+    public function __construct(UtilisateurRepository $UtilisateurRepository)
     {
-        $this->UtilisateurRepository = new UtilisateurRepository();
+        $this->UtilisateurRepository =  $UtilisateurRepository;
     }
     public function RegisterProfessional(Request $request)
     {

@@ -79,9 +79,16 @@ Route::get('/admin/create/categorie',function(){
     return view('/Admin.Dashboard-categorie-creation');
 });
 
-Route::get('/admin/avis',function(){
-    return view('/Admin.Dashboard-avis');
-});
+Route::get('/admin/avis',[AdminController::class,'SelectAvis']);
+
+Route::delete('/Admin/delete/avis/{id}',[AdminController::class,'DeleteAvis']);
+
+Route::put('/admin/approve/avis/{id}',[AdminController::class,'ApproveAvis']);
+Route::put('/admin/refuse/avis/{id}',[AdminController::class,'RefuseAvis']);
+Route::put('/admin/update/avis/{id}',[AdminController::class,'UpdateAvis']);
+
+
+
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');
 });
@@ -89,4 +96,9 @@ Route::get('/admin/settings',function(){
 
 Route::get('/web/account-selection',function(){
     return view('account-choose');
+});
+
+
+Route::get('/services',function(){
+    return view('services');
 });

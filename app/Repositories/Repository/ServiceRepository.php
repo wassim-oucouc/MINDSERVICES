@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Repositories\Contracts\ServiceInterface;
 
 
-class ServiceRepository
+class ServiceRepository implements ServiceInterface
 {
 
 

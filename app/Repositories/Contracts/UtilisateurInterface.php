@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface UserInterface
+interface UtilisateurInterface
 {
     public function find($id);
     public function Update($id,array $data);
