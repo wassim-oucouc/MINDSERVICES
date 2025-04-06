@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\AuthController;
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +89,16 @@ Route::put('/admin/refuse/avis/{id}',[AdminController::class,'RefuseAvis']);
 Route::put('/admin/update/avis/{id}',[AdminController::class,'UpdateAvis']);
 
 
+Route::get('/client/overview',[ClientController::class,'index']);
+
+Route::get('/client/reservation',[ClientController::class,'reservationRead']);
+
+Route::get('/client/reservation/details/{id}',[ClientController::class,'GetReservationDetails']);
+
+Route::get('/client/profile',[ClientController::class,'Profile']);
+
+Route::get('/client/settings',[ClientController::class,'UpdateClientProfile']);
+Route::put('/client/settings',[ClientController::class,'UpdateClientProfile']);
 
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');

@@ -14,5 +14,7 @@ class Prestataire extends Model
     {
         return $this->hasMany(Avis::class);
     }
+
+   
     use HasFactory;
 }

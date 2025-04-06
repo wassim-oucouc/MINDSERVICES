@@ -1,540 +1,331 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINDSERVICES - Espace Client</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body class="font-poppins text-gray-800 bg-gray-100">
-    <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <aside class="bg-white w-64 shadow-lg h-full flex-shrink-0 z-20 border-r border-gray-200">
-            <div class="h-full flex flex-col">
-                <!-- Logo -->
-                <div class="flex items-center justify-center h-16 border-b border-gray-200">
-                    <h1 class="text-xl font-bold text-indigo-600 cursor-pointer">MIND<span class="text-indigo-800">SERVICE</span></h1>
-                </div>
-                
-                <!-- User Info -->
-                <div class="flex items-center space-x-4 px-6 py-4 border-b border-gray-200">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1287&auto=format&fit=crop" 
-                         alt="Client Profile" class="w-10 h-10 rounded-full object-cover">
-                    <div>
-                        <h3 class="font-medium text-sm">Paul Martin</h3>
-                        <p class="text-xs text-gray-500">Client</p>
-                    </div>
-                </div>
-                
-                <!-- Navigation -->
-                <nav class="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-                    <a href="client-dashboard.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg active-nav-item bg-indigo-100 text-indigo-600">
-                        <i class="fas fa-tachometer-alt text-lg"></i>
-                        <span class="font-medium">Tableau de bord</span>
-                    </a>
-                    <a href="client-appointments.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-calendar-alt text-lg"></i>
-                        <span class="font-medium">Mes Rendez-vous</span>
-                    </a>
-                    <a href="client-services.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-concierge-bell text-lg"></i>
-                        <span class="font-medium">Services</span>
-                    </a>
-                    <a href="client-messages.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-comments text-lg"></i>
-                        <span class="font-medium">Messages</span>
-                        <span class="ml-auto bg-red-500 text-white text-xs py-0.5 px-2 rounded-full">2</span>
-                    </a>
-                    <a href="client-invoices.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-file-invoice-dollar text-lg"></i>
-                        <span class="font-medium">Factures</span>
-                    </a>
-                    <a href="client-profile.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-user-circle text-lg"></i>
-                        <span class="font-medium">Mon Profil</span>
-                    </a>
-                    <a href="client-help.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors">
-                        <i class="fas fa-question-circle text-lg"></i>
-                        <span class="font-medium">Aide</span>
-                    </a>
-                </nav>
-                
-                <!-- Logout -->
-                <div class="p-4 border-t border-gray-200">
-                    <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-red-500 transition-colors">
-                        <i class="fas fa-sign-out-alt text-lg"></i>
-                        <span class="font-medium">Déconnexion</span>
-                    </a>
+@extends('layout.client')
+
+@section('title', 'Home')
+
+@section('home', 'flex items-center px-2 py-2 text-sm font-medium rounded-md bg-indigo-50 text-indigo-600')
+
+
+
+@section('content')
+        <!-- Main Content -->
+        <div class="flex-1 overflow-auto">
+            <!-- Dashboard Header -->
+            <div class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-2xl font-semibold text-gray-900">Tableau de bord</h1>
                 </div>
             </div>
-        </aside>
 
-        <!-- Main Content -->
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
-            <!-- Top header -->
-            <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
-                <div class="flex items-center">
-                    <button class="text-gray-500 hover:text-indigo-600 focus:outline-none mr-6 lg:hidden">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    <h2 class="text-xl font-semibold text-gray-800">Tableau de Bord</h2>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button class="p-2 text-gray-500 hover:text-indigo-600 focus:outline-none relative">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
-                    </button>
-                </div>
-            </header>
-
-            <!-- Dashboard content -->
-            <div class="p-6 fade-in">
-                <!-- Welcome Message -->
-                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-6">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-800">Bienvenue, Paul Martin 👋</h3>
-                            <p class="text-gray-600 mt-1">Heureux de vous revoir sur votre espace personnel</p>
-                        </div>
-                        <button class="mt-4 md:mt-0 bg-indigo-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-indigo-700 transition-colors">
-                            <i class="fas fa-plus"></i>
-                            <span>Prendre Rendez-vous</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Stats cards -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500 mb-1">Total Rendez-vous</p>
-                                <h3 class="text-2xl font-bold">12</h3>
-                                <p class="text-xs text-indigo-500 mt-2 flex items-center">
-                                    <i class="fas fa-calendar-check mr-1"></i> 3 Confirmés
-                                </p>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-indigo-500 flex items-center justify-center">
-                                <i class="fas fa-calendar-check text-white text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500 mb-1">Prochain Rendez-vous</p>
-                                <h3 class="text-lg font-bold">14 Mars 2025</h3>
-                                <p class="text-xs text-indigo-500 mt-2 flex items-center">
-                                    <i class="fas fa-clock mr-1"></i> 10:00 - Coaching
-                                </p>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                                <i class="fas fa-hourglass-half text-white text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500 mb-1">Messages</p>
-                                <h3 class="text-2xl font-bold">2</h3>
-                                <p class="text-xs text-red-500 mt-2 flex items-center">
-                                    <i class="fas fa-envelope mr-1"></i> Non lus
-                                </p>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center">
-                                <i class="fas fa-comments text-white text-xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500 mb-1">Factures</p>
-                                <h3 class="text-2xl font-bold">3</h3>
-                                <p class="text-xs text-green-500 mt-2 flex items-center">
-                                    <i class="fas fa-check-circle mr-1"></i> Toutes payées
-                                </p>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
-                                <i class="fas fa-file-invoice-dollar text-white text-xl"></i>
-                            </div>
+            <!-- Dashboard Content -->
+            <main class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+                <!-- Welcome Card -->
+                <div class="bg-white shadow rounded-lg mb-6">
+                    <div class="px-4 py-5 sm:p-6">
+                        <h2 class="text-lg font-medium text-gray-900">Bienvenue, Jean !</h2>
+                        <p class="mt-1 text-sm text-gray-600">
+                            Que souhaitez-vous faire aujourd'hui ?
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-3">
+                            <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                                <i class="fas fa-search mr-2"></i> Rechercher un service
+                            </a>
+                            <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                <i class="fas fa-calendar-plus mr-2"></i> Nouvelle réservation
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Upcoming Appointments -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-6">
-                    <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                        <h3 class="font-semibold text-gray-900">Prochains Rendez-vous</h3>
-                        <a href="client-appointments.html" class="text-indigo-600 text-sm hover:text-indigo-800">
+                <!-- Services Réservés Section -->
+                <div class="mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-medium text-gray-900">Services réservés</h2>
+                        <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                             Voir tout <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
-                    <div>
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Heure</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prestataire</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-                                    <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                <!-- Appointment 1 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">14/03/2025</div>
-                                        <div class="text-xs text-gray-500">10:00 - 11:30</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+
+                    <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                        <ul class="divide-y divide-gray-200">
+                            <!-- Service 1 -->
+                            <li>
+                                <div class="px-4 py-4 sm:px-6">
+                                    <div class="flex items-center justify-between">
                                         <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1364&auto=format&fit=crop" alt="Provider" class="h-8 w-8 rounded-full object-cover">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                                <i class="fas fa-wrench text-indigo-600"></i>
                                             </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Camille Laurent</div>
-                                                <div class="text-xs text-gray-500">Coach Sportif</div>
+                                            <div class="ml-4">
+                                                <p class="text-sm font-medium text-gray-900">Plomberie</p>
+                                                <p class="text-sm text-gray-500">Réparation robinet cuisine</p>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Séance de coaching personnalisé</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmé</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
-                                            <i class="fas fa-times-circle"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Appointment 2 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">15/03/2025</div>
-                                        <div class="text-xs text-gray-500">11:00 - 13:00</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
+                                                En attente
+                                            </span>
+                                            <button class="text-gray-400 hover:text-gray-500">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 sm:flex sm:justify-between">
+                                        <div class="sm:flex">
+                                            <p class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-user mr-1.5 text-gray-400"></i>
+                                                Martin Leblanc
+                                            </p>
+                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
+                                                6 avril 2025, 14:00
+                                            </p>
+                                        </div>
+                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                            <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
+                                            <p>À domicile</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Service 2 -->
+                            <li>
+                                <div class="px-4 py-4 sm:px-6">
+                                    <div class="flex items-center justify-between">
                                         <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop" alt="Provider" class="h-8 w-8 rounded-full object-cover">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                                <i class="fas fa-leaf text-indigo-600"></i>
                                             </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Emma Bernard</div>
-                                                <div class="text-xs text-gray-500">Photographe</div>
+                                            <div class="ml-4">
+                                                <p class="text-sm font-medium text-gray-900">Jardinage</p>
+                                                <p class="text-sm text-gray-500">Tonte de pelouse</p>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Séance photo professionnelle</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmé</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
-                                            <i class="fas fa-times-circle"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                <!-- Appointment 3 -->
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">20/03/2025</div>
-                                        <div class="text-xs text-gray-500">14:00 - 15:00</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center gap-2">
+                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
+                                                Confirmé
+                                            </span>
+                                            <button class="text-gray-400 hover:text-gray-500">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 sm:flex sm:justify-between">
+                                        <div class="sm:flex">
+                                            <p class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-user mr-1.5 text-gray-400"></i>
+                                                Émilie Robert
+                                            </p>
+                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
+                                                10 avril 2025, 10:00
+                                            </p>
+                                        </div>
+                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                            <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
+                                            <p>À domicile</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <!-- Service 3 -->
+                            <li>
+                                <div class="px-4 py-4 sm:px-6">
+                                    <div class="flex items-center justify-between">
                                         <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1287&auto=format&fit=crop" alt="Client" class="h-8 w-8 rounded-full object-cover">
+                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                                <i class="fas fa-desktop text-indigo-600"></i>
                                             </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">Lucas Petit</div>
-                                                <div class="text-xs text-gray-500">Architecte d'intérieur</div>
+                                            <div class="ml-4">
+                                                <p class="text-sm font-medium text-gray-900">Informatique</p>
+                                                <p class="text-sm text-gray-500">Réparation ordinateur</p>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Consultation design</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">En attente</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
-                                            <i class="fas fa-times-circle"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <div class="flex items-center gap-2">
+                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
+                                                Terminé
+                                            </span>
+                                            <button class="text-gray-400 hover:text-gray-500">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 sm:flex sm:justify-between">
+                                        <div class="sm:flex">
+                                            <p class="flex items-center text-sm text-gray-500">
+                                                <i class="fas fa-user mr-1.5 text-gray-400"></i>
+                                                Thomas Mercier
+                                            </p>
+                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
+                                                <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
+                                                28 mars 2025, 16:30
+                                            </p>
+                                        </div>
+                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                                            <a href="#" class="text-indigo-600 hover:text-indigo-500">
+                                                Laisser un avis <i class="fas fa-star ml-1"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Two Columns Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Recent Messages -->
-                    <div class="md:col-span-1 bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Messages Récents</h3>
-                            <span class="text-xs text-gray-500">3 messages</span>
-                        </div>
-                        <div class="divide-y divide-gray-200">
-                            <!-- Message 1 -->
-                            <div class="p-4 hover:bg-gray-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div class="flex items-center">
-                                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1364&auto=format&fit=crop" alt="Sender" class="h-8 w-8 rounded-full object-cover mr-3">
-                                        <div>
-                                            <p class="font-medium text-gray-900">Camille Laurent</p>
-                                            <p class="text-xs text-gray-500">Coach Sportif</p>
-                                        </div>
+                <!-- Two Column Layout for Stats and Profile -->
+                <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                    <!-- Stats Card -->
+                    <div class="bg-white shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Vos statistiques</h3>
+                            <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                                <div class="bg-gray-50 overflow-hidden rounded-lg">
+                                    <div class="px-4 py-5 sm:p-6">
+                                        <dt class="text-sm font-medium text-gray-500 truncate">
+                                            Services réservés
+                                        </dt>
+                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                            8
+                                        </dd>
                                     </div>
-                                    <span class="text-xs text-gray-500">Aujourd'hui</span>
                                 </div>
-                                <p class="text-sm text-gray-600 line-clamp-2">Bonjour Paul, je vous confirme notre rendez-vous de coaching personnalisé pour le 14 mars à 10h00. N'oubliez pas votre tenue de sport.</p>
-                                <div class="mt-2">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">Nouveau</span>
-                                </div>
-                            </div>
-
-                            <!-- Message 2 -->
-                            <div class="p-4 hover:bg-gray-50">
-                                <div class="flex justify-between items-start mb-2">
-                                    <div class="flex items-center">
-                                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop" alt="Sender" class="h-8 w-8 rounded-full object-cover mr-3">
-                                        <div>
-                                            <p class="font-medium text-gray-900">Emma Bernard</p>
-                                            <p class="text-xs text-gray-500">Photographe</p>
-                                        </div>
+                                <div class="bg-gray-50 overflow-hidden rounded-lg">
+                                    <div class="px-4 py-5 sm:p-6">
+                                        <dt class="text-sm font-medium text-gray-500 truncate">
+                                            Services terminés
+                                        </dt>
+                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                            5
+                                        </dd>
                                     </div>
-                                    <span class="text-xs text-gray-500">Hier</span>
                                 </div>
-                                <p class="text-sm text-gray-600 line-clamp-2">Pour votre séance photo, pourriez-vous apporter 2-3 tenues différentes? Je vous conseille des couleurs unies qui passent bien à l'image.</p>
-                                <div class="mt-2">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-800">Nouveau</span>
+                                <div class="bg-gray-50 overflow-hidden rounded-lg">
+                                    <div class="px-4 py-5 sm:p-6">
+                                        <dt class="text-sm font-medium text-gray-500 truncate">
+                                            À venir
+                                        </dt>
+                                        <dd class="mt-1 text-3xl font-semibold text-gray-900">
+                                            2
+                                        </dd>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 overflow-hidden rounded-lg">
+                                    <div class="px-4 py-5 sm:p-6">
+                                        <dt class="text-sm font-medium text-gray-500 truncate">
+                                            Note moyenne
+                                        </dt>
+                                        <dd class="mt-1 text-3xl font-semibold text-gray-900 flex items-center">
+                                            4.8
+                                            <div class="ml-2 text-yellow-400 text-lg flex">
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </dd>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Recommended Services -->
-                    <div class="md:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Services Recommandés</h3>
-                            <a href="client-services.html" class="text-indigo-600 text-sm hover:text-indigo-800">
-                                Voir tout <i class="fas fa-arrow-right ml-1"></i>
+                    <!-- Profile Summary -->
+                    <div class="bg-white shadow rounded-lg">
+                        <div class="px-4 py-5 sm:p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-medium leading-6 text-gray-900">Profil</h3>
+                                <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                    Modifier <i class="fas fa-edit ml-1"></i>
+                                </a>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="h-24 w-24 rounded-full bg-indigo-100 flex items-center justify-center">
+                                    <span class="text-indigo-800 font-semibold text-2xl">JD</span>
+                                </div>
+                                <div class="ml-6">
+                                    <h4 class="text-xl font-medium text-gray-900">Jean Dupont</h4>
+                                    <p class="text-sm text-gray-500">Membre depuis janvier 2025</p>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
+                                        Paris, France
+                                    </p>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        <i class="fas fa-envelope mr-1.5 text-gray-400"></i>
+                                        jean.dupont@email.com
+                                    </p>
+                                    <p class="mt-1 text-sm text-gray-600">
+                                        <i class="fas fa-phone mr-1.5 text-gray-400"></i>
+                                        +33 6 12 34 56 78
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex justify-end">
+                                <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                    Voir profil complet <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Settings -->
+                <div class="mt-6 bg-white shadow rounded-lg">
+                    <div class="px-4 py-5 sm:p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Paramètres rapides</h3>
+                            <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                Tous les paramètres <i class="fas fa-cog ml-1"></i>
                             </a>
                         </div>
-                        <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <!-- Service Card 1 -->
-                            <div class="service-card bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                                <div class="h-32 w-full overflow-hidden">
-                                    <img src="https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?q=80&w=1770&auto=format&fit=crop" 
-                                        alt="Coaching Service" class="w-full h-full object-cover">
-                                </div>
-                                <div class="p-4">
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <h4 class="font-medium text-gray-900">Programme Nutrition</h4>
-                                            <p class="text-sm text-gray-600 mt-1">Plan alimentaire adapté à vos objectifs</p>
-                                        </div>
-                                        <div class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Santé</div>
-                                    </div>
-                                    <div class="flex items-center mt-3">
-                                        <div class="flex text-yellow-400 text-sm">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span class="text-xs text-gray-500 ml-2">5.0 (32 avis)</span>
-                                    </div>
-                                    <div class="flex justify-between items-center mt-4">
-                                        <span class="text-indigo-600 font-medium">À partir de 120€</span>
-                                        <button class="bg-indigo-600 text-white px-3 py-1 rounded text-sm hover:bg-indigo-700 transition-colors">
-                                            Réserver
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Recent Activity and Invoices -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-                    <!-- Recent Activity -->
-                    <div class="md:col-span-2 bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Activité Récente</h3>
-                        </div>
-                        <div class="p-4">
-                            <div class="relative">
-                                <!-- Timeline line -->
-                                <div class="absolute top-0 left-4 h-full w-0.5 bg-gray-200"></div>
-                                
-                                <!-- Activity items -->
-                                <div class="space-y-6">
-                                    <!-- Activity 1 -->
-                                    <div class="relative pl-10">
-                                        <div class="absolute top-1 left-0 h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                                            <i class="fas fa-calendar-check text-indigo-600"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-900">Rendez-vous confirmé</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Vous avez confirmé votre rendez-vous avec Camille Laurent pour le 14 mars.</p>
-                                            <span class="text-xs text-gray-400 mt-1 block">Aujourd'hui, 09:45</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Activity 2 -->
-                                    <div class="relative pl-10">
-                                        <div class="absolute top-1 left-0 h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
-                                            <i class="fas fa-comments text-blue-600"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-900">Nouveau message</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Vous avez reçu un message de Emma Bernard concernant votre séance photo.</p>
-                                            <span class="text-xs text-gray-400 mt-1 block">Hier, 15:32</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Activity 3 -->
-                                    <div class="relative pl-10">
-                                        <div class="absolute top-1 left-0 h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
-                                            <i class="fas fa-file-invoice-dollar text-green-600"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-900">Paiement effectué</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Vous avez payé la facture #INV-2025-003 d'un montant de 150€.</p>
-                                            <span class="text-xs text-gray-400 mt-1 block">10 mars 2025, 11:20</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <!-- Activity 4 -->
-                                    <div class="relative pl-10">
-                                        <div class="absolute top-1 left-0 h-8 w-8 rounded-full bg-yellow-100 flex items-center justify-center">
-                                            <i class="fas fa-calendar-plus text-yellow-600"></i>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-sm font-medium text-gray-900">Nouveau rendez-vous</h4>
-                                            <p class="text-xs text-gray-500 mt-1">Vous avez réservé un rendez-vous avec Lucas Petit pour le 20 mars.</p>
-                                            <span class="text-xs text-gray-400 mt-1 block">05 mars 2025, 14:15</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Invoices -->
-                    <div class="md:col-span-1 bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200">
-                        <div class="p-4 border-b border-gray-200 flex justify-between items-center">
-                            <h3 class="font-semibold text-gray-900">Dernières Factures</h3>
-                            <a href="client-invoices.html" class="text-indigo-600 text-sm hover:text-indigo-800">
-                                Voir tout <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
-                        <div class="divide-y divide-gray-200">
-                            <!-- Invoice 1 -->
-                            <div class="p-4 hover:bg-gray-50">
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="text-sm font-medium text-gray-900">#INV-2025-003</div>
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Payée</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-xs text-gray-500">Coaching Sportif</p>
-                                        <p class="text-xs text-gray-500">10 mars 2025</p>
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-900">150€</div>
-                                </div>
-                                <button class="mt-2 text-xs text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-download mr-1"></i> Télécharger
+                        <div class="mt-2 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Notifications par email</span>
+                                <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 bg-indigo-600" role="switch">
+                                    <span class="sr-only">Utiliser les notifications</span>
+                                    <span class="translate-x-5 pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+                                        <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-0 ease-out duration-100">
+                                            <svg class="h-3 w-3 text-indigo-600" fill="currentColor" viewBox="0 0 12 12">
+                                                <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+                                            </svg>
+                                        </span>
+                                    </span>
                                 </button>
                             </div>
-
-                            <!-- Invoice 2 -->
-                            <div class="p-4 hover:bg-gray-50">
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="text-sm font-medium text-gray-900">#INV-2025-002</div>
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Payée</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-xs text-gray-500">Shooting Photo</p>
-                                        <p class="text-xs text-gray-500">15 fév 2025</p>
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-900">250€</div>
-                                </div>
-                                <button class="mt-2 text-xs text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-download mr-1"></i> Télécharger
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Notifications SMS</span>
+                                <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 bg-gray-200" role="switch">
+                                    <span class="sr-only">Utiliser les notifications SMS</span>
+                                    <span class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+                                        <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200">
+                                            <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                                                <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </span>
                                 </button>
                             </div>
-
-                            <!-- Invoice 3 -->
-                            <div class="p-4 hover:bg-gray-50">
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="text-sm font-medium text-gray-900">#INV-2025-001</div>
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Payée</span>
-                                </div>
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-xs text-gray-500">Développement Web</p>
-                                        <p class="text-xs text-gray-500">05 jan 2025</p>
-                                    </div>
-                                    <div class="text-sm font-medium text-gray-900">650€</div>
-                                </div>
-                                <button class="mt-2 text-xs text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-download mr-1"></i> Télécharger
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-700">Mode sombre</span>
+                                <button type="button" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 bg-gray-200" role="switch">
+                                    <span class="sr-only">Utiliser le mode sombre</span>
+                                    <span class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200">
+                                        <span class="absolute inset-0 h-full w-full flex items-center justify-center transition-opacity opacity-100 ease-in duration-200">
+                                            <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
+                                                <path d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </span>
+                                    </span>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+
+                <!-- Footer Space -->
+                <div class="h-6"></div>
+            </main>
+        </div>
     </div>
-
-    <script>
-        // Toggle sidebar on mobile
-        document.querySelector('.fa-bars').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar');
-            
-            if (sidebar.classList.contains('hidden')) {
-                sidebar.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('hidden');
-            }
-        });
-    </script>
 </body>
 </html>
+
+@endsection
