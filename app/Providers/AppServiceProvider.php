@@ -6,7 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Repositories\Contracts\AvisInterface;
 use App\Repositories\Contracts\UserInterface;
+use App\Repositories\Contracts\ClientInterface;
 use App\Repositories\Repository\AvisRepository;
+use App\Repositories\Repository\clientRepository;
 use App\Repositories\Contracts\CategorieInterface;
 use App\Repositories\Repository\CategorieRepository;
 use App\Repositories\Repository\UtilisateurRepository;
@@ -24,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserInterface::class,UtilisateurRepository::class);
         $this->app->bind(CategorieInterface::class,CategorieRepository::class);
         $this->app->bind(AvisInterface::class,AvisRepository::class);
+        $this->app->bind(ReservationInterface::class,ReservationInterface::class);
+        $this->app->bind(ClientInterface::class,clientRepository::class);
     }
 
     /**

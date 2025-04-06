@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Categorie;
+use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,13 +14,13 @@ class Service extends Model
     Protected $table = "service";
     use HasFactory;
 
-    public function Categorie()
+    public function category()
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class,'categorie_id');
     }
 
-    public function Réservation()
+    public function Reservation()
     {
-        return $this->hasMany(Réservation::class);
+        return $this->hasMany(Reservation::class);
     }
 }

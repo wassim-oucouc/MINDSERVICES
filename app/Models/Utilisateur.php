@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Utilisateur extends Authenticatable
 {
-    Protected $Fillable = ['Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
+    Protected $fillable = ['Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
 
     Protected $table = "utilisateur";
     use HasFactory;

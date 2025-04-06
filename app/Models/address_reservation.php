@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Client extends Model
+class address_reservation extends Model
 {
-    Protected $fillable = ['telephone','pays','id_client','created_at','updated_at'];
-    Protected $table = "Client";
+    Protected $table = "address_reservation";
+
+    
     use HasFactory;
 }
