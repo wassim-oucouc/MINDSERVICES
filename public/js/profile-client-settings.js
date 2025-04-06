@@ -76,7 +76,7 @@ function Validation()
 
     if(Prenom.value == '' || !PrenomExpression.test(Prenom.value.trim()))
     {
-        showError('Prenom invalide (lettres et tirets uniquement)');
+        showError('Prenom invalide (lettres et tirets uniquement).');
         toggleRedBanner()        
         validate = false;
     }
