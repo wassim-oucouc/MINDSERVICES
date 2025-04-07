@@ -74,5 +74,12 @@ public function BanServiceByID($id)
 
     return $service;
 }
+
+public function GetServiceDetails($id)
+{
+    $service = Service::where('id',$id)->with('Prestataire','Professional','category')->first();
+
+    return $service;
+}
 }
 

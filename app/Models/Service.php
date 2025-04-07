@@ -23,4 +23,14 @@ class Service extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    public function Prestataire()
+    {
+        return $this->belongsTo(Utilisateur::class,'prestataire_id');
+    }
+
+    public function Professional()
+    {
+        return $this->belongsTo(Prestataire::class,'prestataire_id','utilisateur_id');
+    }
 }

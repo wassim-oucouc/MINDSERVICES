@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\AuthController;
@@ -100,6 +101,9 @@ Route::get('/client/profile',[ClientController::class,'Profile']);
 Route::get('/client/settings',[ClientController::class,'UpdateClientProfile']);
 Route::put('/client/settings',[ClientController::class,'UpdateClientProfile']);
 
+Route::get('/service/details/{id}',[HomeController::class,'indexService']);
+Route::get('/services',[HomeController::class,'IndexServiceSearch']);
+
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');
 });
@@ -110,6 +114,3 @@ Route::get('/web/account-selection',function(){
 });
 
 
-Route::get('/services',function(){
-    return view('services');
-});

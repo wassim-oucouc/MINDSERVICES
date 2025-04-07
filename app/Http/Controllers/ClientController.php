@@ -56,7 +56,7 @@ if($request->nom)
     $validated = $request->validate([
         "prenom" => "required|string|max:50",
         "nom" => "required|string|max:50",
-        "email" => "required|email|unique:utilisateur,email",
+        "email" => "nullable|email|unique:utilisateur,email",
         "telephone" => "required|string|max:20",
         "pays" => "required",
         "current_password" => "nullable|string|min:8",
@@ -75,7 +75,7 @@ if($request->nom)
    }
 
 
-    if (!$request->filled('current-password')) {
+    if (!$request->filled('current-password') && !$request->filled('email')) {
         if ($request->file('photo')) {
             $path = $request->file('photo')->store('User', 'public');
         }
@@ -83,7 +83,6 @@ if($request->nom)
         $data = [
             "Prenom" => $request->prenom,
             "Nom" => $request->nom,
-            "Email" => $request->email,
             "Photo" => $path,
             "updated_at" => now()
         ];
@@ -99,10 +98,9 @@ if($request->nom)
         return response()->json([
             "message" => "Profile updated successfully!"
         ]);
-    } else {
+    } else if($request->filled('current-password') && !$request->filled('email')) {
         $password = $this->clientRepository->find(Auth::user()->id);
-        return response()->json([$request->current_password]);
-        if (Hash::check($request->current_password, $password->Password)) {
+         if (Hash::check($request->current_password, $password->Password)) {
            
             $newpassword = Hash::make($request->password);
 
@@ -113,7 +111,6 @@ if($request->nom)
             $data = [
                 "Prenom" => $request->prenom,
                 "Nom" => $request->nom,
-                "Email" => $request->email,
                 "Password" => $newpassword,
                 "Photo" => $client->Photo,
                 "updated_at" => now()
@@ -130,16 +127,82 @@ if($request->nom)
             return response()->json([
                 "message" => "Profile updated successfully!"
             ]);
-        } else {
+            
+        }
+        else {
             return response()->json([
                 "message" => "Current password is incorrect."
             ], 400);
         }
     }
-}
+        else if(!$request->filled('current-password') && $request->filled('email'))
+        {
+            if ($request->hasFile('photo')) {
+                $path = $request->file('photo')->store('User', 'public');
+            }
+            $data = [
+                "Prenom" => $request->prenom,
+                "Nom" => $request->nom,
+                "Email" => $request->email,
+                "Photo" => $client->Photo,
+                "updated_at" => now()
+            ];
 
+            $dataclient = [
+                "telephone" => $request->telephone,
+                "pays" => $request->pays
+            ];
+            $this->clientRepository->update(Auth::user()->id, $data);
+            $this->clientRepository->UpdateClientInfo(Auth::user()->id, $dataclient);
+
+            return response()->json([
+                "message" => "Profile updated successfully!"
+            ]);
+
+
+        }
+        else
+        {
+            $password = $this->clientRepository->find(Auth::user()->id);
+            if (Hash::check($request->current_password, $password->Password)) {
+              
+               $newpassword = Hash::make($request->password);
+   
+               if ($request->hasFile('photo')) {
+                   $path = $request->file('photo')->store('User', 'public');
+               }
+   
+               $data = [
+                   "Prenom" => $request->prenom,
+                   "Nom" => $request->nom,
+                   "Email" => $request->email,
+                   "Password" => $newpassword,
+                   "Photo" => $client->Photo,
+                   "updated_at" => now()
+               ];
+   
+               $dataclient = [
+                   "telephone" => $request->telephone,
+                   "pays" => $request->pays
+               ];
+   
+               $this->clientRepository->update(Auth::user()->id, $data);
+               $this->clientRepository->UpdateClientInfo(Auth::user()->id, $dataclient);
+   
+               return response()->json([
+                   "message" => "Profile updated successfully!"
+               ]);
+               
+           }
+           else {
+               return response()->json([
+                   "message" => "Current password is incorrect."
+               ], 400);
+           }
+        }
+         
+    }
 
     return view('Client.Dashboard-settings', compact('client'));
 }
-
 }

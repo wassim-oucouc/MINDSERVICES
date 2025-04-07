@@ -60,4 +60,34 @@ class AvisRepository implements AvisInterface
             $avis->save();
         }
     }
+
+    public function CalculateAverageFeedback($id)
+    {
+        $AvisAverage = Avis::where('prestataire_id', $id)
+        ->where('status', 'Approuvé')
+        ->avg('Note');
+
+        return $AvisAverage;
+    }
+
+    public function CountFeedbackPrestataire($id)
+    {
+        $TotalAvis = Avis::where('prestataire_id',$id)
+        ->where('status','Approuvé')
+        ->count();
+
+        return $TotalAvis;
+    }
+
+    public function GetFeedbackLimit($id)
+    {
+        $Avis = Avis::where('prestataire_id',$id)
+        ->where('status','Approuvé')
+        ->with('Client')
+        ->limit(4)
+        ->orderBy('id','DESC')
+        ->get();
+
+        return $Avis;
+    }
 }

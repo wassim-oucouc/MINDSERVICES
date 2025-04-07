@@ -58,10 +58,6 @@
                                         <input type="text" id="nom" name="nom" value="{{$client->Nom}}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2">
                                     </div>
                                     <div>
-                                        <label for="email" class="block text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Email</label>
-                                        <input type="email" id="email" name="email" value="{{$client->Email}}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2">
-                                    </div>
-                                    <div>
                                         <label for="telephone" class="block text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Numéro Téléphone</label>
                                         <input type="tel" id="telephone" name="telephone" value="{{$client->telephone}}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2">
                                     </div>
@@ -105,8 +101,22 @@
                         </div>
                     </div>
 
+                    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
+                        <div class="p-6">
+                            <h2 class="text-xl font-semibold text-gray-900 mb-6">changer email adresse</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Email</label>
+                                    <input type="email" id="email" name="email"  class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2">                                    <p class="mt-2 text-sm text-gray-500">Laissez ces champs vides si vous ne souhaitez pas changer votre mot de passe.</p>
+                                </div>
+                                <div>
+ </div>
+                        </div>
+                    </div>
+                </div>
+
                     <!-- Mot de passe -->
-password                    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
+                    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
                         <div class="p-6">
                             <h2 class="text-xl font-semibold text-gray-900 mb-6">Changer le mot de passe</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
