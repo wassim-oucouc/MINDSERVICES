@@ -114,24 +114,19 @@
                     <h3 class="text-lg font-bold text-gray-900 mt-6 mb-3">Ce qui est inclus</h3>
                     <ul class="space-y-2">
                         <li class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-600">Déplacement du plombier à votre domicile</span>
+                            <span class="text-gray-600">🚗 Déplacement du prestataire à votre domicile</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-600">Diagnostic complet pour identifier l'origine de la fuite</span>
+                            <span class="text-gray-600">🔍 Diagnostic complet pour identifier l’origine du problème ou du besoin</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-600">Réparation de la fuite (remplacement de joints, soudure, etc.)</span>
+                            <span class="text-gray-600">🛠️ Intervention ou prestation de base (réparation, installation ou mise en service selon le service choisi)</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-600">Vérification du bon fonctionnement après réparation</span>
+                            <span class="text-gray-600">✅ Vérification du bon fonctionnement après l’intervention</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-check text-indigo-500 mt-1 mr-3"></i>
-                            <span class="text-gray-600">Garantie de 6 mois sur les travaux effectués</span>
+                            <span class="text-gray-600">🛡️ Garantie de 6 mois sur les travaux ou services effectués</span>
                         </li>
                     </ul>
                 </div>

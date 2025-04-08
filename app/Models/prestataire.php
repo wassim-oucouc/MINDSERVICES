@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Avis;
+use App\Models\Service;
+use App\Models\Utilisateur;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Prestataire extends Model
 {
@@ -12,7 +15,17 @@ class Prestataire extends Model
 
     public function Avis()
     {
-        return $this->hasMany(Avis::class);
+        return $this->hasMany(Avis::class,'prestataire_id','utilisateur_id');
+    }
+
+    public  function Service()
+    {
+        return $this->hasMany(Service::class,'prestataire_id','utilisateur_id');
+    }
+
+    public function Utilisateur()
+    {
+        return $this->belongsTo(Utilisateur::class,'utilisateur_id');
     }
 
    

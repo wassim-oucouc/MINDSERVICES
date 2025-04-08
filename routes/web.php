@@ -102,6 +102,10 @@ Route::get('/client/settings',[ClientController::class,'UpdateClientProfile']);
 Route::put('/client/settings',[ClientController::class,'UpdateClientProfile']);
 
 Route::get('/service/details/{id}',[HomeController::class,'indexService']);
+
+Route::get('/prestataire/profile/{id}',[HomeController::class,'GetProfile']);
+
+
 Route::get('/services',[HomeController::class,'IndexServiceSearch']);
 
 Route::get('/admin/settings',function(){

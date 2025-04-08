@@ -13,19 +13,21 @@
             </div>
             <div class="absolute bottom-0 left-6 transform translate-y-1/2 flex items-end">
                 <div class="h-24 w-24 sm:h-32 sm:w-32 rounded-full border-4 border-white overflow-hidden bg-white">
-                    <img src="path/to/profile-photo.jpg" alt="Nom Prénom" class="h-full w-full object-cover">
+                    <img src="/storage/{{$prestatairedetails->Utilisateur->Photo}}" alt="{{$prestatairedetails->Utilisateur->Prenom}} {{$prestatairedetails->Utilisateur->Nom}}" class="h-full w-full object-cover">
                 </div>
                 <div class="ml-4 pb-2">
-                    <h1 class="text-2xl sm:text-3xl font-bold text-black">Nom Prénom</h1>
+                    <h1 class="text-xl sm:text-xl font-bold text-black">{{$prestatairedetails->Utilisateur->Prenom}} {{$prestatairedetails->Utilisateur->Nom}}</h1>
                     <div class="flex items-center mt-1">
                         <div class="flex text-yellow-400">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="ml-2 text-white font-medium">4.5 <span class="text-gray-200">(20 avis)</span></span>
+                        @for( $i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $AvisAverage)
+                                    <i class="fas fa-star"></i> 
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                    @endfor              
+                                </div>
+                        <span class="ml-2 text-black font-medium">{{$AvisAverage}} <span class="text-black-200">({{$TotalAvisPrestataire}} avis)</span></span>
                     </div>
                 </div>
             </div>
@@ -56,11 +58,15 @@
                     <div class="mt-6">
                         <div class="flex items-center mb-3">
                             <i class="fas fa-map-marker-alt text-indigo-500 w-6"></i>
-                            <span class="ml-2 text-gray-700">Ville, Code Postal</span>
+                            <span class="ml-2 text-gray-700">{{$prestatairedetails->Ville}}, {{$prestatairedetails->zip_code}}</span>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center mb-3">
                             <i class="fas fa-wrench text-indigo-500 w-6"></i>
-                            <span class="ml-2 text-gray-700">Service principal</span>
+                            <span class="ml-2 text-gray-700">{{$prestatairedetails->service_principal}}</span>
+                        </div>
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-user   text-indigo-500 w-6"></i>
+                            <span class="ml-2 font text-gray-700">{{$prestatairedetails->created_at}}</span>
                         </div>
                     </div>
 
@@ -81,32 +87,36 @@
                     </div>
                 </section>
 
-                <!-- Services proposés -->
-                <section id="services" class="bg-white rounded-xl p-6 shadow-md mb-8">
-                    <h2 class="text-xl font-bold text-gray-900 mb-6">Services proposés</h2>
+                <section id="services" class=" bg-white rounded-xl p-6 shadow-md mb-8">
+                <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-gray-900">Services</h2>
+                        <a href="#all-reviews" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les services</a>
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                            <div class="h-40 overflow-hidden">
-                                <img src="path/to/service-photo.jpg" alt="Service Titre" class="w-full h-full object-cover">
+                    @foreach($prestatairedetails->Service as $service)
+                    <div class="w-17 h-17 border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
+                    <div class=" overflow-hidden">
+                                <img src="storage/{{$service->Photo}}" alt="Service Titre" class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <div class="flex items-center justify-between mb-2">
                                     <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                        Catégorie
+                                    {{$service->category->Nom}}
                                     </span>
-                                    <span class="text-lg font-bold text-gray-900">Prix€<span class="text-gray-500 text-sm font-normal">/h</span></span>
+                                    <span class="text-lg font-bold text-gray-900">{{$service->Prix}}€<span class="text-gray-500 text-sm font-normal">/h</span></span>
                                 </div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-1">Titre du service</h3>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">Description du service.</p>
-                                <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
+                                <h3 class="text-lg font-medium text-gray-900 mb-1">{{$service->titre}}</h3>
+                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{$service->Description}}</p>
+                                <a href="/service/details/{{$service->id}}" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
                                     Voir plus <i class="fas fa-arrow-right ml-1"></i>
                                 </a>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </section>
 
-                <!-- Avis clients -->
+            
                 <section id="reviews" class="bg-white rounded-xl p-6 shadow-md mb-8">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-bold text-gray-900">Avis clients</h2>
@@ -123,46 +133,13 @@
                         </div>
                     </div>
                     
-                    <!-- Liste des avis -->
+                    
                     <div class="space-y-6">
-                        <div class="border-b border-gray-200 pb-6">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0">
-                                    <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                                        <span class="text-indigo-800 font-semibold">AB</span>
-                                    </div>
-                                </div>
-                                <div class="ml-3 flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <h3 class="text-sm font-medium text-gray-900">Alice B.</h3>
-                                        <p class="text-sm text-gray-500">Il y a 2 jours</p>
-                                    </div>
-                                    <div class="flex text-yellow-400 mt-1">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="far fa-star"></i>
-                                    </div>
-                                    <div class="mt-2 text-sm text-gray-600">
-                                        <p>Commentaire de l'avis.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            
-            <!-- Colonne droite (1/3) supprimée -->
-        </div>
-    </div>
-</div>
-
+                    
 <!-- Section témoignages -->
 <div class="bg-indigo-700 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-2xl font-bold mb-8 text-center">Ce que nos clients disent de Nom Prénom</h2>
+        <h2 class="text-2xl font-bold mb-8 text-center">Ce que nos clients disent de {{$prestatairedetails->Utilisateur->Prenom}} {{$prestatairedetails->Utilisateur->Nom}}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-indigo-800 rounded-xl p-6">
@@ -198,7 +175,7 @@
         <div class="max-w-3xl mx-auto space-y-4">
             <div class="bg-white rounded-lg shadow-sm overflow-hidden">
                 <button class="w-full flex items-center justify-between p-4 focus:outline-none">
-                    <span class="text-lg font-medium text-gray-900">Comment prendre rendez-vous avec Nom Prénom ?</span>
+                    <span class="text-lg font-medium text-gray-900">Comment prendre rendez-vous avec {{$prestatairedetails->Utilisateur->Prenom}} {{$prestatairedetails->Utilisateur->Nom}} ?</span>
                     <i class="fas fa-chevron-down text-indigo-500"></i>
                 </button>
                 <div class="p-4 border-t border-gray-200 bg-gray-50">
