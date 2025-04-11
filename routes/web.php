@@ -105,8 +105,15 @@ Route::get('/service/details/{id}',[HomeController::class,'indexService']);
 
 Route::get('/prestataire/profile/{id}',[HomeController::class,'GetProfile']);
 
+Route::get('/prestataire/avis/{id}',[HomeController::class,'GetProfileAvis']);
+
+Route::get('/prestataire/services/{id}',[HomeController::class,'GetProfileServices']);
+
 
 Route::get('/services',[HomeController::class,'IndexServiceSearch']);
+
+Route::post('/services',[HomeController::class,'IndexServiceSearch']);
+
 
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');

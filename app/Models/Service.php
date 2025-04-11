@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Avis;
 use App\Models\Categorie;
 use App\Models\Reservation;
 use Illuminate\Database\Eloquent\Model;
@@ -32,5 +33,10 @@ class Service extends Model
     public function Professional()
     {
         return $this->belongsTo(Prestataire::class,'prestataire_id','utilisateur_id');
+    }
+
+    public function Avis()
+    {
+        return $this->hasMany(Avis::class,'Service_id');
     }
 }

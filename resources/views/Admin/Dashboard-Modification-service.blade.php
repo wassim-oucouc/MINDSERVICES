@@ -1,5 +1,3 @@
-Modification de Service Template (Front-end seulement)
-
 @extends('layout.admin')
 
 @section('title', 'Modifier un Service')

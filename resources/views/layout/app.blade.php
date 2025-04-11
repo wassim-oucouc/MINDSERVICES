@@ -163,5 +163,6 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
+    <script src = "/js/services-home.js" ></script>
     </body>
     </html>

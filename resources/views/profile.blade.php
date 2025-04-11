@@ -9,7 +9,7 @@
         <!-- Partie supérieure: bannière et photo de profil -->
         <div class="relative mb-8">
             <div class="h-48 sm:h-64 w-full rounded-xl overflow-hidden bg-indigo-700">
-                <div class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-800 opacity-90"></div>
+                <img src = "https://images.pexels.com/photos/19670/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-indigo-800 opacity-90 h-48 sm:h-64 w-full">
             </div>
             <div class="absolute bottom-0 left-6 transform translate-y-1/2 flex items-end">
                 <div class="h-24 w-24 sm:h-32 sm:w-32 rounded-full border-4 border-white overflow-hidden bg-white">
@@ -36,9 +36,9 @@
         <!-- Navigation du profil -->
         <div class="mt-16 mb-8 border-b border-gray-200">
             <nav class="flex -mb-px space-x-8">
-                <a href="#overview" class="border-indigo-500 text-indigo-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Vue d'ensemble</a>
-                <a href="#services" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Services</a>
-                <a href="#reviews" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Avis clients</a>
+            <a href="/prestataire/profile/{{$prestatairedetails->utilisateur->id}}" class="border-indigo-500 text-indigo-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Vue d'ensemble</a>
+                    <a href="/prestataire/services/{{$prestatairedetails->utilisateur->id}}" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Services</a>
+                    <a href="/prestataire/avis/{{$prestatairedetails->utilisateur->id}}" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">Avis clients</a>
             </nav>
         </div>
 
@@ -50,8 +50,7 @@
                 <section id="overview" class="bg-white rounded-xl p-6 shadow-md mb-8">
                     <h2 class="text-xl font-bold text-gray-900 mb-4">À propos</h2>
                     <div class="prose max-w-none text-gray-600">
-                        <p>Description du prestataire ici.</p>
-                        <p>Professionnel expérimenté avec plus de X ans d'expérience dans le domaine. Je propose des interventions de qualité, rapides et au meilleur prix. Mon objectif est votre satisfaction et je m'engage à fournir un service irréprochable pour tous vos besoins.</p>
+                        <p>{{$prestatairedetails->Description}}</p>
                     </div>
 
                     <!-- Informations personnelles -->
@@ -80,41 +79,40 @@
                             <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-green-50 text-green-700">
                                 <i class="fas fa-shield-alt mr-1.5"></i> Assurance professionnelle
                             </span>
-                            <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-purple-50 text-purple-700">
-                                <i class="fas fa-id-card mr-1.5"></i> Identité vérifiée
-                            </span>
                         </div>
                     </div>
                 </section>
 
-                <section id="services" class=" bg-white rounded-xl p-6 shadow-md mb-8">
-                <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-xl font-bold text-gray-900">Services</h2>
-                        <a href="#all-reviews" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les services</a>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @foreach($prestatairedetails->Service as $service)
-                    <div class="w-17 h-17 border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-                    <div class=" overflow-hidden">
-                                <img src="storage/{{$service->Photo}}" alt="Service Titre" class="w-full h-full object-cover">
-                            </div>
-                            <div class="p-4">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                    {{$service->category->Nom}}
-                                    </span>
-                                    <span class="text-lg font-bold text-gray-900">{{$service->Prix}}€<span class="text-gray-500 text-sm font-normal">/h</span></span>
-                                </div>
-                                <h3 class="text-lg font-medium text-gray-900 mb-1">{{$service->titre}}</h3>
-                                <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{$service->Description}}</p>
-                                <a href="/service/details/{{$service->id}}" class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">
-                                    Voir plus <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </section>
+                <section id="services" class="bg-white rounded-xl p-6 shadow-md mb-8">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900">Services</h2>
+        <a href="#all-reviews" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les services</a>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    @foreach($prestatairedetails->Service as $service)
+    <div class="bg-white rounded-xl overflow-hidden shadow-md transition-all hover:shadow-lg border border-gray-200">
+        <div class="h-48 overflow-hidden">
+            <img src="storage/{{$service->Photo}}" alt="Service Titre" class="w-full h-full object-cover">
+        </div>
+        <div class="p-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
+                {{$service->category->Nom}}
+                </span>
+                <span class="text-lg font-bold text-gray-900">{{$service->Prix}}€<span class="text-gray-500 text-sm font-normal">/h</span></span>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-1">{{$service->titre}}</h3>
+            <p class="text-sm text-gray-600 mb-3 line-clamp-2">{{$service->Description}}</p>
+            <div class="flex justify-end">
+                <a href="/service/details/{{$service->id}}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Voir détails
+                </a>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    </div>
+</section>
 
             
                 <section id="reviews" class="bg-white rounded-xl p-6 shadow-md mb-8">
@@ -122,14 +120,16 @@
                         <h2 class="text-xl font-bold text-gray-900">Avis clients</h2>
                         <div class="flex items-center">
                             <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                            @for( $i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $AvisAverage)
+                                    <i class="fas fa-star"></i> 
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif
+                                    @endfor
                             </div>
-                            <span class="text-gray-700 font-medium">4.5</span>
-                            <span class="text-gray-500 ml-1">(20 avis)</span>
+                            <span class="text-gray-700 font-medium">{{$AvisAverage}}</span>
+                            <span class="text-gray-500 ml-1">({{$TotalAvisPrestataire}} avis)</span>
                         </div>
                     </div>
                     

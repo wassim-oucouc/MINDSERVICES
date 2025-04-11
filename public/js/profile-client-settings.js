@@ -137,12 +137,10 @@ async function SendFormData(data)
     {
 try
 {
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let response = await fetch('/client/settings',{
         method : 'POST',
         headers: {
             'Accept': 'application/json',
-            'X-CSRF-TOKEN': token,
         },
         body : data
     });

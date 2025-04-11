@@ -90,4 +90,10 @@ class AvisRepository implements AvisInterface
 
         return $Avis;
     }
+    public function GetFeedbacksWithPaginate($id)
+    {
+        $Avis = Avis::with('Client')->paginate(5);
+
+        return $Avis;
+    }
 }

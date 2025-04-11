@@ -65,8 +65,6 @@ if($request->nom)
         "photo" => "nullable|image|mimes:jpeg,png,jpg,gif,svg"
     ]);
 }
-
-
    catch(\Illuminate\Validation\ValidationException $e)
    {
     return response()->json([
@@ -205,4 +203,6 @@ if($request->nom)
 
     return view('Client.Dashboard-settings', compact('client'));
 }
+
+
 }

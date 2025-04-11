@@ -222,7 +222,7 @@ class AdminController extends Controller
         {
         $validated = $request->validate([
             "Note" => "required",
-            "Commentaire" => "required|string|min:6",
+            "Commentaire" => "required|string",
             "status" => "required"
         ]);
     

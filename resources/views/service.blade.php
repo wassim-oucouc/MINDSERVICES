@@ -105,9 +105,6 @@
                         <p>
                            {{$service->Description}}
                         </p>
-                        <p>
-                            Nous intervenons pour les fuites visibles (robinets, éviers, douches, toilettes) ainsi que pour les fuites cachées (canalisations encastrées, tuyaux souterrains). Notre expertise nous permet de minimiser les dégâts et de réaliser les réparations avec un minimum d'impact sur votre intérieur.
-                        </p>
                     </div>
                     
                     <!-- Ce qui est inclus -->
@@ -137,7 +134,7 @@
                 <div class="bg-white rounded-xl p-6 shadow-md">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-bold text-gray-900">Avis clients</h2>
-                        <a href="#all-reviews" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les avis</a>
+                        <a href="/prestataire/avis/{{$service->Prestataire->id}}" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les avis</a>
                     </div>
                     
                     <!-- Liste des avis (3 maximum) -->
