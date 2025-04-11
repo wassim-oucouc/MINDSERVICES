@@ -59,4 +59,11 @@ class CategorieRepository implements CategorieInterface
     
         return $categories;
     }
+
+    public function GetAllCategories()
+    {
+        $categories = Categorie::all();
+
+        return $categories;
+    }
 }

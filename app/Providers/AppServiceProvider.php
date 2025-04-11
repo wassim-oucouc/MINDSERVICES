@@ -10,7 +10,9 @@ use App\Repositories\Contracts\ClientInterface;
 use App\Repositories\Repository\AvisRepository;
 use App\Repositories\Repository\clientRepository;
 use App\Repositories\Contracts\CategorieInterface;
+use App\Repositories\Contracts\PrestataireInterface;
 use App\Repositories\Repository\CategorieRepository;
+use App\Repositories\Repository\PrestataireRepository;
 use App\Repositories\Repository\UtilisateurRepository;
 use App\Repositories\Contracts\BaseRepositoryInterface;
 
@@ -28,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AvisInterface::class,AvisRepository::class);
         $this->app->bind(ReservationInterface::class,ReservationInterface::class);
         $this->app->bind(ClientInterface::class,clientRepository::class);
+        $this->app->bind(PrestataireInterface::class,PrestataireRepository::class);
     }
 
     /**

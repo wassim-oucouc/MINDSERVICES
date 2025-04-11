@@ -5,7 +5,7 @@
 @section('title', 'Services')
 @section('content')
 
-        <!-- Main Content -->
+<!-- Main Content -->
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
             <!-- Top header -->
             <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between">

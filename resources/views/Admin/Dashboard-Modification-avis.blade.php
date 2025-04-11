@@ -103,7 +103,6 @@
                         <form action="/admin/update/avis/{{$Avis->id}}" method="POST" class="space-y-6">
                             @csrf
                             @method('PUT')
-                            
                             <!-- Rating as Select -->
                             <div>
                                 <label for="note" class="block text-sm font-medium text-gray-700 mb-2">Note</label>

@@ -18,35 +18,35 @@ function ClearErrors()
 }
 
 function toggleRedBanner() {
-    document.querySelector('.red_banner')
+    document.querySelector('#banner')
     .classList.add('mb-4');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('p-3');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('bg-red-100');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('border');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('border-red-400');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('text-red-700');
-  document.querySelector('.red_banner')
+  document.querySelector('#banner')
     .classList.add('rounded');  }
 
     function togglegreenBanner() {
-        document.querySelector('.red_banner')
+        document.querySelector('#banner')
         .classList.add('mb-4');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('p-3');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('bg-green-100');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('border');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('border-green-400');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('text-green-700');
-      document.querySelector('.red_banner')
+      document.querySelector('#banner')
         .classList.add('rounded');  }
 
 function showError(message)
@@ -88,11 +88,6 @@ function Validation()
         toggleRedBanner();
         validate = false;
     }
-    if(email.value == '' || !EmailExpression.test(email.value.trim()))
-        {
-            showError('Adresse e-mail invalide');
-            validate = false;
-        }
     if(numero.value == '' || !NumeroExpression.test(numero.value.trim()))
         {
             showError('Numéro de téléphone invalide (ex: +212600000000)');
@@ -104,7 +99,7 @@ function Validation()
             validate = false;
         }
 
-        if (current_password.vnnalue.trim() !== ''){
+        if (current_password.value.trim() !== ''){
             if (nouveau_password.value.trim().length < 8) {
                 showError("Le nouveau mot de passe doit contenir au moins 8 caractères");
                 toggleRedBanner();
@@ -142,12 +137,10 @@ async function SendFormData(data)
     {
 try
 {
-    let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     let response = await fetch('/client/settings',{
         method : 'POST',
         headers: {
             'Accept': 'application/json',
-            'X-CSRF-TOKEN': token,
         },
         body : data
     });
@@ -157,9 +150,10 @@ try
 
     if(json.message == 'Profile updated successfully!')
     {
+       document.querySelector('#banner').className = "";
         let greenmessage = document.createElement('li');
         let ul = document.querySelector('.ul_errors');
-        togglegreenBanner()
+        togglegreenBanner();
         greenmessage.textContent = json.message;
     ul.appendChild(greenmessage);
 

@@ -17,4 +17,6 @@ class Utilisateur extends Authenticatable
     {
         return $this->hasOne(Role::class);
     }
+
+    
 }
