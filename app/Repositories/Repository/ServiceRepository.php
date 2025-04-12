@@ -171,9 +171,15 @@ public function GetServicesbycategorieAsc($array)
 {
     $service = $this->GetServicebycategorie($array);
 
-    $service->orderBy('Service.Prix','asc');
+   return $service->sortBy('Prix');
 
-    return $service;
+}
+
+public function GetServicesbycategorieDesc($array)
+{
+    $service = $this->GetServicebycategorie($array);
+
+    return $service->sortByDesc('Prix');
 
 }
 

@@ -86,9 +86,10 @@ class HomeController extends Controller
     {
         $ServicePaginate = $this->ServiceRepository->GetServicesAll();
         $categories = $this->CategorieRepository->GetAllCategories();
+
         if($request->location && $request->service)
         {
-            $ServiceFiltred = $this->ServiceRepository->GetServiceByNameCity(substr($request->service,0, 3),$request->location);
+            $ServiceFiltred = $this->ServiceRepository->GetServiceByNameCity($request->service,$request->location);
             // dd($ServiceFiltred);
 
             return response()->json([
@@ -96,7 +97,7 @@ class HomeController extends Controller
             ]);
         }
 
-        if($request->category)
+         if($request->category && !$request->price)
         {
             $services = $this->ServiceRepository->GetServicebycategorie($request->category);
             // dd($services);
@@ -105,7 +106,7 @@ class HomeController extends Controller
             ]);
         }
 
-        if($request->price)
+         else if($request->price && !$request->category)
         {
             if($request->price == 'Économique')
             {
@@ -115,10 +116,11 @@ class HomeController extends Controller
             ]);
         }
 
-            if($request->price == 'Premium')
+            else if($request->price == 'Premium')
             {
                
                 $services = $this->ServiceRepository->GetServiceWithPriceDesc();
+                // dd($services);
                 return response()->json([
                     "services" => $services
                 ]);
@@ -129,6 +131,14 @@ class HomeController extends Controller
             if($request->price == 'Économique')
             {
                 $services = $this->ServiceRepository->GetServicesbycategorieAsc($request->category);
+
+                return response()->json([
+                    "services" => $services
+                ]);
+            }
+            else
+            {
+                $services = $this->ServiceRepository->GetServicesbycategorieDesc($request->category);
 
                 return response()->json([
                     "services" => $services
