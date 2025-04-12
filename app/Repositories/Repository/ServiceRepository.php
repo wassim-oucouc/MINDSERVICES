@@ -167,6 +167,17 @@ db::raw('AVG(avis.Note) AS Note_avg'))
 return $query;
 }
 
+public function GetServicesbycategorieAsc($array)
+{
+    $service = $this->GetServicebycategorie($array);
+
+    $service->orderBy('Service.Prix','asc');
+
+    return $service;
+
+}
+
+
 
 
 }

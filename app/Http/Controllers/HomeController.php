@@ -109,7 +109,7 @@ class HomeController extends Controller
         {
             if($request->price == 'Économique')
             {
-            $services = $this->ServiceRepository->GetServiceWithPriceDesc();
+                $services = $this->ServiceRepository->GetServiceWithPriceAsc();
             return response()->json([
                 "services" => $services
             ]);
@@ -117,7 +117,8 @@ class HomeController extends Controller
 
             if($request->price == 'Premium')
             {
-                $services = $this->ServiceRepository->GetServiceWithPriceAsc();
+               
+                $services = $this->ServiceRepository->GetServiceWithPriceDesc();
                 return response()->json([
                     "services" => $services
                 ]);
@@ -125,7 +126,14 @@ class HomeController extends Controller
         }
         if($request->category && $request->price)
         {
-            
+            if($request->price == 'Économique')
+            {
+                $services = $this->ServiceRepository->GetServicesbycategorieAsc($request->category);
+
+                return response()->json([
+                    "services" => $services
+                ]);
+            }
         }
 
 

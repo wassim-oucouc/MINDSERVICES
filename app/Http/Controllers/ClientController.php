@@ -102,7 +102,7 @@ if($request->nom)
            
             $newpassword = Hash::make($request->password);
 
-            if ($request->hasFile('photo')) {
+            if ($request->hasFile('photo')){
                 $path = $request->file('photo')->store('User', 'public');
             }
 
