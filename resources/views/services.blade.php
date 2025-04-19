@@ -108,11 +108,13 @@
                         <h2 class="text-lg font-medium text-gray-900">{{$service->titre}}</h2>
                         <div class="flex items-center mt-1">
                             <div class="flex text-yellow-400">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                            @for( $i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $service->avis_avg_note)
+                                        <i class="fas fa-star"></i> 
+                                    @else
+                                        <i class="far fa-star"></i>
+                                    @endif
+                                @endfor   
                             </div>
                             <span class="ml-1 text-sm text-gray-500">{{$service->avis_avg_note}} ({{$service->avis_count}} avis)</span>
                         </div>

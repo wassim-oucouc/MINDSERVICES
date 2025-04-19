@@ -9,6 +9,8 @@ class address_reservation extends Model
 {
     Protected $table = "address_reservation";
 
+    Protected $fillable = ["address","city","postal_code","country","created_at","updated_at"];
+
     
     use HasFactory;
 }

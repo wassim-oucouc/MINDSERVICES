@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Avis extends Model
 {
-    Protected $fillable = ['Note','Commentaire','status','client_id','prestataire_id','Service_id','created_at','updated_at'];
+    Protected $fillable = ['Note','Commentaire','status','Client_id','prestataire_id','Service_id','created_at','updated_at'];
 
     public function Client()
     {

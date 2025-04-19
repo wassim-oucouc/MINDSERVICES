@@ -6,23 +6,35 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\Contracts\AvisInterface;
+use App\Repositories\Contracts\ClientInterface;
+use App\Repositories\Repository\AvisRepository;
+use App\Repositories\Contracts\ServiceInterface;
 use App\Repositories\Repository\ClientRepository;
+use App\Repositories\Repository\ServiceRepository;
+use App\Repositories\Contracts\ReservationInterface;
 use App\Repositories\Repository\ReservationRepository;
 
 class ClientController extends Controller
 {
     private $ReservationRepository;
     private $clientRepository;
+    private $AvisRepository;
+    private $ServiceRepository;
 
-    public function __construct(ReservationRepository $ReservationRepository,ClientRepository $clientRepository)
+    public function __construct(ReservationInterface $ReservationRepository,ClientInterface $clientRepository,AvisInterface $AvisRepository,ServiceInterface $ServiceRepository)
     {
         $this->ReservationRepository = $ReservationRepository;
         $this->clientRepository = $clientRepository;
+        $this->AvisRepository = $AvisRepository;
+        $this->ServiceRepository = $ServiceRepository;
     }
 
     public function Index()
     {
-        return view('Client.Dashboard-home');
+        $client = $this->clientRepository->GetclientDetails();
+        $reservations = $this->clientRepository->GetReservationsDetails();
+        return view('Client.Dashboard-home',compact('client','reservations'));
     }
 
     public function reservationRead()
@@ -34,9 +46,14 @@ class ClientController extends Controller
     public function GetReservationDetails(Request $request)
     {
         $reservation  = $this->ReservationRepository->GetDetailsReservation($request->id);
+        if($reservation)
+        {
+        $TotalAvisPrestataire = $this->AvisRepository->CountFeedbackPrestataire($reservation->Prestataire->id);
+        $AvisAverage = $this->AvisRepository->CalculateAverageFeedback($reservation->Prestataire->id);
        $totalReservation =  $reservation->Service->Prix * $reservation->Service->duration;
+        }
         // dd($totalReservation);
-        return view('Client.Dashboard-Reservation-Details',compact('reservation','totalReservation'));
+        return view('Client.Dashboard-Reservation-Details',compact('reservation','totalReservation','TotalAvisPrestataire','AvisAverage'));
     }
 
     public function Profile()
@@ -74,7 +91,7 @@ if($request->nom)
 
 
     if (!$request->filled('current-password') && !$request->filled('email')) {
-        if ($request->file('photo')) {
+        if ($request->file('photo')){
             $path = $request->file('photo')->store('User', 'public');
         }
 
@@ -203,6 +220,95 @@ if($request->nom)
 
     return view('Client.Dashboard-settings', compact('client'));
 }
+
+
+public function showFeedbackForm($id)
+{
+    $service = $this->ServiceRepository->find($id);
+    $prestataire_id = $service->Prestataire->id;
+    return view('Client.Dashboard-Service-reservés-avis', compact('service', 'prestataire_id'));
+}
+
+
+
+
+public function CreateFeedbackReservation(Request $request,$id)
+{
+    $service = $this->ServiceRepository->find($id);
+    $prestataire_id = $service->Prestataire->id;
+   
+    if($request->rating)
+    {
+
+      
+
+        $validation = $request->validate([
+            "rating" => "required",
+            "comment" => "required"
+        ]);
+
+        $checkAvis = $this->AvisRepository->AvisCheckById($id);
+
+        if($checkAvis)
+        {
+            return redirect()->back()->with('error','Vous Avez deja Fait un avis pour ce Service');
+        }
+        else
+        {
+            $data = [
+                "Note" => $validation['rating'],
+                "Commentaire" => $validation['comment'],
+                "status" => "En attente",
+                "Client_id" => Auth::user()->id,
+                "prestataire_id" =>  $prestataire_id,
+                "Service_id" => $id,
+                "created_at" => now(),
+                "updated_at" => now()
+            ];
+
+            $avis = $this->AvisRepository->create($data);
+            return redirect('client/reservation')->with('done','Votre avis a été enregistré avec succès. Merci pour votre retour !');
+           
+        }
+    }
+    return view('Client.Dashboard-Service-reservés-avis', compact('service', 'prestataire_id'));
+
+
+    }
+
+    public function StoreFeedbackReservation(Request $request,$id)
+    {
+        if($request->rating)
+        {
+            $service_id = $request->service_id;
+            $prestataire_id = $request->prestataire_id;
+            $checkAvis = $this->AvisRepository->AvisCheckById($service_id);
+
+            if($checkAvis)
+            {
+                return Redirect()->back()->with('error','Vous avez déjà soumis un avis pour ce service. Merci de votre contribution!');
+            }
+            else
+            {
+                $data = [
+                    "Note" => $request->rating,
+                    "Commentaire" => $request->comment,
+                    "status" => "En attente",
+                    "Client_id" => Auth::user()->id,
+                    "prestataire_id" => $prestataire_id,
+                    "Service_id" => $service_id,
+                    "created_at" => now(),
+                    "updated_at" => now()
+                ];
+    
+                $avis = $this->AvisRepository->create($data);
+
+                return redirect()->back()->with('done','Votre avis a été enregistré avec succès. Merci pour votre retour !');
+
+            }
+        }
+    }
+
 
 
 }

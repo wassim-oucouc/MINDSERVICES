@@ -14,6 +14,9 @@ class PrestataireRepository implements PrestataireInterface
     }
     public function update($id,$data)
     {
+      $Prestataire = Prestataire::where('utilisateur_id',$id)->update($data);
+
+      return $Prestataire;
 
     }
     public function delete($id)

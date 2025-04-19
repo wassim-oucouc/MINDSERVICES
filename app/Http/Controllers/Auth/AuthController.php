@@ -121,7 +121,7 @@ class AuthController extends Controller
 
      if(!$user || !hash::check($request->Password,$user->Password))
      {
-        return redirect()->back()->with('error','Email Or Password is Incorrect');
+        return redirect()->back()->with('error',"L'adresse e-mail ou le mot de passe est incorrect");
      }
 
    else  if($user && hash::check($request->Password,$user->Password))
@@ -136,7 +136,7 @@ class AuthController extends Controller
         return redirect('/professional/dashboard');
         break;
       case 2 : 
-        return redirect('/client/dashboard');
+        return redirect('/client/overview');
         break;
     
      case 3 : 

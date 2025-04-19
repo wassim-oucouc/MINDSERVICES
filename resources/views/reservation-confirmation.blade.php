@@ -1,304 +1,217 @@
 @extends('layout.app')
 
-@section('title', 'Réservation du service')
+@section('title', 'Confirmation de Réservation')
 @section('content')
 
-<!-- Section principale de réservation -->
-<div class="bg-gradient-to-b from-gray-50 to-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <!-- Navigation retour -->
-        <div class="mb-6">
-            <a href="javascript:history.back()" class="inline-flex items-center text-gray-700 hover:text-indigo-600">
-                <i class="fas fa-chevron-left mr-2"></i> Retour au service
-            </a>
-            <h1 class="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl">Réservation du service</h1>
-        </div>
-        
-        <!-- Alerte "Service populaire" -->
-        <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg mb-8">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <i class="fas fa-info-circle text-indigo-600"></i>
-                </div>
-                <div class="ml-3">
-                    <p class="font-semibold text-indigo-700">C'est un service très demandé.</p>
-                    <p class="text-indigo-600">Les créneaux pour ce service se remplissent rapidement.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Contenu principal en deux colonnes -->
-        <div class="lg:grid lg:grid-cols-3 lg:gap-8">
-            <!-- Colonne gauche (2/3) -->
-            <div class="lg:col-span-2">
-               <!-- Section date -->
-<div class="bg-white rounded-xl p-6 shadow-md mb-8">
-    <h2 class="text-xl font-bold text-gray-900 mb-6">
-        <i class="far fa-calendar-alt text-indigo-600 mr-2"></i>
-        Choisissez une date
-    </h2>
-    
-    <!-- Navigation du mois (statique) -->
-    <div class="flex items-center justify-between mb-4">
-        <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <h3 class="text-lg font-medium text-gray-900">Avril 2025</h3>
-        <button class="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
-    
-    <!-- Calendrier amélioré -->
-    <div class="mb-6">
-        <div class="grid grid-cols-7 gap-1 text-center mb-2">
-            <div class="text-gray-500 font-medium text-sm py-2">Lun</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Mar</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Mer</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Jeu</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Ven</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Sam</div>
-            <div class="text-gray-500 font-medium text-sm py-2">Dim</div>
-        </div>
-
-        <!-- Jours du mois -->
-        <div class="grid grid-cols-7 gap-1 text-center">
-            <!-- Jours précédents (disabled) -->
-            <div class="py-3 text-gray-300">30</div>
-            <div class="py-3 text-gray-300">31</div>
-            
-            <!-- Jours actuels (avec des boutons pour les dates disponibles) -->
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">1</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">2</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">3</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">4</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">5</button>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">6</div>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">7</div>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">8</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">9</button>
-            <button class="py-3 border-2 border-indigo-500 bg-indigo-100 text-indigo-700 font-medium rounded-md cursor-pointer">10</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">11</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">12</button>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">13</div>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">14</div>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">15</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">16</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">17</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">18</button>
-            <button class="py-3 border border-gray-200 rounded-md hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">19</button>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">20</div>
-            <div class="py-3 border border-gray-100 bg-gray-50 text-gray-400 rounded-md">21</div>
-        </div>
-    </div>
-    
-    <p class="text-gray-700 font-medium flex items-center">
-        <i class="fas fa-check-circle text-green-500 mr-2"></i>
-        Date sélectionnée: <span class="font-bold text-indigo-700 ml-2">Mardi 10 Avril 2025</span>
-    </p>
-</div>
-
-<!-- Section heure -->
-<div class="bg-white rounded-xl p-6 shadow-md mb-8">
-    <h2 class="text-xl font-bold text-gray-900 mb-6">
-        <i class="far fa-clock text-indigo-600 mr-2"></i>
-        Choisissez une heure
-    </h2>
-    
-    <!-- Créneaux horaires avec design amélioré -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
-        <!-- Créneau indisponible avec info bulle -->
-        <div class="relative group">
-            <div class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-400 bg-gray-50 cursor-not-allowed">
-                08:00
-                <span class="absolute left-0 bottom-full mb-2 w-28 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Indisponible
-                </span>
-            </div>
-        </div>
-        
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">09:00</button>
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">10:00</button>
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">11:00</button>
-        
-        <!-- Créneau sélectionné -->
-        <button class="py-3 px-2 border-2 border-indigo-500 rounded-md text-center bg-indigo-100 text-indigo-700 font-medium cursor-pointer">14:00</button>
-        
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">15:00</button>
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">16:00</button>
-        <button class="py-3 px-2 border border-gray-200 rounded-md text-center text-gray-700 hover:border-indigo-400 hover:bg-indigo-50 transition-colors cursor-pointer">17:00</button>
-    </div>
-    
-    <p class="text-gray-700 font-medium flex items-center">
-        <i class="fas fa-check-circle text-green-500 mr-2"></i>
-        Heure sélectionnée: <span class="font-bold text-indigo-700 ml-2">14:00</span>
-    </p>
-</div>
-                
-                <!-- Bouton Continuer -->
-                <div class="flex justify-end">
-                    <button class="w-full sm:w-auto py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg shadow-sm flex items-center justify-center transition-colors">
-                        Continuer vers l'inscription
-                        <i class="fas fa-arrow-right ml-2"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Colonne droite (1/3) - Récapitulatif du service -->
-            <div class="mt-10 lg:mt-0">
-                <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-6">
-                    <!-- Header récapitulatif -->
-                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-4 text-white">
-                        <h3 class="text-lg font-medium">Récapitulatif de la réservation</h3>
-                    </div>
-                    
-                    <!-- Détails du service -->
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="h-16 w-16 rounded-lg overflow-hidden">
-                                <img src="/api/placeholder/120/120" alt="Service de plomberie" class="h-full w-full object-cover">
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium text-gray-900">Réparation de fuite d'eau</h4>
-                                <p class="text-gray-600">Service de plomberie</p>
-                                <div class="flex text-yellow-400 mt-1">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <span class="ml-2 text-gray-600 text-xs">4.9 (128 avis)</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Détails prestataire -->
-                        <div class="mt-6 pt-6 border-t border-gray-200">
-                            <h5 class="font-medium text-gray-900 mb-2">Prestataire</h5>
-                            <div class="flex items-center">
-                                <div class="h-10 w-10 rounded-full overflow-hidden">
-                                    <img src="/api/placeholder/60/60" alt="Prestataire" class="h-full w-full object-cover">
-                                </div>
-                                <div class="ml-3">
-                                    <p class="font-medium text-gray-900">Martin Durand</p>
-                                    <p class="text-sm text-gray-600">Plombier certifié</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Détails date et heure -->
-                        <div class="mt-6 pt-6 border-t border-gray-200">
-                            <h5 class="font-medium text-gray-900 mb-3">Votre réservation</h5>
-                            
-                            <div class="flex items-start mb-3">
-                                <i class="far fa-calendar-alt text-indigo-600 mt-1 w-5"></i>
-                                <div class="ml-3">
-                                    <p class="font-medium text-gray-800">Mardi 10 Avril 2025</p>
-                                    <p class="text-sm text-gray-600">À 14:00</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start mb-3">
-                                <i class="fas fa-map-marker-alt text-indigo-600 mt-1 w-5"></i>
-                                <div class="ml-3">
-                                    <p class="font-medium text-gray-800">À votre adresse</p>
-                                    <p class="text-sm text-gray-600">À préciser lors de la réservation</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <i class="far fa-clock text-indigo-600 mt-1 w-5"></i>
-                                <div class="ml-3">
-                                    <p class="font-medium text-gray-800">Durée estimée: 2 heures</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Tarifs -->
-                        <div class="mt-6 pt-6 border-t border-gray-200">
-                            <h5 class="font-medium text-gray-900 mb-3">Tarifs</h5>
-                            
-                            <div class="flex justify-between mb-2">
-                                <p class="text-gray-600">Tarif horaire</p>
-                                <p class="font-medium">80€ / heure</p>
-                            </div>
-                            
-                            <div class="flex justify-between mb-2">
-                                <p class="text-gray-600">Durée estimée</p>
-                                <p class="font-medium">2 heures</p>
-                            </div>
-                            
-                            <div class="flex justify-between mb-2">
-                                <p class="text-gray-600">Frais de déplacement</p>
-                                <p class="font-medium">Inclus</p>
-                            </div>
-                            
-                            <div class="flex justify-between pt-2 mt-2 border-t border-gray-200">
-                                <p class="font-bold text-gray-800">Total estimé</p>
-                                <p class="font-bold text-gray-800">160€</p>
-                            </div>
-                            
-                            <p class="text-xs text-gray-500 mt-2">Le montant final peut varier en fonction de la durée réelle du service.</p>
+<!-- Hero Section - Confirmation -->
+<div class="relative bg-white overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="relative z-10 py-8 bg-white sm:py-16 md:py-20 lg:py-28 xl:py-32">
+            <div class="pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="h-20 w-20 rounded-full bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-check-circle text-4xl text-green-500"></i>
                         </div>
                     </div>
-                    
-                    <!-- Garantie -->
-                    <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                        <div class="flex items-center text-gray-700">
-                            <i class="fas fa-shield-alt text-indigo-600 mr-2"></i>
-                            <p class="text-sm">Service garanti par MINDSERVICE</p>
-                        </div>
-                    </div>
+                    <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                        <span class="block">Demande reçue !</span>
+                        <span class="block text-indigo-600">Réservation en attente</span>
+                    </h1>
+                    <p class="mt-5 text-xl text-gray-500 mx-auto max-w-3xl">
+                        Votre réservation est en cours de révision par notre prestataire. Vous recevrez une notification dès qu'elle sera confirmée.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Section des instructions -->
-<div class="bg-gray-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 class="text-2xl font-bold mb-8 text-center">Comment fonctionne la réservation ?</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Étape 1 -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
-                    1
-                </div>
-                <h3 class="text-xl font-medium mb-2">Réservez</h3>
-                <p class="text-gray-300">
-                    Choisissez une date et une heure qui vous conviennent et indiquez votre adresse.
-                </p>
+<!-- Détails de la réservation -->
+<div class="py-12 bg-gray-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    Détails de votre réservation
+                </h3>
             </div>
-            
-            <!-- Étape 2 -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
-                    2
-                </div>
-                <h3 class="text-xl font-medium mb-2">Confirmation</h3>
-                <p class="text-gray-300">
-                    Le prestataire confirme votre rendez-vous sous 30 minutes en moyenne.
-                </p>
-            </div>
-            
-            <!-- Étape 3 -->
-            <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
-                    3
-                </div>
-                <h3 class="text-xl font-medium mb-2">Service & Paiement</h3>
-                <p class="text-gray-300">
-                    Le service est réalisé et vous payez en ligne de façon sécurisée après la prestation.
-                </p>
+            <div class="border-t border-gray-200">
+                <dl>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Service demandé
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    {{$confirmation['TitreService']}}
+                        </dd>
+                    </div>
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Prestataire
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{$confirmation['PrenomPrestataire']}} {{$confirmation['NomPrestataire']}}
+                        </dd>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Date et heure souhaitées
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                        {{$confirmation['reservation_date']}} à {{$confirmation['reservation_time']}}
+                        </dd>
+                    </div>
+                    <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Adresse
+                        </dt>
+                        <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                            {{$confirmation['address']}}, {{$confirmation['postal_code']}} {{$confirmation['city']}}
+                        </dd>
+                    </div>
+                    <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                        <dt class="text-sm font-medium text-gray-500">
+                            Statut
+                        </dt>
+                        <dd class="mt-1 text-sm sm:mt-0 sm:col-span-2">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                En attente de confirmation
+                            </span>
+                        </dd>
+                    </div>
+                </dl>
             </div>
         </div>
-        
-        <div class="mt-10 text-center">
-            <p class="text-gray-400 max-w-3xl mx-auto">
-                Tous les services réservés via MINDSERVICE sont garantis. Si vous n'êtes pas satisfait, notre équipe interviendra pour résoudre le problème ou vous proposer un remboursement selon nos conditions de service.
+    </div>
+</div>
+
+<!-- Section Prochaines étapes -->
+<div class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Prochaines étapes</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Que se passe-t-il maintenant ?
             </p>
+        </div>
+
+        <div class="mt-10">
+            <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
+                <!-- Étape 1 -->
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">1. Attente de confirmation</h3>
+                    <p class="mt-2 text-base text-gray-500 text-center">
+                        Le prestataire examine votre demande et vérifie sa disponibilité
+                    </p>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">2. Échange avec le prestataire</h3>
+                    <p class="mt-2 text-base text-gray-500 text-center">
+                        Vous pourrez communiquer via telephone ou par email pour préciser vos besoins
+                    </p>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="mt-4 text-lg font-medium text-gray-900">3. Réalisation du service</h3>
+                    <p class="mt-2 text-base text-gray-500 text-center">
+                        Le prestataire intervient à la date convenue pour réaliser la prestation
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="py-12 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+            <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Questions fréquentes</h2>
+            <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                Besoin d'aide ?
+            </p>
+        </div>
+
+        <div class="mt-10 max-w-3xl mx-auto">
+            <!-- Question 1 -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md mb-4">
+                <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Combien de temps pour obtenir une confirmation ?
+                    </h3>
+                    <i class="fas fa-chevron-down text-gray-500"></i>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                    <p class="text-sm text-gray-500">
+                        La plupart des prestataires répondent dans un délai de 24 à 48 heures. Vous recevrez une notification par email et sur votre compte dès que votre réservation sera confirmée.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md mb-4">
+                <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Puis-je annuler ma réservation ?
+                    </h3>
+                    <i class="fas fa-chevron-down text-gray-500"></i>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                    <p class="text-sm text-gray-500">
+                        Vous pouvez annuler votre réservation à tout moment avant la confirmation du prestataire sans frais. Après confirmation, veuillez consulter les conditions d'annulation spécifiques du prestataire.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="bg-white shadow overflow-hidden sm:rounded-md">
+                <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between items-center">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Comment contacter le prestataire ?
+                    </h3>
+                    <i class="fas fa-chevron-down text-gray-500"></i>
+                </div>
+                <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+                    <p class="text-sm text-gray-500">
+                        Une fois votre réservation confirmée, vous pourrez échanger avec le prestataire via notre messagerie sécurisée accessible depuis votre espace client.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="bg-indigo-700">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+        <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            <span class="block">Besoin d'un autre service ?</span>
+            <span class="block text-indigo-200">Explorez notre catalogue de prestataires</span>
+        </h2>
+        <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+            <div class="inline-flex rounded-md shadow">
+                <a href="/services" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                    Découvrir les services
+                </a>
+            </div>
+            <div class="ml-3 inline-flex rounded-md shadow">
+                <a href="/client/overview" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600">
+                    Mon tableau de bord
+                </a>
+            </div>
         </div>
     </div>
 </div>

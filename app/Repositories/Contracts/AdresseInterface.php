@@ -1,11 +1,10 @@
 <?php
-
 namespace App\Repositories\Contracts;
 
-interface UtilisateurInterface
+interface AdresseInterface
 {
     public function find($id);
-    public function UpdateUtilisateur($id,array $data);
+    public function Update($id,array $data);
     public function Delete($id);
     public function create(array $data);
 }

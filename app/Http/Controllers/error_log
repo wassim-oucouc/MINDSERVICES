@@ -1,0 +1,7 @@
+[17-Apr-2025 13:01:19 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'modulename.extension' (tried: C:\php\ext\modulename.extension (Le module spécifié est introuvable), C:\php\ext\php_modulename.extension.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[17-Apr-2025 13:01:19 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'msql.dll' (tried: C:\php\ext\msql.dll (Le module spécifié est introuvable), C:\php\ext\php_msql.dll.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[17-Apr-2025 13:01:19 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'msql.so' (tried: C:\php\ext\msql.so (Le module spécifié est introuvable), C:\php\ext\php_msql.so.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[17-Apr-2025 13:01:20 UTC] PHP Fatal error:  Uncaught Error: Class "App\Http\Controllers\Controller" not found in C:\Users\Youcode\Desktop\MINDSERVICES\app\Http\Controllers\AdminController.php:17
+Stack trace:
+#0 {main}
+  thrown in C:\Users\Youcode\Desktop\MINDSERVICES\app\Http\Controllers\AdminController.php on line 17

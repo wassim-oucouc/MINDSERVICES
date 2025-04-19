@@ -74,18 +74,18 @@
                 <p class="text-gray-600 mb-8 text-center">Connectez-vous à votre espace</p>
                 
                 <!-- Message d'erreur conditionnel -->
-                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 hidden" id="error-message">
+                @if(session('error'))
+                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6" id="error-message">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <i class="fas fa-exclamation-circle text-red-500"></i>
                         </div>
-                        @if(session('error'))
                         <div class="ml-3">
                             <p class="text-sm">{{session('error')}}</p>
                         </div>
-                        @endif
                     </div>
                 </div>
+                @endif
                 
                 <form id="loginForm" method="POST" action="/login" class="space-y-6">
                     @csrf
