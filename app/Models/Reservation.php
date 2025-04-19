@@ -15,6 +15,7 @@ class Reservation extends Model
 
     Protected $table = "reservation";
 
+    Protected $fillable = ["client_id","prestataire_id","service_id","addresse_id","reservation_date","reservation_time","created_at","updated_at","status"];
     public function Service()
     {
         return $this->belongsTo(Service::class,'service_id');

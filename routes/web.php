@@ -63,7 +63,6 @@ Route::delete('admin/delete/categorie/{id}',[AdminController::class,'DestroyCate
 Route::get('/admin/create/service',[AdminController::class,'AddService']);
 Route::post('/admin/create/service',[AdminController::class,'CreateService']);
 
-Route::get('/admin/update/service/{id}',[AdminController::class,'UpdateService']);
 
 Route::put('/admin/update/service/{id}',[AdminController::class,'EditService']);
 
@@ -89,6 +88,11 @@ Route::put('/admin/approve/avis/{id}',[AdminController::class,'ApproveAvis']);
 Route::put('/admin/refuse/avis/{id}',[AdminController::class,'RefuseAvis']);
 Route::put('/admin/update/avis/{id}',[AdminController::class,'UpdateAvis']);
 
+Route::get('/admin/utilisateurs',[AdminController::class,'UtilisateurIndex']);
+
+Route::delete('/admin/delete/user/{id}',[AdminController::class,'DeleteUser']);
+
+Route::put('/admin/update/user/{id}',[AdminController::class,'UpdateUser']);
 
 Route::get('/client/overview',[ClientController::class,'index']);
 
@@ -97,6 +101,13 @@ Route::get('/client/reservation',[ClientController::class,'reservationRead']);
 Route::get('/client/reservation/details/{id}',[ClientController::class,'GetReservationDetails']);
 
 Route::get('/client/profile',[ClientController::class,'Profile']);
+
+
+Route::post('/client/reservation/avis/{id}',[ClientController::class,'CreateFeedbackReservation']);
+Route::get('/client/reservation/avis/{id}', [ClientController::class, 'showFeedbackForm']);
+
+Route::post('/client/reservation/details/{id}',[ClientController::class,'StoreFeedbackReservation']);
+
 
 Route::get('/client/settings',[ClientController::class,'UpdateClientProfile']);
 Route::put('/client/settings',[ClientController::class,'UpdateClientProfile']);
@@ -114,6 +125,14 @@ Route::get('/services',[HomeController::class,'IndexServiceSearch']);
 
 Route::post('/services',[HomeController::class,'IndexServiceSearch']);
 
+Route::get('/reservation/service/{id}',[HomeController::class,'IndexReservation']);
+Route::post('/reservation/{id}',[HomeController::class,'ReservationDateTime']);
+
+
+
+Route::post('/reservation/step/complete',[HomeController::class,'IndexReserve']);
+
+Route::get('reservation-confirmation',[HomeController::class,'ConfirmationReservation']);
 
 Route::get('/admin/settings',function(){
     return view('/Admin.Dashboard-settings');

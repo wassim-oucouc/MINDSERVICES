@@ -21,17 +21,14 @@
                 <!-- Welcome Card -->
                 <div class="bg-white shadow rounded-lg mb-6">
                     <div class="px-4 py-5 sm:p-6">
-                        <h2 class="text-lg font-medium text-gray-900">Bienvenue, Jean !</h2>
+                        <h2 class="text-lg font-medium text-gray-900">Bienvenue, {{$client->Prenom}} !</h2>
                         <p class="mt-1 text-sm text-gray-600">
                             Que souhaitez-vous faire aujourd'hui ?
                         </p>
                         <div class="mt-4 flex flex-wrap gap-3">
-                            <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                            <a href="/services" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                                 <i class="fas fa-search mr-2"></i> Rechercher un service
-                            </a>
-                            <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                                <i class="fas fa-calendar-plus mr-2"></i> Nouvelle réservation
-                            </a>
+                            </a>    
                         </div>
                     </div>
                 </div>
@@ -40,14 +37,14 @@
                 <div class="mb-6">
                     <div class="flex items-center justify-between mb-4">
                         <h2 class="text-xl font-medium text-gray-900">Services réservés</h2>
-                        <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                        <a target = "_blank" href="/client/reservation" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                             Voir tout <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
 
                     <div class="bg-white shadow overflow-hidden sm:rounded-md">
                         <ul class="divide-y divide-gray-200">
-                            <!-- Service 1 -->
+                            @foreach($reservations as $reservation)
                             <li>
                                 <div class="px-4 py-4 sm:px-6">
                                     <div class="flex items-center justify-between">
@@ -56,14 +53,37 @@
                                                 <i class="fas fa-wrench text-indigo-600"></i>
                                             </div>
                                             <div class="ml-4">
-                                                <p class="text-sm font-medium text-gray-900">Plomberie</p>
-                                                <p class="text-sm text-gray-500">Réparation robinet cuisine</p>
+                                                <p class="text-sm font-medium text-gray-900">{{$reservation->CategorieNom}}</p>
+                                                <p class="text-sm text-gray-500">{{$reservation->titre}}</p>
                                             </div>
                                         </div>
                                         <div class="flex items-center gap-2">
-                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">
-                                                En attente
-                                            </span>
+                                        @if($reservation->status == 'En attente')
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-1"></span>
+                                    En attente
+                                </span>
+                                @elseif($reservation->status == 'Confirmée')
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
+                                    Confirmée
+                                </span>
+                                @elseif($reservation->status == 'Terminée')
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                                    Terminée
+                                </span>
+                                @elseif($reservation->status == 'Annulée')
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1"></span>
+                                    Annulée
+                                </span>
+                                @elseif($reservation->status == 'En cours')
+                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-sky-400 rounded-full mr-1"></span>
+                                    En cours
+                                </span>
+                                @endif
                                             <button class="text-gray-400 hover:text-gray-500">
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </button>
@@ -73,11 +93,11 @@
                                         <div class="sm:flex">
                                             <p class="flex items-center text-sm text-gray-500">
                                                 <i class="fas fa-user mr-1.5 text-gray-400"></i>
-                                                Martin Leblanc
+                                                {{$reservation->Prenom}} {{$reservation->Nom}}
                                             </p>
                                             <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
                                                 <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
-                                                6 avril 2025, 14:00
+                                                {{$reservation->reservation_date}}, {{$reservation->reservation_time}}
                                             </p>
                                         </div>
                                         <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
@@ -86,90 +106,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-
-                            <!-- Service 2 -->
-                            <li>
-                                <div class="px-4 py-4 sm:px-6">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                                                <i class="fas fa-leaf text-indigo-600"></i>
-                                            </div>
-                                            <div class="ml-4">
-                                                <p class="text-sm font-medium text-gray-900">Jardinage</p>
-                                                <p class="text-sm text-gray-500">Tonte de pelouse</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">
-                                                Confirmé
-                                            </span>
-                                            <button class="text-gray-400 hover:text-gray-500">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 sm:flex sm:justify-between">
-                                        <div class="sm:flex">
-                                            <p class="flex items-center text-sm text-gray-500">
-                                                <i class="fas fa-user mr-1.5 text-gray-400"></i>
-                                                Émilie Robert
-                                            </p>
-                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                                <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
-                                                10 avril 2025, 10:00
-                                            </p>
-                                        </div>
-                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                            <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
-                                            <p>À domicile</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <!-- Service 3 -->
-                            <li>
-                                <div class="px-4 py-4 sm:px-6">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
-                                                <i class="fas fa-desktop text-indigo-600"></i>
-                                            </div>
-                                            <div class="ml-4">
-                                                <p class="text-sm font-medium text-gray-900">Informatique</p>
-                                                <p class="text-sm text-gray-500">Réparation ordinateur</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center gap-2">
-                                            <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800">
-                                                Terminé
-                                            </span>
-                                            <button class="text-gray-400 hover:text-gray-500">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="mt-2 sm:flex sm:justify-between">
-                                        <div class="sm:flex">
-                                            <p class="flex items-center text-sm text-gray-500">
-                                                <i class="fas fa-user mr-1.5 text-gray-400"></i>
-                                                Thomas Mercier
-                                            </p>
-                                            <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                                <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
-                                                28 mars 2025, 16:30
-                                            </p>
-                                        </div>
-                                        <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                            <a href="#" class="text-indigo-600 hover:text-indigo-500">
-                                                Laisser un avis <i class="fas fa-star ml-1"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+</li>
+@endforeach
                         </ul>
                     </div>
                 </div>
@@ -238,28 +176,28 @@
                                 </a>
                             </div>
                             <div class="flex items-center">
-                                <div class="h-24 w-24 rounded-full bg-indigo-100 flex items-center justify-center">
-                                    <span class="text-indigo-800 font-semibold text-2xl">JD</span>
+                                <div class="h-20 w-21 rounded-full bg-indigo-100 flex items-center justify-center">
+                                    <img src = "/storage/{{$client->Photo}}" class="h-24 w-24 rounded-full flex items-center justify-center">
                                 </div>
                                 <div class="ml-6">
-                                    <h4 class="text-xl font-medium text-gray-900">Jean Dupont</h4>
-                                    <p class="text-sm text-gray-500">Membre depuis janvier 2025</p>
+                                    <h4 class="text-xl font-medium text-gray-900">{{$client->Prenom}} {{$client->Nom}}</h4>
+                                    <p class="text-sm text-gray-500">inscrit  {{$client->created_at}}</p>
                                     <p class="mt-1 text-sm text-gray-600">
                                         <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
-                                        Paris, France
+                                        {{$client->pays}}
                                     </p>
                                     <p class="mt-1 text-sm text-gray-600">
                                         <i class="fas fa-envelope mr-1.5 text-gray-400"></i>
-                                        jean.dupont@email.com
+                                        {{$client->Email}}
                                     </p>
                                     <p class="mt-1 text-sm text-gray-600">
                                         <i class="fas fa-phone mr-1.5 text-gray-400"></i>
-                                        +33 6 12 34 56 78
+                                        {{$client->telephone}}
                                     </p>
                                 </div>
                             </div>
                             <div class="mt-5 flex justify-end">
-                                <a href="#" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                                <a href="/client/profile" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">
                                     Voir profil complet <i class="fas fa-arrow-right ml-1"></i>
                                 </a>
                             </div>

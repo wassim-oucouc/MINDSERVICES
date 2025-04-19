@@ -43,6 +43,24 @@ class CategorieRepository implements CategorieInterface
         return $categorie;
     }
 
+    public function ReadCategoriesPaginate()
+    {$categories = DB::table('service')
+        ->Rightjoin('categorie', 'categorie.id', '=', 'service.categorie_id')
+        ->groupBy('categorie.id', 'categorie.Nom','categorie.Description','categorie.Photo','categorie.created_at','categorie.updated_at')  
+        ->select(
+            'categorie.Nom',
+            DB::raw('COUNT(service.titre) AS COUNT'),
+            'categorie.Description',
+            'categorie.id',
+            'categorie.Photo',
+            'categorie.created_at'
+        )
+        ->paginate(1);
+    
+        return $categories;
+    }
+
+    
     public function ReadCategories()
     {$categories = DB::table('service')
         ->Rightjoin('categorie', 'categorie.id', '=', 'service.categorie_id')

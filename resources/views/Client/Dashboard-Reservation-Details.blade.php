@@ -53,6 +53,35 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Colonne de gauche: Informations principales -->
             <div class="lg:col-span-2 space-y-8">
+            @if (session('done'))
+    <div class="max-w-6xl mx-auto mt-4">
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Succès!</strong>
+            <span class="block sm:inline">{{ session('done') }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none'">
+                    <title>Fermer</title>
+                    <path d="M10 9l-5-5-1.41 1.41L8.59 10l-5 5L5 16l5-5 5 5 1.41-1.41-5-5 5-5L15 4l-5 5z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+@endif
+@if (session('error'))
+    <div class="max-w-6xl mx-auto mt-4">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Erreur!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none'">
+                    <title>Fermer</title>
+                    <path d="M10 9l-5-5-1.41 1.41L8.59 10l-5 5L5 16l5-5 5 5 1.41-1.41-5-5 5-5L15 4l-5 5z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+@endif
+
                 <!-- Carte du service -->
                 <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
                     <div class="p-6">
@@ -162,12 +191,14 @@
                             </div>
                             <h3 class="text-lg font-medium text-gray-900">{{$reservation->Prestataire->Prenom}} {{$reservation->Prestataire->Nom}}</h3>
                             <div class="mt-2 flex items-center">
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="fas fa-star text-yellow-400"></i>
-                                <i class="far fa-star text-yellow-400"></i>
-                                <span class="ml-2 text-sm text-gray-600">(10 avis)</span>
+                            @for( $i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $AvisAverage)
+                                        <i class="fas fa-star text-yellow-400"></i> 
+                                    @else
+                                        <i class="far fa-star text-yellow-400"></i>
+                                    @endif
+                                @endfor 
+                                <span class="ml-2 text-sm text-gray-600">({{$TotalAvisPrestataire}} avis)</span>
                             </div>
                             <p class="mt-4 text-sm text-gray-600">{{$reservation->Professional->service_principal}}</p>
                             <div class="mt-4 flex flex-col space-y-2 w-full">
@@ -200,11 +231,18 @@
                             @elseif($reservation->status =='Confirmée')
                             <button type="button" id="give-review-button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
                                 <i class="fas fa-star mr-2"></i> Donner l'avis
-                            </button>
+</button>
+                            <a href="/service/details/{{$reservation->Service->id}}" target = "_blank" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 transition-colors duration-200">
+                                <i class="fas fa-comments mr-2"></i> Voir Détail Service
+                            </a>
                             @elseif($reservation->status == 'En attente')
                             
                             <button type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
     <i class="fas fa-check-circle mr-2"></i> Compléter la réservation
+</button>
+@elseif($reservation->status == 'Terminée')
+<button type="button" id="give-review-button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
+                                <i class="fas fa-star mr-2"></i> Donner l'avis
 </button>
                             @endif
                         </div>
@@ -222,8 +260,10 @@
                             </button>
                         </div>
                         <div class="modal-body p-4">
-                            <form action="/client/reservation/{{$reservation->id}}/review" method="POST">
+                            <form id = "avis-form" action="/client/reservation/details/{{$reservation->id}}" method="POST">
                                 @csrf
+                                <input type="hidden" name="service_id" value = "{{$reservation->Service->id}}">
+                                <input type="hidden" name="prestataire_id" value = "{{$reservation->Prestataire->id}}">
                                 <div class="mb-4">
                                     <label for="rating" class="block text-sm font-medium text-gray-700">Évaluation</label>
                                     <select id="rating" name="rating" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
@@ -239,7 +279,7 @@
                                     <textarea id="comment" name="comment" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                                 </div>
                                 <div class="flex justify-end">
-                                    <button type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
+                                    <button id = "avis-submit" type="submit" class="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200">
                                         Soumettre l'avis
                                     </button>
                                 </div>
@@ -274,23 +314,5 @@
         </div>
     </main>
 </div>
-
-<script>
-    document.getElementById('give-review-button').addEventListener('click', function() {
-        document.getElementById('review-modal').classList.remove('hidden');
-    });
-
-    document.getElementById('close-modal').addEventListener('click', function() {
-        document.getElementById('review-modal').classList.add('hidden');
-    });
-
-    // Fermer le modal en cliquant en dehors de celui-ci
-    window.addEventListener('click', function(event) {
-        const modal = document.getElementById('review-modal');
-        if (event.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
-</script>
 
 @endsection

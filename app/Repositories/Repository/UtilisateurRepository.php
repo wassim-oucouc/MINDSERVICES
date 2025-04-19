@@ -17,7 +17,13 @@ class UtilisateurRepository implements UtilisateurInterface
         $users = Utilisateur::find($id);
         return $users;
     }
-    public function Update($id,array $data)
+
+    public function findUser($id)
+    {
+        $users = Utilisateur::find($id)->with('Role','Professional','Client')->first();
+        return $users;
+    }
+    public function UpdateUtilisateur($id,array $data)
     {
         $user  = Utilisateur::find($id);
         $user->update($data);
@@ -26,7 +32,7 @@ class UtilisateurRepository implements UtilisateurInterface
     }
     public function Delete($id)
     {
-        $user = Utilisateur::find($id);
+        $user = Utilisateur::findOrfail($id);
         $user->delete();
         return $user;
 
@@ -59,6 +65,13 @@ class UtilisateurRepository implements UtilisateurInterface
     public function FindByEmail($email)
     {
         return Utilisateur::where('Email',$email)->first();
+    }
+
+    public function GetAllUsers()
+    {
+        $users = Utilisateur::with('Client','Professional','Role')->paginate(5);
+
+        return $users;
     }
 }
 

@@ -5,6 +5,7 @@ namespace  App\Repositories\Repository;
 
 use App\Models\Avis;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Repositories\Contracts\AvisInterface;
 
 
@@ -37,6 +38,9 @@ class AvisRepository implements AvisInterface
     }
     public function create(array $data)
     {
+        $Avis = Avis::create($data);
+
+        return $Avis;
 
     }
     public function ReadAvis()
@@ -95,5 +99,12 @@ class AvisRepository implements AvisInterface
         $Avis = Avis::with('Client')->paginate(5);
 
         return $Avis;
+    }
+
+    public function AvisCheckById($service_id)
+    {
+        $avis = Avis::where('Service_id',$service_id)->where('client_id',Auth::user()->id)->first();
+
+        return $avis;
     }
 }

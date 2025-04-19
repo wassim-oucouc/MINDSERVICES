@@ -15,7 +15,7 @@ class ServiceRepository implements ServiceInterface
 
 public function find($id)
 {
-    $service = Service::findOrfail($id);
+    $service = Service::where('id',$id)->with('Prestataire')->first();
     return $service;
 }
 public function Update($id,array $data)
@@ -42,15 +42,15 @@ public function ReadServices()
     ->join('Utilisateur','Utilisateur.id','=','service.prestataire_id')
     ->join('categorie','Categorie.id','=','service.categorie_id')
     ->select('Utilisateur.Prenom','Utilisateur.Nom','Utilisateur.Photo AS ProfilePhoto',
-    'categorie.Nom AS CategorieNom','Service.titre','Service.Description','Service.Photo',
+    'categorie.Nom AS CategorieNom','Service.titre','Service.duration','Service.availability','Service.Description','Service.Photo',
     'Service.Prix','Service.created_at','Service.id','Service.updated_at','Service.status')
-    ->get();
+    ->paginate(5);
     return $services;
 }
 
 public function GetServiceByID($id)
 {
-    $service = Service::find($id);
+    $service = Service::find($id)->with('category','Prestataire')->first();
 
     return $service;
 }
@@ -166,6 +166,23 @@ db::raw('AVG(avis.Note) AS Note_avg'))
 
 return $query;
 }
+
+public function GetServicesbycategorieAsc($array)
+{
+    $service = $this->GetServicebycategorie($array);
+
+   return $service->sortBy('Prix')->values();
+
+}
+
+public function GetServicesbycategorieDesc($array)
+{
+    $service = $this->GetServicebycategorie($array);
+
+    return $service->sortByDesc('Prix')->values();
+
+}
+
 
 
 

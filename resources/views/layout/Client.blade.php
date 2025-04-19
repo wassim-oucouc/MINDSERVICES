@@ -12,28 +12,25 @@
 </head>
 <body class="bg-gray-50">
     <div class="flex min-h-screen">
-        <!-- BARRE DE NAVIGATION LATÉRALE -->
         <div class="md:hidden fixed z-20 p-4 bg-white shadow-sm">
             <button id="menuButton" class="text-gray-500 focus:outline-none focus:text-gray-600">
                 <i class="fas fa-bars h-6 w-6"></i>
             </button>
         </div>
         
-        <!-- Sidebar / Navigation latérale -->
         <div id="sidebar" class="fixed md:relative z-10 w-64 bg-white shadow-md h-full hidden md:block">
             <div class="relative z-10 bg-white h-full flex flex-col">
                 <div class="px-4 py-6">
                     <div class="flex items-center mb-6">
-                        <div class="h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                            <span class="text-indigo-800 font-semibold">JD</span>
+                        <div class="h-12 w-12 rounded-full flex items-center justify-center">
+                            <img src = "/storage/{{Auth::user()->Photo}}" class="h-9 w-9 rounded-full flex items-center justify-center">
                         </div>
                         <div class="ml-3">
-                            <p class="text-sm font-medium text-gray-900">Jean Dupont</p>
-                            <p class="text-xs text-gray-500">jean.dupont@email.com</p>
+                            <p class="text-sm font-medium text-gray-900">{{Auth::user()->Prenom}} {{Auth::user()->Nom}}</p>
+                            <p class="text-xs text-gray-500">{{Auth::user()->Email}}</p>
                         </div>
                     </div>
                     
-                    <!-- Menu de navigation -->
                     <nav class="h-135 space-y-1">
                         <a href="/client/overview" class="@yield('home') flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i class="fas fa-home mr-3 h-5 w-5 text-gray-400"></i>
@@ -43,7 +40,7 @@
                             <i class="fas fa-calendar-alt mr-3 h-5 w-5 text-indigo-500"></i>
                             Services réservés
                         </a>
-                        <a href="/" class="@yield('recherche') flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="/services" target = "_blank" class="@yield('recherche') flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i class="fas fa-search mr-3 h-5 w-5 text-gray-400"></i>
                             Rechercher un service
                         </a>
@@ -55,14 +52,13 @@
                             <i class="fas fa-user mr-3 h-5 w-5 text-gray-400"></i>
                             Profil
                         </a>
-                        <a href="/" class="@yield('paramètres') flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+                        <a href="/client/settings" class="@yield('paramètres') flex items-center px-2 py-2 text-sm font-medium rounded-md text-gray-600 hover:bg-gray-50 hover:text-gray-900">
                             <i class="fas fa-cog mr-3 h-5 w-5 text-gray-400"></i>
                             Paramètres
                         </a>
                     </nav>
                 </div>
                 
-                <!-- Lien de déconnexion -->
                 <div class="mt-auto border-t border-gray-200 px-4 py-4">
                     <a href="/" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50">
                         <i class="fas fa-sign-out-alt mr-3 h-5 w-5 text-red-500"></i>
@@ -73,3 +69,9 @@
         </div>
 
         @yield('content')
+
+
+
+
+        
+<script src = "/js/FormFeedbackReservation.js"></script>

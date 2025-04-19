@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
-    Protected $fillable = ['titre','Description','Photo','Prix','categorie_id','prestataire_id','status'];
+    Protected $fillable = ['titre','Description','Photo','Prix','duration','availability','categorie_id','prestataire_id','status'];
 
     Protected $table = "service";
     use HasFactory;

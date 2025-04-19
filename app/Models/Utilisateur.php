@@ -15,7 +15,17 @@ class Utilisateur extends Authenticatable
 
     public function Role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class,'role_id');
+    }
+
+    public function Professional()
+    {
+        return $this->hasOne(Prestataire::class,'utilisateur_id');
+    }
+
+    public function Client()
+    {
+        return $this->hasOne(Client::class,'id_client');
     }
 
     
