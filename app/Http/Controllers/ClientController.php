@@ -303,7 +303,7 @@ public function CreateFeedbackReservation(Request $request,$id)
     
                 $avis = $this->AvisRepository->create($data);
 
-                return redirect()->back()->with('done','Votre avis a bien été enregistré avec succès. Merci pour votre retour !');
+                return redirect()->back()->with('done','Votre avis a été enregistré avec succès. Merci pour votre retour !');
 
             }
         }
