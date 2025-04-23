@@ -61,8 +61,63 @@ class ReservationRepository implements ReservationInterface
 
     public function GetDetailsReservation($id)
     {
-        $reservation = Reservation::where('id',$id)->with('Service','Prestataire','Client','Professional','Adresse','Service.category')->first();
+        $reservation = Reservation::where('id',$id)->with('Service','Prestataire','Client.Client','Professional','Adresse','Service.category')->first();
 
         return $reservation;
+    }
+
+    public function GetReservationsPaginate($id)
+    {
+        $reservation = Reservation::where('prestataire_id',$id)->with('Service','Prestataire')->limit(4)->get();
+
+        return $reservation;
+    }
+
+    public function CountReservationEncours($id)
+    {
+        $total = reservation::where('prestataire_id',$id)->where('status','En attente')->count();
+
+        return $total;
+    }
+
+    public function GetReservationsTerminer($id)
+    {
+        $total = Reservation::where('prestataire_id',$id)->where('status','Terminée')->count();
+
+        return $total;
+    }
+
+    public function GetReservationsByPrestataire($id)
+    {
+        $reservations = Reservation::where('prestataire_id',$id)->with('Service','Client')->paginate(5);
+
+        return $reservations;
+    }
+
+    public function CancelReservationById($id)
+    {
+        $reservation = Reservation::find($id);
+
+        if($reservation)
+        {
+            $reservation->update([
+                "status" => "Annulée"
+            ]);
+        }
+        return false;
+    }
+
+    public function ConfirmReservationByid($id)
+    {
+        $reservation = Reservation::find($id);
+
+        if($reservation)
+        {
+            $reservation->update([
+                "status" => "Confirmée"
+            ]);
+        }
+
+        return false;
     }
 }

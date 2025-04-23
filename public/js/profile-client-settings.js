@@ -67,12 +67,6 @@ function Validation()
 
     let validate = true;
 
-    if(Photo.value == 0)
-    {
-        showError('Importer Une Photo');
-        toggleRedBanner()        
-        validate = false;
-    }
 
     if(Prenom.value == '' || !PrenomExpression.test(Prenom.value.trim()))
     {

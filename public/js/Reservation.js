@@ -40,6 +40,8 @@ button_continuer.addEventListener('click',function(event){
         document.querySelector('#reservation').submit();
     }
     else {
+        document.querySelector('#time-select').style.borderColor = "red";
+        document.querySelector('#date-picker').style.borderColor = "red";
         event.preventDefault();
     }
 });

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Utilisateur extends Authenticatable
 {
-    Protected $fillable = ['Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
+    Protected $fillable = ['id','Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
 
     Protected $table = "utilisateur";
     use HasFactory;
@@ -26,6 +26,11 @@ class Utilisateur extends Authenticatable
     public function Client()
     {
         return $this->hasOne(Client::class,'id_client');
+    }
+
+    public function Avis()
+    {
+        return $this->hasMany(Avis::class,'prestataire_id');
     }
 
     

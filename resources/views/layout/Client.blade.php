@@ -60,7 +60,7 @@
                 </div>
                 
                 <div class="mt-auto border-t border-gray-200 px-4 py-4">
-                    <a href="/" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50">
+                    <a href="/logout" class="flex items-center px-2 py-2 text-sm font-medium rounded-md text-red-600 hover:bg-red-50">
                         <i class="fas fa-sign-out-alt mr-3 h-5 w-5 text-red-500"></i>
                         Déconnexion
                     </a>

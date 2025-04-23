@@ -32,9 +32,13 @@ class ClientController extends Controller
 
     public function Index()
     {
+        $id_client = Auth::user()->id;
+        $statistic = $this->clientRepository->GetStatisticByClientId($id_client);
+        $services = $this->ServiceRepository->getserviceslimit();
+
         $client = $this->clientRepository->GetclientDetails();
         $reservations = $this->clientRepository->GetReservationsDetails();
-        return view('Client.Dashboard-home',compact('client','reservations'));
+        return view('Client.Dashboard-home',compact('client','reservations','statistic','services'));
     }
 
     public function reservationRead()
@@ -79,7 +83,7 @@ if($request->nom)
         "current_password" => "nullable|string|min:8",
         "password" => "nullable|string|min:8",
         "password-confirm" => "nullable|string|same:password",
-        "photo" => "nullable|image|mimes:jpeg,png,jpg,gif,svg"
+        "photo" => "nullable|image"
     ]);
 }
    catch(\Illuminate\Validation\ValidationException $e)
@@ -94,13 +98,23 @@ if($request->nom)
         if ($request->file('photo')){
             $path = $request->file('photo')->store('User', 'public');
         }
-
+if($request->file('photo'))
+{
         $data = [
             "Prenom" => $request->prenom,
             "Nom" => $request->nom,
             "Photo" => $path,
             "updated_at" => now()
         ];
+    }
+    else
+    {
+        $data = [
+            "Prenom" => $request->prenom,
+            "Nom" => $request->nom,
+            "updated_at" => now()
+        ];
+    }
 
         $dataclient = [
             "telephone" => $request->telephone,

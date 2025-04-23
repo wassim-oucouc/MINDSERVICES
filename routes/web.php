@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PrestataireController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,6 +76,12 @@ Route::put('/admin/ban/service/{id}',[AdminController::class,'BanService']);
 
 Route::get('/admin/rendez-vous',[AdminController::class,'Rendez_vous']);
 
+Route::put('/admin/settings',[AdminController::class,'UpdateAdminDetails'])->name('update.admin');
+
+Route::put('/admin/settings/password',[AdminController::class,'UpdatePassword'])->name('update.password.admin');
+
+Route::put('/admin/settings/image',[AdminController::class,'UpdateImage'])->name('update.image.admin');
+
 
 Route::get('/admin/create/categorie',function(){
     return view('/Admin.Dashboard-categorie-creation');
@@ -118,7 +125,38 @@ Route::get('/prestataire/profile/{id}',[HomeController::class,'GetProfile']);
 
 Route::get('/prestataire/avis/{id}',[HomeController::class,'GetProfileAvis']);
 
+Route::get('/prestataires',[HomeController::class,'Prestataires']);
+
 Route::get('/prestataire/services/{id}',[HomeController::class,'GetProfileServices']);
+
+Route::get('/professional/dashboard',[PrestataireController::class,'IndexHome']);
+
+Route::get('/professional/services',[PrestataireController::class,'IndexServices']);
+
+Route::get('/professional/creation/service',[PrestataireController::class,'IndexServiceCreation']);
+Route::post('/professional/creation/service',[PrestataireController::class,'ServiceCreation']);
+
+Route::put('/professional/services',[PrestataireController::class,'EditService']);
+
+Route::delete('/professional/delete/service/{id}',[PrestataireController::class,'DeleteService']);
+
+Route::get('/professional/reservation',[PrestataireController::class,'GestionReservationIndex']);
+
+Route::put('/professional/cancel/reservation/{id}',[PrestataireController::class,'CancelReservation']);
+
+Route::put('/professional/confirm/reservation/{id}',[PrestataireController::class,'ConfirmReservation']);
+
+Route::get('/professional/reservation/details/{id}',[PrestataireController::class,'ReservationDetails']);
+
+Route::get('/professional/avis/',[PrestataireController::class,'AvisIndex']);
+
+Route::get('/professional/settings',[PrestataireController::class,'ProfileSettingsIndex']);
+
+Route::put('/professional/settings/details',[PrestataireController::class,'UpdatePrestataireDetails'])->name('update.prestataire');
+
+Route::put('/professional/settings/password',[PrestataireController::class,'UpdatePassword'])->name('update.password');
+
+Route::put('/professional/settings/image',[PrestataireController::class,'UpdateImage'])->name('update.image');
 
 
 Route::get('/services',[HomeController::class,'IndexServiceSearch']);
@@ -127,6 +165,9 @@ Route::post('/services',[HomeController::class,'IndexServiceSearch']);
 
 Route::get('/reservation/service/{id}',[HomeController::class,'IndexReservation']);
 Route::post('/reservation/{id}',[HomeController::class,'ReservationDateTime']);
+
+
+Route::get('/logout',[AuthController::class,'Logout']);
 
 
 

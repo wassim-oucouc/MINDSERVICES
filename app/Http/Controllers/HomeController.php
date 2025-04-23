@@ -192,11 +192,6 @@ class HomeController extends Controller
         }
     }
 
-    if(isset($_POST['submit_button']))
-    {
-        dd('hello');
-    }
-
 
 }
 
@@ -231,13 +226,19 @@ public function IndexReserve(Request $request)
         return redirect('/reservation/service/' . $id_service)
             ->with('error', 'Cette date et heure sont déjà réservées. Merci de choisir une nouvelle date et heure.');
     } else {
-        if($request->address) {
             $validated = $request->validate([
                 "address" => "required|string",
                 "postal_code" => "required",
                 "city" => "required|string",
                 "pays" => "required|string"
             ]);
+
+            if($request->address) {
+                $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->date, $request->time);
+                if ($reservation){
+                    return redirect('/reservation/service/' . $id_service)
+                        ->with('error', 'Cette date et heure sont déjà réservées. Merci de choisir une nouvelle date et heure.');
+                }
 
             $adress = $this->AdresseRepository->create([
                 "address" => $validated['address'],
@@ -291,6 +292,13 @@ public function ConfirmationReservation()
     $confirmation = session('confirmation');
 
     return view('reservation-confirmation',compact('confirmation'));
+}
+
+public function Prestataires()
+{
+$prestataires = $this->PrestataireRepository->GetPrestataires();
+// dd($prestataires);
+    return view('prestataires',compact('prestataires'));
 }
 
 }

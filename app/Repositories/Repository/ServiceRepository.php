@@ -20,14 +20,22 @@ public function find($id)
 }
 public function Update($id,array $data)
 {
-    $updateservice = Service::where('id',$id)->update($data);
-  
-    return $updateservice;
+     $service = Service::find($id);
+     if (!$service) {
+         return false;  
+     }
+ 
+     $updateservice = $service->update($data);
+
+     return $updateservice;
 }
 public function Delete($id)
 {
     $deleteservice = Service::find($id);
+    if($deleteservice)
+    {
     $deleteservice->delete();
+    }
     return $deleteservice;
 }
 public function create(array $data)
@@ -40,7 +48,7 @@ public function ReadServices()
 {
     $services = DB::table('service')
     ->join('Utilisateur','Utilisateur.id','=','service.prestataire_id')
-    ->join('categorie','Categorie.id','=','service.categorie_id')
+    ->join('categorie','categorie.id','=','service.categorie_id')
     ->select('Utilisateur.Prenom','Utilisateur.Nom','Utilisateur.Photo AS ProfilePhoto',
     'categorie.Nom AS CategorieNom','Service.titre','Service.duration','Service.availability','Service.Description','Service.Photo',
     'Service.Prix','Service.created_at','Service.id','Service.updated_at','Service.status')
@@ -50,7 +58,7 @@ public function ReadServices()
 
 public function GetServiceByID($id)
 {
-    $service = Service::find($id)->with('category','Prestataire')->first();
+    $service = Service::where('id',$id)->with('category','Prestataire')->first();
 
     return $service;
 }
@@ -86,6 +94,12 @@ public function GetServicesWithPaginate($id)
 {
     $services = Service::where('prestataire_id',$id)->where('status','Actif')->paginate(5);
 
+    return $services;
+}
+
+public function getserviceslimit()
+{
+    $services = Service::limit(4)->get();
     return $services;
 }
 
@@ -181,6 +195,45 @@ public function GetServicesbycategorieDesc($array)
 
     return $service->sortByDesc('Prix')->values();
 
+}
+
+public function GetServiceActif($id)
+{
+    $service = Service::where('prestataire_id',$id)->where('status','Actif')->count();
+
+    return $service;
+}
+
+public function GetServicesByPrestataire($id)
+{
+    $services = DB::table('service')
+    ->join('utilisateur','utilisateur.id','=','service.prestataire_id')
+    ->join('categorie','Categorie.id','=','service.categorie_id')
+    ->where('service.prestataire_id','=',$id)
+    ->where('service.status','Actif')
+    ->select('utilisateur.Prenom','utilisateur.Nom','utilisateur.Photo AS ProfilePhoto',
+    'categorie.Nom AS CategorieNom','service.titre','service.duration','service.availability','service.Description','service.Photo',
+    'service.Prix','service.created_at','service.id','service.updated_at','service.status')
+    ->paginate(5);
+
+    return $services;
+}
+
+public function statisticServiceByPrestataire($id)
+{
+    $totalservices = Service::where('prestataire_id',$id)->count();
+
+    $totalservicesactif = Service::where('prestataire_id',$id)->where('status','Actif')->count();
+
+    $totalserviceInactif = Service::where('prestataire_id',$id)->where('status','inactif')->count();
+
+    $statistic = [
+        "total" => $totalservices,
+        "totalactif" => $totalservicesactif,
+        "totalinactif" => $totalserviceInactif
+    ];
+
+    return $statistic;
 }
 
 

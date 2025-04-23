@@ -2,6 +2,7 @@
 namespace App\Repositories\Repository;
 
 use App\Models\Client;
+use App\Models\Reservation;
 use App\Models\Utilisateur;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,26 @@ class ClientRepository implements ClientInterface
             )
         ->first();
             return $client;
+    }
+
+    public function GetStatisticByClientId($id)
+    {
+        $totalreservation = Reservation::where('client_id',$id)->count();
+
+        $reservationpending = Reservation::where('client_id',$id)->where('status','En attente')->count();
+
+        $reservationconfirmer = Reservation::where('client_id',$id)->where('status','Confirmée')->count();
+
+        $reservationannuler = Reservation::where('client_id',$id)->where('status','Annulée')->count();
+
+        $statistic = [
+            "totalreservation" => $totalreservation,
+            "reservationpending" => $reservationpending,
+            "reservationconfirmer" => $reservationconfirmer,
+            "reservationannuler" => $reservationannuler
+        ];
+
+        return $statistic;
     }
 
         public function GetReservationsDetails()
@@ -59,7 +80,7 @@ return $reservations;
 
         public function UpdateClientInfo($id,$dataclient)
         {
-            $client =  DB::table('client')->where('id',$id)->update($dataclient);
+            $client =  DB::table('client')->where('id_client',$id)->update($dataclient);
           
             return $client;
         }

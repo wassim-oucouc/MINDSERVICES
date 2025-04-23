@@ -69,17 +69,38 @@
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     <a href="/" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
                     <a href="/services" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="providers.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
+                    <a href="/prestataires" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
                     <a href="about.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
                     <a href="/contact" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
                 </div>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+                @if(Auth::check())
+                @if(Auth::user()->role_id == 2)
+                    <a href="/client/overview">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                @elseif(Auth::user()->role_id == 1)
+                <a href="/professional/dashboard">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                @elseif(Auth::user()->role_id == 3)
+                <a href="/admin/dashboard">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                            @endif      
+                            @else
+                            <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
                 <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="/login">Connexion</a>
                 <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="/pro/register">Espace Professionnel</a>
                 <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="/client/register">Espace Client</a>
+            </div>           
+                            @endif
+    </div>    
+          
             </div>
-            <div class="flex items-center sm:hidden">ton">
+             
+            <div class="flex items-center sm:hidden">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
                 <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-but

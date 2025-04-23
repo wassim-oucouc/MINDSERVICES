@@ -85,14 +85,17 @@ class AvisRepository implements AvisInterface
 
     public function GetFeedbackLimit($id)
     {
+
         $Avis = Avis::where('prestataire_id',$id)
         ->where('status','Approuvé')
         ->with('Client')
-        ->limit(4)
         ->orderBy('id','DESC')
+        ->limit(4)
         ->get();
 
-        return $Avis;
+      return $Avis;
+
+      
     }
     public function GetFeedbacksWithPaginate($id)
     {
@@ -106,5 +109,25 @@ class AvisRepository implements AvisInterface
         $avis = Avis::where('Service_id',$service_id)->where('client_id',Auth::user()->id)->first();
 
         return $avis;
+    }
+
+
+    public function GetFeedbacksByPrestataire($id)
+    {
+        $avis = Avis::where('Prestataire_id',$id)->with('Service','Client')->paginate(5);
+
+
+        return $avis;
+    }
+
+    public function getstatisticbyprestataire($id)
+    {
+        $totalavis = Avis::where('prestataire_id',$id)->count();
+
+        $averagenote = DB::table('avis')->where('prestataire_id',$id)->avg('Note');
+
+        
+
+        return $averagenote;
     }
 }

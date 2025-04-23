@@ -7,12 +7,27 @@
         <!-- En-tête de navigation -->
         <header class="flex items-center mb-6">
             <i class="fas fa-chevron-left text-xl"></i>
+            
             <h1 class="text-2xl font-semibold ml-2">Réservation de Service</h1>
         </header>
-
+        @if (session('error'))
+    <div class="max-w-6xl mx-auto mt-4">
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <strong class="font-bold">Erreur!</strong>
+            <span class="block sm:inline">{{ session('error') }}</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" onclick="this.parentElement.parentElement.style.display='none'">
+                    <title>Fermer</title>
+                    <path d="M10 9l-5-5-1.41 1.41L8.59 10l-5 5L5 16l5-5 5 5 1.41-1.41-5-5 5-5L15 4l-5 5z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+@endif
         <!-- Bannière principale avec étapes de progression -->
         <section class="relative bg-cover bg-center rounded-lg overflow-hidden mb-8" style="background-image: url('/api/placeholder/1600/400')">
             <div class="absolute inset-0 bg-gradient-to-r from-indigo-900 to-indigo-700 opacity-90"></div>
+             
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                 <!-- En-tête avec étapes -->
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">

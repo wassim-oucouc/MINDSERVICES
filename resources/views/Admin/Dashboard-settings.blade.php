@@ -1,11 +1,11 @@
-@extends('layout.admin')
+@extends('layout.Admin')
 
 @section('Paramètres', 'flex items-center space-x-3 px-4 py-3 rounded-lg bg-indigo-100 text-indigo-600')
 
 @section('title', 'Settings')
 
 @section('content')
-        <!-- Main Content -->
+        
         <main class="main-content flex-1 overflow-x-hidden overflow-y-auto bg-gray-50">
             <!-- Top header -->
             <header class="bg-white shadow-sm px-6 py-4 flex items-center justify-between">
@@ -31,15 +31,52 @@
             </header>
 
             <!-- Settings Content -->
+             
             <div class="p-6 fade-in">
+            @if ($errors->any())
+    <div class="max-w-md mt-4 space-y-3">
+        @foreach ($errors->all() as $error)
+            <div class="flex items-center gap-2 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-lg shadow-sm">
+                <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2"
+                     viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+                <span class="text-sm font-medium">{{ $error }}</span>
+            </div>
+        @endforeach
+    </div>
+@endif
+            @if (session('infosupdated'))
+    <div class="w-full max-w-2xl mt-4 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg shadow-sm flex items-center gap-2">
+        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        <span class="text-sm font-medium">
+            {{ session('infosupdated') }}
+        </span>
+    </div>
+@endif
+            @if (session('email'))
+        <div class="flex items-center gap-2 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-lg shadow-sm">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+                 d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span class="text-sm font-medium">{{ session('email') }}</span>
+        </div>
+    @endif
+
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-8">
                     <div class="p-6">
                         <h3 class="text-lg font-semibold mb-4">Informations du Compte</h3>
-                        <form>
+                        
+                        <form action="{{ route('update.admin') }}" method="POST">
+                        @csrf  
+                            @method('PUT')
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="first_name" class="block text-sm font-medium text-gray-700">Prénom</label>
-                                    <input value = "{{Auth::user()->Prenom}}"type="text" id="first_name" name="first_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="Jean">
+                                    <input value ="{{Auth::user()->Prenom}}" type="text" id="first_name" name="first_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="Jean">
                                 </div>
                                 <div>
                                     <label for="last_name" class="block text-sm font-medium text-gray-700">Nom</label>
@@ -47,11 +84,7 @@
                                 </div>
                                 <div>
                                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                                    <input value = "{{Auth::user()->Email}}"type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="jean.dupont@example.com">
-                                </div>
-                                <div>
-                                    <label for="phone" class="block text-sm font-medium text-gray-700">Téléphone</label>
-                                    <input type="tel" id="phone" name="phone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" value="+33 6 12 34 56 78">
+                                    <input value = "{{Auth::user()->Email}}" type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                                 </div>
                             </div>
                             <div class="flex items-center justify-between">
@@ -62,9 +95,27 @@
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-8">
+                @if (session('password'))
+        <div class="flex items-center gap-2 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-lg shadow-sm">
+            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+                 d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span class="text-sm font-medium">{{ session('password') }}</span>
+        </div>
+    @endif
+    @if (session('passwordchanged'))
+        <div class="flex items-center gap-2 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg shadow-sm">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+                 d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-sm font-medium">{{ session('passwordchanged') }}</span>
+        </div>
+    @endif
                     <div class="p-6">
                         <h3 class="text-lg font-semibold mb-4">Changer le Mot de Passe</h3>
-                        <form>
+                        <form action = "{{Route('update.password.admin')}}" method = "POST">
+                            @csrf 
+                            @method('PUT')
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                                 <div>
                                     <label for="current_password" class="block text-sm font-medium text-gray-700">Mot de passe actuel</label>
@@ -87,12 +138,22 @@
                 </div>
 
                 <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-8">
+                @if (session('imagechanged'))
+        <div class="flex items-center gap-2 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-lg shadow-sm">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
+                 viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+                 d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-sm font-medium">{{ session('imagechanged') }}</span>
+        </div>
+    @endif  
                     <div class="p-6">
                         <h3 class="text-lg font-semibold mb-4">Changer la Photo de Profil</h3>
-                        <form>
+                        <form action = "{{route('update.image.admin')}}" method = "POST" enctype="multipart/form-data">
+                            @csrf 
+                            @method('PUT')
                             <div class="flex items-center mb-6">
                                 <div class="profile-image-container">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
+                                    <img id = "image_user" src="/storage/{{Auth::user()->Photo}}" 
                                          alt="Admin Profile" class="w-20 h-20 rounded-full border-4 border-white object-cover shadow-md">
                                 </div>
                                 <div class="ml-4">
@@ -121,19 +182,16 @@
     </div>
 
     <script>
-        // Toggle sidebar
-        document.querySelector('.fa-bars').addEventListener('click', function() {
-            const sidebar = document.querySelector('.sidebar');
-            const mainContent = document.querySelector('.main-content');
-            
-            if (sidebar.classList.contains('hidden')) {
-                sidebar.classList.remove('hidden');
-                mainContent.classList.remove('ml-0');
-            } else {
-                sidebar.classList.add('hidden');
-                mainContent.classList.add('ml-0');
-            }
+      let inputimage = document.querySelector('#profile_image');
+        let profileimage = document.querySelector('#image_user');
+
+
+        inputimage.addEventListener("change",function(){
+            let url = URL.createObjectURL(inputimage.files[0]);
+            profileimage.src = url
+            console.log(url);
         });
+        
     </script>
 </body>
 </html>

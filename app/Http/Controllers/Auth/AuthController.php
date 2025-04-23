@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use session;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

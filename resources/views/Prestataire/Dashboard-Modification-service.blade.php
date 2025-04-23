@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.Prestataire')
 
 @section('title', 'Modifier un Service')
 
@@ -57,10 +57,9 @@
                                 @endif
                             </ul>
                     
-                    <form class="p-6 space-y-8" method="POST" action="/admin/update/service/{{$services->id}}" enctype="multipart/form-data" autocomplete="off">
+                    <form class="p-6 space-y-8" method="POST" action="/professional/edit/service/{{$services->id}}" enctype="multipart/form-data" autocomplete="off">
                         @csrf 
                         @method('PUT')
-                        <!-- Nom de la catégorie -->
                         <div>
                             <label for="categoryName" class="block text-sm font-medium text-gray-700 mb-2">Nom de Service *</label>
                             <input value = "{{$services->titre}}" type="text" id="name" name="name" required value="Service de coiffure"
@@ -120,16 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <label for="statut" class="block text-sm font-medium text-gray-700 mb-2">Statut du produit</label>
-                            <select id="statut" name="statut"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
-                                <option value="Actif" selected>Actif</option>
-                                <option value="Inactif">Inactif</option>
-                                <option value="Brouillon">Brouillon</option>
-                            </select>
-                            <p class="mt-2 text-xs text-gray-500">Sélectionnez le statut du produit.</p>
-                        </div>
+                       
                         
                         <!-- SEO Section -->
                         <div class="border-t border-gray-100 pt-6">

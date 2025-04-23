@@ -8,7 +8,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <!-- Partie supérieure: catégorie clickable et titre -->
         <div class="mb-6">
-            <a href="/categories/{{$service->category->Nom}}" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800 hover:bg-indigo-200 transition-colors">
+            <a href="/categories/{{$service->category->Nom}}" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors">
                 <i class="fas fa-tag mr-2"></i> {{$service->category->Nom}}
             </a>
             <h1 class="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">{{$service->titre}}</h1>
@@ -24,7 +24,7 @@
                 </div>
                 
                 <!-- Prix et informations essentielles -->
-                <div class="bg-white rounded-xl p-6 shadow-md mb-8 border-l-4 border-indigo-500">
+                <div class="bg-white rounded-xl p-6 shadow-md mb-8 border-l-4 border-blue-500">
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-sm text-gray-500 uppercase font-semibold">Tarif horaire</p>
@@ -78,8 +78,7 @@
                             </div>
                             <p class="text-gray-600 font-medium mt-2">
     <i class="fas fa-map-marker-alt mr-1"></i>
-    {{ $service->professional->Ville }}, {{ $service->professional->zip_code }}
-</p>
+    {{ $service->professional->Ville ?? ""}}, {{ $service->professional->zip_code  ?? "" }}
 </p>
                         </div>
                     </div>
@@ -90,7 +89,7 @@
                     <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-blue-50 text-blue-700">
                         <i class="fas fa-shield-alt mr-1.5"></i> Service garanti
                     </span>
-                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-purple-50 text-purple-700">
+                    <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-teal-50 text-teal-700">
                         <i class="fas fa-history mr-1.5"></i> Intervention rapide
                     </span>
                     <span class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium bg-green-50 text-green-700">
@@ -114,13 +113,13 @@
                             <span class="text-gray-600">🚗 Déplacement du prestataire à votre domicile</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-gray-600">🔍 Diagnostic complet pour identifier l’origine du problème ou du besoin</span>
+                            <span class="text-gray-600">🔍 Diagnostic complet pour identifier l'origine du problème ou du besoin</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-gray-600">🛠️ Intervention ou prestation de base (réparation, installation ou mise en service selon le service choisi)</span>
                         </li>
                         <li class="flex items-start">
-                            <span class="text-gray-600">✅ Vérification du bon fonctionnement après l’intervention</span>
+                            <span class="text-gray-600">✅ Vérification du bon fonctionnement après l'intervention</span>
                         </li>
                         <li class="flex items-start">
                             <span class="text-gray-600">🛡️ Garantie de 6 mois sur les travaux ou services effectués</span>
@@ -134,7 +133,7 @@
                 <div class="bg-white rounded-xl p-6 shadow-md">
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-bold text-gray-900">Avis clients</h2>
-                        <a href="/prestataire/avis/{{$service->Prestataire->id}}" class="text-indigo-600 hover:text-indigo-700 font-medium">Voir tous les avis</a>
+                        <a href="/prestataire/avis/{{$service->Prestataire->id}}" class="text-blue-600 hover:text-blue-700 font-medium">Voir tous les avis</a>
                     </div>
                     
                     <!-- Liste des avis (3 maximum) -->
@@ -144,7 +143,7 @@
                         <div class="border-b border-gray-200 pb-6">
                             <div class="flex items-start">
                                 <div class="flex-shrink-0">
-                                    <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center">
+                                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
                                         <img src = "/storage/{{$review->Client->Photo}}" class="h-10 w-10 rounded-full">
                                     </div>
                                 </div>
@@ -179,14 +178,14 @@
                 <!-- Carte prestataire -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden sticky top-6">
                     <!-- Header prestataire -->
-                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-800 px-6 py-4 text-white">
+                    <div class="bg-gradient-to-r from-blue-600 to-teal-500 px-6 py-4 text-white">
                         <h3 class="text-lg font-medium">Prestataire du service</h3>
                     </div>
                     
                     <!-- Informations prestataire -->
                     <div class="p-6">
                         <div class="flex items-center">
-                            <div class="h-16 w-16 rounded-full overflow-hidden border-2 border-indigo-100">
+                            <div class="h-16 w-16 rounded-full overflow-hidden border-2 border-blue-100">
                                 <img src="/storage/{{$service->Prestataire->Photo}}" alt="{{$service->Prestataire->Prenom}} {{$service->Prestataire->Nom}}" class="h-full w-full object-cover">
                             </div>
                             <div class="ml-4">
@@ -233,15 +232,15 @@
         <i class="far fa-star"></i>
     @endif
 
-    <span class="ml-2 text-gray-600 text-xs">{{ $AvisAverage }}</span>
+    <span class="ml-2 text-gray-600 text-xs">{{ $AvisAverage ?? 0 }}</span>
 </div>
                             </div>
                         </div>
                         
                         <!-- Localisation -->
                         <div class="mt-6 flex items-center text-gray-700">
-                            <i class="fas fa-map-marker-alt text-indigo-500 mr-2"></i>
-                            <span>{{$service->Professional->Ville}}, {{$service->Professional->zip_code}}</span>
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                            <span>{{$service->Professional->Ville ?? ""}}, {{$service->Professional->zip_code ?? ""}}</span>
                         </div>
                         
                         <!-- Vérifications -->
@@ -259,7 +258,7 @@
                         </div>
                         
                         <div class="mt-4">
-                            <a href="/prestataire/profile/{{$service->Prestataire->id}}" class="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
+                            <a href="/prestataire/profile/{{$service->Prestataire->id}}" class="text-blue-600 hover:text-blue-700 text-sm font-medium">
                                 Voir le profil complet
                             </a>
                         </div>
@@ -267,7 +266,7 @@
                     
                     <!-- Section Réservation -->
                     <div class="p-6 bg-gray-50 border-t border-gray-100">
-                        <a href="/reservation/service/{{$service->id}}" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <a href="/reservation/service/{{$service->id}}" class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             <i class="fas fa-calendar-check mr-2"></i> Réserver maintenant
                         </a>
                         
@@ -278,11 +277,11 @@
                     
                     <!-- Partage -->
                     <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-center space-x-4">
-                        <button class="inline-flex items-center text-gray-700 hover:text-indigo-600">
+                        <button class="inline-flex items-center text-gray-700 hover:text-blue-600">
                             <i class="far fa-heart mr-1"></i> Favoris
                         </button>
                         <span class="text-gray-300">|</span>
-                        <button class="inline-flex items-center text-gray-700 hover:text-indigo-600">
+                        <button class="inline-flex items-center text-gray-700 hover:text-blue-600">
                             <i class="fas fa-share-alt mr-1"></i> Partager
                         </button>
                     </div>
@@ -300,7 +299,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- Étape 1 -->
             <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 text-white mx-auto mb-4 text-2xl">
                     1
                 </div>
                 <h3 class="text-xl font-medium mb-2">Réservez</h3>
@@ -311,7 +310,7 @@
             
             <!-- Étape 2 -->
             <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 text-white mx-auto mb-4 text-2xl">
                     2
                 </div>
                 <h3 class="text-xl font-medium mb-2">Confirmation</h3>
@@ -322,7 +321,7 @@
             
             <!-- Étape 3 -->
             <div class="text-center">
-                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-500 text-white mx-auto mb-4 text-2xl">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gradient-to-r from-blue-600 to-teal-500 text-white mx-auto mb-4 text-2xl">
                     3
                 </div>
                 <h3 class="text-xl font-medium mb-2">Service & Paiement</h3>

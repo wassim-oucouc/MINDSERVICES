@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\ServiceEditRequest;
 use App\Repositories\Contracts\AvisInterface;
 use App\Repositories\Contracts\ClientInterface;
 use App\Repositories\Repository\AvisRepository;
@@ -18,6 +19,7 @@ use App\Repositories\Contracts\PrestataireInterface;
 use App\Repositories\Contracts\UtilisateurInterface;
 use App\Repositories\Repository\CategorieRepository;
 use App\Repositories\Repository\PrestataireRepository;
+use App\Repositories\Repository\UtilisateurRepository;
 
 class AdminController extends Controller
 {
@@ -143,20 +145,12 @@ class AdminController extends Controller
     }
 
     
-    public function EditService(Request $request,$id)
+    public function EditService(ServiceEditRequest $request,$id)
     {
         $services = $this->ServiceRepository->GetServiceByID($id);
         $categories = $this->CategorieRepository->ReadCategories();
-        if($request->name)
-        {
-            $validated = $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-                'prix' => 'required',
-                'categorie' => 'required',
-                'image' => 'required',
-                'statut' => 'required',
-            ]);
+ 
+            $validated = $request->validated();
 
             $path = $request->file('image')->store('service', 'public');
             $id_categorie = $this->CategorieRepository->GetIdByName($request->categorie->id);
@@ -172,9 +166,8 @@ class AdminController extends Controller
                 'updated_at' => now(),
                 'status' => $validated['statut']
             ]);
-        }
             return view('Admin.Dashboard-Modification-service', compact('services', 'categories'));        
-    }
+}
 
     public function DeleteService($id)
     {
@@ -322,6 +315,112 @@ class AdminController extends Controller
         }
     
         return view('Admin.Dashboard-Modification-utilisateurs', compact('user'));
+    }
+
+    public function UpdateAdminDetails(Request $request)
+    {
+        $admin_id = Auth::user()->id;
+
+            $validated = $request->validate([
+                "first_name" => "required|string|min:6",
+                "last_name" => "required|string|min:6",
+                "email" => "required|string",
+            ]);
+
+
+            if(Auth::user()->Email != $request->email)
+            {
+                $user = $this->UtilisateurRepository->FindByEmail($request->email);
+
+                if(!$user)
+                {
+                    $data = [
+                        "Prenom" => $request->first_name,
+                        "Nom" => $request->last_name,
+                        "Email" => $request->email,
+                    ];
+
+                   
+
+                    $this->UtilisateurRepository->UpdateUtilisateur($admin_id,$data);
+
+                    
+                return redirect()->back()->with('infosupdated','Vos informations ont été mises à jour avec succès.');
+                }
+                else
+                {
+                return redirect()->back()->with('email','Cette adresse e-mail est déjà associée à un compte.');
+                }
+            }
+            else
+            {
+                
+                $data = [
+                    "Prenom" => $request->first_name,
+                    "Nom" => $request->last_name,
+                    "Email" => $request->email,
+                ];
+
+               
+
+                $this->UtilisateurRepository->UpdateUtilisateur($admin_id,$data);
+
+                
+                return redirect()->back()->with('infosupdated','Vos informations ont été mises à jour avec succès.');
+            }
+        }
+    public function UpdatePassword(Request $request)
+    {
+        $admin_id = Auth::user()->id;
+            $request->validate([
+                "current_password" => "required|string",
+                "new_password" => "required|string|min:6",
+                "confirm_password" => "required"
+            ]);
+
+            $user = $this->UtilisateurRepository->FindByEmail(Auth::user()->Email);
+
+            $passwordcheck = Hash::check($request->current_password,$user->Password);
+
+            if(!$passwordcheck)
+            {
+                return redirect()->back()->with('password','Le mot de passe ne correspond pas à notre enregistrement.');
+            }
+            else
+            {
+                if($request->new_password != $request->confirm_password)
+                {
+                    return redirect()->back()->with('password','Confirmation du mot de passe incorrecte.');
+                }
+                else
+                {
+                    $newpassword = Hash::make($request->new_password);
+                    $this->UtilisateurRepository->UpdateUtilisateur($admin_id,[
+                        "Password" => $newpassword
+                    ]);
+
+                    return redirect()->back()->with('passwordchanged','Votre mot de passe a été mis à jour avec succès.');
+                }
+            }
+        }
+        public function UpdateImage(Request $request)
+        {
+            $admin_id = Auth::user()->id;
+            $request->validate([
+                "profile_image" => "required|image|mimes:jpeg,png,jpg"
+            ]);
+
+            if($request->Hasfile('profile_image'))
+            {
+                $path = $request->file('profile_image')->store('Prestataire','public');
+                $this->UtilisateurRepository->UpdateUtilisateur($admin_id,[
+                    "Photo" => $path
+                ]);
+
+                return redirect()->back()->with('imagechanged','Votre photo de profil a été mise à jour avec succès.');
+            }
+
+
     }
     
 
