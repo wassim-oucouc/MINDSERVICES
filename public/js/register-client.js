@@ -6,6 +6,7 @@ function ValidationForm() {
     let password = document.querySelector('#password-error');
     let telephone = document.querySelector('#telephone-error');
     let image = document.querySelector('#image-error');
+    let PaysErrors = document.querySelector('#pays-error');
 
 
 
@@ -16,6 +17,9 @@ function ValidationForm() {
     let PasswordInput = document.querySelector('#password').value;
     let PhoneInput = document.querySelector('#phone').value;
     let PhotoInput = document.querySelector('#Photo').value;
+    let PaysInput = document.querySelector('#pays').value;
+
+    console.log('pays input',PaysInput)
     const RegexName = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
 
     const RegexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -36,8 +40,8 @@ function ValidationForm() {
     }
 
     if (NomInput == "" || !RegexName.test(NomInput)) {
+        document.querySelector('#nom').classList.add("border-red-500");
         nom.textContent = "Enter a Valid Name";
-        console.log(nom);
         isvalid = false;
     }
     else {
@@ -86,6 +90,16 @@ function ValidationForm() {
     else {
         image.textContent = "";
         document.querySelector('#Photo').style.borderColor = "green";
+    }
+    if(PaysInput == "")
+    {
+        PaysErrors.textContent = "Pays Obligatoire";
+        document.querySelector('#pays').style.borderColor = "red";
+    }
+    else
+    {
+        PaysErrors.textContent = "";
+        document.querySelector('#pays').style.borderColor = "green";
     }
 
     return isvalid;

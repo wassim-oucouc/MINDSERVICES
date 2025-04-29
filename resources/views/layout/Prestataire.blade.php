@@ -29,7 +29,7 @@
                 
                 <!-- User Info -->
                 <div class="flex items-center space-x-3 px-4 py-4 border-b border-gray-100">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
+                    <img src="/storage/{{Auth::user()->Photo}}" 
                          alt="Admin Profile" class="w-10 h-10 rounded-full object-cover">
                     <div>
                         <h3 class="font-medium text-sm">{{Auth::user()->Nom}}</h3>
@@ -48,7 +48,7 @@
                             <i class="fas fa-briefcase mr-3 text-gray-400 group-hover:text-indigo-500"></i>
                             Services
                         </a>
-                        <a href="/professional/reservations" class="@yield('Rendez-vous') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
+                        <a href="/professional/reservation" class="@yield('Rendez-vous') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
                             <i class="fas fa-calendar-alt mr-3 text-gray-400 group-hover:text-indigo-500"></i>
                             Reservations
                         </a>
@@ -62,7 +62,7 @@
                             <i class="fas fa-chart-bar mr-3 text-gray-400 group-hover:text-indigo-500"></i>
                             Statistiques
                         </a>
-                        <a href="/admin/settings" class="@yield('Paramètres') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
+                        <a href="/professional/settings" class="@yield('Paramètres') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
                             <i class="fas fa-cog mr-3 text-gray-400 group-hover:text-indigo-500"></i>
                             Paramètres
                         </a>
@@ -71,7 +71,7 @@
                 
                 <!-- Logout -->
                 <div class="p-4 border-t border-gray-100">
-                    <a href="#" class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-700">
+                    <a href="/logout" class="group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-700">
                         <i class="fas fa-sign-out-alt mr-3 text-gray-400 group-hover:text-red-500"></i>
                         Déconnexion
                     </a>
@@ -104,7 +104,7 @@
                             <!-- Profile Dropdown -->
                             <div class="relative">
                                 <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
-                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop" 
+                                    <img src="/storage/{{Auth::user()->Photo}}" 
                                         alt="Profile" class="w-8 h-8 rounded-full object-cover">
                                     <span class="hidden md:block text-sm font-medium">{{Auth::user()->Nom}}</span>
                                     <i class="fas fa-chevron-down text-xs"></i>
@@ -123,22 +123,9 @@
     </div>
 
     <script>
-        // Simple active item toggle (replace with your own logic)
-        document.addEventListener('DOMContentLoaded', function() {
-            const path = window.location.pathname;
-            const links = document.querySelectorAll('nav a');
-            
-            links.forEach(link => {
-                if (link.getAttribute('href') === path) {
-                    link.classList.add('bg-indigo-50', 'text-indigo-700');
-                    const icon = link.querySelector('i, svg');
-                    if (icon) {
-                        icon.classList.remove('text-gray-400');
-                        icon.classList.add('text-indigo-500');
-                    }
-                }
-            });
-        });
+
+
+         
     </script>
 </body>
 </html>

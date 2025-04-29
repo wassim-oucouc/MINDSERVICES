@@ -32,15 +32,21 @@ class ClientController extends Controller
 
     public function Index()
     {
+        $id_client = Auth::user()->id;
+        $statistic = $this->clientRepository->GetStatisticByClientId($id_client);
+        $services = $this->ServiceRepository->getserviceslimit();
+
         $client = $this->clientRepository->GetclientDetails();
         $reservations = $this->clientRepository->GetReservationsDetails();
-        return view('Client.Dashboard-home',compact('client','reservations'));
+        return view('Client.Dashboard-home',compact('client','reservations','statistic','services'));
     }
 
     public function reservationRead()
     {
+        $client_id = Auth::user()->id;
         $reservation = $this->ReservationRepository->GetReservationsClient();
-        return view('Client.Dashboard-services-reservés',compact('reservation'));
+        $CountReservation = $this->ReservationRepository->GetTotalReservationByID($client_id);
+        return view('Client.Dashboard-services-reservés',compact('reservation','CountReservation'));
     }
 
     public function GetReservationDetails(Request $request)
@@ -65,6 +71,11 @@ class ClientController extends Controller
 
     public function UpdateClientProfile(Request $request)
 {
+
+    if(!Auth::user()->HasPermission('edit_information'))
+    {
+        abort(404);
+    }
     $client = $this->clientRepository->GetclientDetails();
 if($request->nom)
 {
@@ -79,7 +90,7 @@ if($request->nom)
         "current_password" => "nullable|string|min:8",
         "password" => "nullable|string|min:8",
         "password-confirm" => "nullable|string|same:password",
-        "photo" => "nullable|image|mimes:jpeg,png,jpg,gif,svg"
+        "photo" => "nullable|image"
     ]);
 }
    catch(\Illuminate\Validation\ValidationException $e)
@@ -94,13 +105,23 @@ if($request->nom)
         if ($request->file('photo')){
             $path = $request->file('photo')->store('User', 'public');
         }
-
+if($request->file('photo'))
+{
         $data = [
             "Prenom" => $request->prenom,
             "Nom" => $request->nom,
             "Photo" => $path,
             "updated_at" => now()
         ];
+    }
+    else
+    {
+        $data = [
+            "Prenom" => $request->prenom,
+            "Nom" => $request->nom,
+            "updated_at" => now()
+        ];
+    }
 
         $dataclient = [
             "telephone" => $request->telephone,
@@ -307,6 +328,47 @@ public function CreateFeedbackReservation(Request $request,$id)
 
             }
         }
+    }
+
+
+    public function RequestCancelReservation(Request $request)
+    {
+        if($request->reservation_id)
+        {
+            $cancel = $this->ReservationRepository->RequestCancel($request->reservation_id);
+            if(!$cancel)
+            {
+              
+                return redirect()->back()->with('success',"Votre Demande d'Annulation a éte bien pris en charge");
+            }
+
+        }
+    }
+
+    public function UpdateReservationDetails(Request $request)
+    {
+        $reservation_id = $request->reservation_id;
+        $service_id = $request->service_id;
+
+        $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->new_date,$request->time,$service_id);
+
+        if($reservation)
+        {
+            return redirect('/client/reservation/details/'.$reservation_id)->with('error',"La date et l'heure sélectionnées pour ce service sont déjà réservées. Veuillez choisir un autre créneau disponible");
+        }
+        else
+        {
+
+        $updatereservation = $this->ReservationRepository->update($reservation_id,[
+            "reservation_date" => $request->new_date,
+            "reservation_time" => $request->time
+        ]);
+
+        return redirect('/client/reservation/details/'.$reservation_id)->with('modifier','La modification a été effectuée avec succès.');
+    }
+
+
+
     }
 
 

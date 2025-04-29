@@ -11,13 +11,15 @@ let time_select = document.querySelector('#time-select');
 
 let service_id = document.querySelector('#service_id');
 
+
+
 let token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 
 
 Date_pick.addEventListener("change", function () {
     if (ValidationInput()) {
-        SendDateTime(Date_pick.value, time_select.value)
+        SendDateTime(Date_pick.value,time_select.value,service_id.value)
 
     }
 
@@ -26,25 +28,26 @@ Date_pick.addEventListener("change", function () {
 time_select.addEventListener("change", function () {
 
     if (ValidationInput()) {
-        SendDateTime(Date_pick.value,time_select.value)
+        SendDateTime(Date_pick.value,time_select.value,service_id.value)
     }
 
 });
 
 button_continuer.addEventListener('click',function(event){
     event.preventDefault();
-
     if (ValidationInput() && validation) {
     document.querySelector('#reservation_date').value = Date_pick.value;
     document.querySelector('#reservation_time').value = time_select.value;
         document.querySelector('#reservation').submit();
     }
     else {
+        document.querySelector('#time-select').style.borderColor = "red";
+        document.querySelector('#date-picker').style.borderColor = "red";
         event.preventDefault();
     }
 });
 
-async function SendDateTime(date, time){
+async function SendDateTime(date,time,id){
     try {
         let response = await fetch(`/reservation/${service_id.value}`, {
             method: 'POST',
@@ -54,11 +57,13 @@ async function SendDateTime(date, time){
             },
             body: JSON.stringify({
                 date: date,
-                time: time
-            }), 
+                time: time,
+                id : id
+            }),
 
         });
         let json = await response.json();
+        console.log(response)
         ResponseFront(json)
     }
     catch (Error) {

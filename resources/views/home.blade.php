@@ -6,13 +6,34 @@
 
 <!-- Hero Section -->
 <div class="relative bg-white overflow-hidden">
+<div class = "absolute right-5 top-5 bg-white shadow-lg rounded-md">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#FDE8E9]/40" role="menuitem" tabindex="-1">
+                                    Your Profile
+                                </a>
+
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#FDE8E9]/40" role="menuitem" tabindex="-1">
+                                    Settings
+                                </a>
+<a href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#FDE8E9]/40" role="menuitem" tabindex="-1">
+                                    Back to Website
+                                </a>
+
+                                <form>
+                                    <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-[#FDE8E9]/40" role="menuitem" tabindex="-1">
+                                        Sign out
+                                    </button>
+                                </form>
+                            </div>
     <div class="max-w-7xl mx-auto">
         <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                 <polygon points="50,0 100,0 50,100 0,100" />
             </svg>
+            
             <div class="pt-10 mx-auto max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
+                
                 <div class="sm:text-center lg:text-left">
+                    
                     <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                         <span class="block">Trouvez les meilleurs</span>
                         <span class="block text-indigo-600">services près de chez vous</span>
@@ -35,7 +56,9 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
         <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Image représentant des professionnels de service">
     </div>
@@ -107,16 +130,16 @@
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Service 1 -->
+           @foreach($categories as $categorie)
             <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Plomberie">
+                    <img class="w-full h-full object-cover" src="/storage/{{$categorie->Photo}}" alt="Plomberie">
                     <div class="absolute inset-0 bg-black bg-opacity-20"></div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Plomberie</h3>
+                    <h3 class="text-lg font-medium text-gray-900">{{$categorie->Nom}}</h3>
                     <p class="mt-2 text-base text-gray-500">
-                        Résolution de problèmes de plomberie, installation et entretien
+                    {{$categorie->Description}}
                     </p>
                     <div class="mt-4">
                         <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
@@ -125,101 +148,9 @@
                     </div>
                 </div>
             </div>
+            @endforeach
 
-            <!-- Service 2 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Électricité">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Électricité</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Installation électrique, dépannage et mise aux normes
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Jardinage">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Jardinage</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Entretien de jardin, tonte de pelouse et taille de haies
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 4 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Ménage">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Ménage</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Nettoyage régulier ou ponctuel de votre domicile
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Rénovation">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Rénovation</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Travaux de peinture, carrelage et rénovation intérieure
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Informatique">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Informatique</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Dépannage informatique et assistance technique
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         <div class="mt-10 text-center">

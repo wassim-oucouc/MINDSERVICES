@@ -21,6 +21,11 @@ class Avis extends Model
         return $this->belongsTo(Utilisateur::class,'prestataire_id');
     }
 
+    public function Service()
+    {
+        return $this->belongsTo(Service::class,'Service_id');
+    }
+
   
     use HasFactory;
 }

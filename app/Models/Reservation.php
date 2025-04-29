@@ -35,7 +35,7 @@ class Reservation extends Model
     {
         return $this->belongsTo(Utilisateur::class,'client_id');
     }
-
+    
     public function Adresse()
     {
         return $this->belongsTo(address_reservation::class,'addresse_id');

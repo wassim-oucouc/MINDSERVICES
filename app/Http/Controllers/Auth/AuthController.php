@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use session;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -155,8 +156,6 @@ class AuthController extends Controller
         if(Auth::check())
         {
             Auth::logout();
-            session::flush();
-            $request->session()->invalidate();
             return redirect('/login');
         }
         return redirect('/login');
