@@ -3,8 +3,10 @@
 @section('title', 'Nos Prestataires')
 @section('content')
 
-<!-- Section d'en-tête avec un design modernisé -->
-<div class="bg-gradient-to-r from-blue-700 to-teal-500 py-12 relative overflow-hidden">
+<!-- Section d'en-tête avec image de bannière -->
+<div class="bg-gradient-to-r from-blue-700 to-teal-500 py-12 relative overflow-hidden bg-cover bg-center" style="background-image: url('/images/banners/providers-header.jpg');">
+    <!-- Overlay pour améliorer la lisibilité du texte -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-700/90 to-teal-500/80"></div>
     <div class="absolute inset-0 bg-pattern opacity-10"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center">
@@ -24,31 +26,40 @@
     </div>
 </div>
 
-<!-- Section Liste des Prestataires -->
-<div class="bg-gray-50 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Section Liste des Prestataires avec image de fond subtile -->
+<div class="bg-gray-50 py-16 relative">
+    <!-- Image de fond légère pour la section -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-5" style="background-image: url('/images/backgrounds/pattern-light.jpg')"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Grille des prestataires -->
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
             @foreach($prestataires as $prestataire)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                    <div class="p-6">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-20 w-20 rounded-full object-cover shadow border-2 border-white" src="/storage/{{$prestataire->Photo}}" alt="Photo de {{$prestataire->Prenom}} {{$prestataire->Nom}}">
-                            </div>
-                            <div class="ml-5">
-                                <h2 class="text-xl font-bold text-gray-800">{{$prestataire->Prenom}} {{$prestataire->Nom}}</h2>
-                                <div class="flex items-center mt-2">
-                                    <div class="flex text-amber-400">
-                                        @for($i = 1; $i <= 5; $i++)
-                                            @if($i <= $prestataire->avis_avg_note)
-                                                <i class="fas fa-star"></i> 
-                                            @else
-                                                <i class="far fa-star"></i>
-                                            @endif
-                                        @endfor  
-                                    </div>
-                                    <span class="ml-2 text-sm font-medium text-gray-600">{{$prestataire->avis_avg_note ?? 0}} ({{$prestataire->avis_count ?? 0}} avis)</span>
+                    <!-- Bannière du profil -->
+                    <div class="h-32 bg-cover bg-center relative" style="background-image: url('/images/profile-banners/banner-{{rand(1,5)}}.jpg');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                    
+                    <div class="p-6 relative">
+                        <!-- Photo de profil chevauchant la bannière -->
+                        <div class="absolute -top-10 left-6">
+                            <img class="h-20 w-20 rounded-full object-cover shadow-lg border-4 border-white" src="/storage/{{$prestataire->Photo}}" alt="Photo de {{$prestataire->Prenom}} {{$prestataire->Nom}}">
+                        </div>
+                        
+                        <div class="mt-12">
+                            <h2 class="text-xl font-bold text-gray-800">{{$prestataire->Prenom}} {{$prestataire->Nom}}</h2>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-amber-400">
+                                    @for($i = 1; $i <= 5; $i++)
+                                        @if($i <= $prestataire->avis_avg_note)
+                                            <i class="fas fa-star"></i> 
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor  
                                 </div>
+                                <span class="ml-2 text-sm font-medium text-gray-600">{{$prestataire->avis_avg_note ?? 0}} ({{$prestataire->avis_count ?? 0}} avis)</span>
                             </div>
                         </div>
                         
@@ -87,8 +98,11 @@
     </div>
 </div>
 
-<!-- Section CTA repensée visuellement -->
-<div class="bg-gradient-to-br from-blue-800 to-teal-700 relative overflow-hidden">
+<!-- Section CTA repensée visuellement avec image de fond -->
+<div class="relative bg-gradient-to-br from-blue-800 to-teal-700 overflow-hidden bg-cover bg-center" style="background-image: url('/images/banners/cta-background.jpg');">
+    <!-- Overlay gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-blue-800/90 to-teal-700/90"></div>
+    
     <!-- Motif de fond décoratif -->
     <div class="absolute inset-0 opacity-10">
         <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">

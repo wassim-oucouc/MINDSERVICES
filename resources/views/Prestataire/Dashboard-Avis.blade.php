@@ -25,16 +25,12 @@
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500">Total des avis</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">358</p>
+                    <p class="text-sm font-medium text-gray-500">Total des Avis</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['totalavis']}}</p>
                 </div>
                 <div class="h-12 w-12 bg-indigo-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-comment-dots text-indigo-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>23% depuis le mois dernier</span>
             </div>
         </div>
 
@@ -42,31 +38,23 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-500">Note moyenne</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">4.7/5</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['averagenote']}}/5</p>
                 </div>
                 <div class="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-star text-green-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>0.3 depuis le mois dernier</span>
             </div>
         </div>
 
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500">Taux de satisfaction</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">92%</p>
+                    <p class="text-sm font-medium text-gray-500">Avis Approuver</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['totalavisapprouver']}}</p>
                 </div>
                 <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-thumbs-up text-blue-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>5% depuis le mois dernier</span>
             </div>
         </div>
     </div>

@@ -27,34 +27,44 @@
                     <div class="flex items-center">
                         <h3 class="text-lg font-semibold text-gray-800">Rendez-vous #{{$reservation->id}}</h3>
                         @if($reservation->status == 'En attente')
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
-                                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-1"></span>
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-1.5"></span>
                                     En attente
                                 </span>
                                 @elseif($reservation->status == 'Confirmée')
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
-                                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1"></span>
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1.5"></span>
                                     Confirmée
                                 </span>
                                 @elseif($reservation->status == 'Terminée')
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
-                                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1"></span>
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1.5"></span>
                                     Terminée
                                 </span>
                                 @elseif($reservation->status == 'Annulée')
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
-                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1"></span>
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
                                     Annulée
                                 </span>
                                 @elseif($reservation->status == 'En cours')
-                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
-                                    <span class="w-1.5 h-1.5 bg-sky-400 rounded-full mr-1"></span>
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-sky-400 rounded-full mr-1.5"></span>
                                     En cours
+                                </span>
+                                @elseif($reservation->status == 'En attente Paiement')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-orange-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1.5"></span>
+                                    En attente Paiement
+                                </span>
+                                @elseif($reservation->status == 'annulation demandée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
+                                    annulation demandée
                                 </span>
                                 @endif
                     </div>
                     <div class="flex space-x-3">
-                        <a href="/service/details/{{$reservation->Service->id}}">
+                        <a target = "_blank" href="/service/details/{{$reservation->Service->id}}">
                     <button  class=" rounded-md px-3 py-1.5 bg-green-500 text-white  mx-1">
     🖨️
     <span>Details Service</span>
@@ -79,14 +89,45 @@
                             <i class="fas fa-times mr-2"></i>Refuser
                         </button>
 </form>
-                    @else
-                    <form action="/professional/cancel/reservation/{{$reservation->id}}" method = "POST">
+@elseif($reservation->status == 'Confirmée')
+<form action="/professional/cancel/reservation/details/{{$reservation->id}}" method = "POST">
                                         @csrf 
                                         @method('PUT')
                                         <button class="px-3 py-1.5 bg-red-500 text-white rounded hover:bg-red-600 mx-1">
                                             Annuler
                                         </button>
                                         </form>
+                                        <form action="/professional/reservation/confirmer/{{$reservation->id}}" method = "POST">
+                                        @csrf 
+                                        @method('PUT')
+                                        <button class="px-3 py-1.5 bg-orange-500 text-white rounded hover:bg-orange-600 mx-1">
+                                        Valider la réservation
+                                        </button>
+                                        </form>
+@elseif($reservation->status == 'annulation demandée')
+<form action="/professional/cancel/reservation/details/{{$reservation->id}}" method = "POST">
+                        @csrf 
+                        @method('PUT')
+                        <button class="px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600">
+                            <i class="fas fa-check mr-2"></i>Accepter L'annulation
+                        </button>
+</form>
+                        <form action="/professional/confirm/reservation/{{$reservation->id}}}" method = "POST">
+                            @csrf 
+                            @method('PUT')
+                        <button class="px-4 py-2 bg-red-500 text-sm text-white rounded hover:bg-red-600">
+                            <i class="fas fa-times mr-2"></i>Refuser L'annulation
+                        </button>
+</form>
+@elseif($reservation->status == 'Terminée')
+<form action="/professional/cancel/reservation/details/{{$reservation->id}}" method = "POST">
+                                        @csrf 
+                                        @method('PUT')
+                                        <button class="px-3 py-1.5 bg-red-500 text-white rounded hover:bg-red-600 mx-1">
+                                            Annuler
+                                        </button>
+                                        </form>
+
                         @endif
                     </div>
                 </div>

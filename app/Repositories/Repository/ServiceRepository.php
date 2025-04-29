@@ -85,7 +85,7 @@ public function BanServiceByID($id)
 
 public function GetServiceDetails($id)
 {
-    $service = Service::where('id',$id)->with('Prestataire','Professional','category')->first();
+    $service = Service::where('id',$id)->where('status','Actif')->with('Prestataire','Professional','category')->first();
 
     return $service;
 }
@@ -109,11 +109,48 @@ public function GetServicesAll()
         $avis->where('status','Approuvé');
     }])->withAvg(['Avis' => function($avis){
         $avis->where('status','Approuvé');
-    }],'Note')->paginate(5);
+    }],'Note')
+    ->where('status','Actif')
+    ->paginate(5);
 
     return $services;
 }
 
+public function GetServicesByCategorieID($id)
+{
+    $services = Service::with('Category','Professional','Avis')->withCount(['Avis' => function($avis){
+        $avis->where('status','Approuvé');
+    }])->withAvg('Avis','Note')->paginate(10);
+
+    return $services;
+}
+
+
+
+public function GetStatisticServices()
+{
+    $totalservices = Service::count();
+
+    $ActifServices = Service::where('status','Actif')->count();
+
+    $InactifServices = Service::where('status','Inactif')->count();
+
+    $statistic = [
+        "totalservices" => $totalservices,
+        "ActifServices" =>  $ActifServices,
+        "InactifServices" => $InactifServices
+    ];
+
+    return $statistic;
+}
+
+
+public function CountServices()
+{
+    $total = Service::all()->count();
+
+    return $total;
+}
 public function GetServiceByNameCity($Name,$City)
 {
 $Service = DB::table('Service')
@@ -236,6 +273,12 @@ public function statisticServiceByPrestataire($id)
     return $statistic;
 }
 
+public function GetServiceBycategorieId($id)
+{
+    $services = Service::where('categorie_id',$id)->with('category')->paginate(10);
+
+    return $services;
+}
 
 
 

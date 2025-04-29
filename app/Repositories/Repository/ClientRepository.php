@@ -78,6 +78,13 @@ return $reservations;
             return $utilisateur;
         }
 
+        public function UpdateClient($id,$data)
+        {
+            $client= Client::where('id_client',$id)->update($data);
+
+            return $client;
+        }
+
         public function UpdateClientInfo($id,$dataclient)
         {
             $client =  DB::table('client')->where('id_client',$id)->update($dataclient);

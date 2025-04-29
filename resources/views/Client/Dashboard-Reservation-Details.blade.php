@@ -41,11 +41,16 @@
                                 <span class="w-2 h-2 bg-yellow-400 rounded-full mr-1.5"></span>
                                 En attente
                             </span>
-                        @elseif($reservation->status == 'En cours')
-                            <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center inline-flex">
-                                <span class="w-2 h-2 bg-blue-400 rounded-full mr-1.5"></span>
-                                En cours
-                            </span>
+                            @elseif($reservation->status == 'En attente Paiement')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-orange-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1.5"></span>
+                                    En attente Paiement
+                                </span>
+                                @elseif($reservation->status == 'annulation demandée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
+                                    annulation demandée
+                                </span>
                         @endif
                     </div>
                 </div>
@@ -89,6 +94,11 @@
                 </div>
             </div>
         @endif
+        @if(session('modifier'))
+    <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+        {{ session('modifier') }}
+    </div>
+@endif
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <!-- Colonne de gauche: Informations principales -->
@@ -232,14 +242,7 @@
                             <a href="mailto:{{$reservation->Prestataire->Email}}" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 transition-colors duration-200">
                                 <i class="fas fa-comments mr-2"></i> Contacter le prestataire
                             </a>
-                            @if($reservation->status == 'En cours')
-                                <button type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200">
-                                    <i class="fas fa-edit mr-2"></i> Modifier ma réservation
-                                </button>
-                                <button type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
-                                    <i class="fas fa-times mr-2"></i> Annuler ma réservation
-                                </button>
-                            @elseif($reservation->status == 'Confirmée')
+                            @if($reservation->status == 'Confirmée')
                                 <button type="button" id="give-review-button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
                                     <i class="fas fa-star mr-2"></i> Donner un avis
                                 </button>
@@ -247,8 +250,11 @@
                                     <i class="fas fa-info-circle mr-2"></i> Voir détail service
                                 </a>
                             @elseif($reservation->status == 'En attente')
-                                <button type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
-                                    <i class="fas fa-check-circle mr-2"></i> Compléter la réservation
+                            <button onclick="openmodalconfirmation()"  type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
+                                    <i class="fas fa-times mr-2"></i>Annuler ma réservation
+                                </button>
+                                <button onclick = "modaldatemodifier({{$reservation->id}},'{{$reservation->reservation_date}}','{{$reservation->reservation_time}}',{{$reservation->Service->id}})" type="button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-600 hover:bg-yellow-700 transition-colors duration-200">
+                                    <i class="fas fa-edit mr-2"></i> Modifier ma réservation
                                 </button>
                             @elseif($reservation->status == 'Terminée')
                                 <button type="button" id="give-review-button" class="w-full inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
@@ -297,6 +303,74 @@
                         </div>
                     </div>
                 </div>
+                <div id="annulationModal" class="fixed inset-0 flex items-center justify-center z-50  backdrop-blur-sm bg-white/30 hidden">
+  <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Confirmation</h2>
+    <p class="text-gray-700 mb-6">Voulez-vous vraiment <span class="text-red-600 font-semibold">demander l’annulation</span> de cette réservation ?</p>
+<form action="/client/reservation/details/{{$reservation->id}}"method = "POST">
+    <input type="hidden" name="reservation_id" value = "{{$reservation->id}}">
+    @csrf
+    @method('PUT')
+    <div class="flex justify-center space-x-4">
+      <button type = "submit" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+        Confirmer
+      </button>
+      <button type = "button" onclick="fermerModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300">
+        Annuler
+      </button>
+    </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal pour modifier la date de réservation -->
+<div id="modificationDateModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/30 hidden">
+  <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
+  @if(session('error'))
+    <div class="mb-4 p-3 bg-red-100 text-red-800 rounded">
+        {{ session('error') }}
+    </div>
+@endif
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Modifier la date de réservation</h2>
+    <p class="text-gray-700 mb-4">Veuillez choisir une nouvelle date et heure pour votre réservation :</p>
+    
+    <form action="/client/reservation/details/update/{{$reservation->id}}" method="POST">
+      @csrf
+      @method('PUT')
+      <input type="hidden" id = "reservation_id" name="reservation_id" value="{{$reservation->id}}">
+      <input type="hidden" id = "service_id" name="service_id">
+      
+      <div class="mb-4">
+        <label for="new_date" class="block text-sm font-medium text-gray-700 mb-1">Nouvelle date</label>
+        <input type="date" id="date_picker" name="new_date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      
+      <div class="mb-6">
+        <label for="new_time" class="block text-sm font-medium text-gray-700 mb-1">Nouvelle heure</label>
+        <select id = "time_picker" name = "time" class="w-full border rounded-lg p-2" id="time-select">
+                            <option value="" disabled selected>Sélectionnez une heure</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+      </div>
+      
+      <div class="flex justify-center space-x-4">
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
+          Confirmer
+        </button>
+        <button type="button" onclick="fermerModalDate()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors duration-200">
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 
                 <!-- Support client -->
                 <div class="bg-gradient-to-r from-blue-50 to-teal-50 shadow-lg rounded-xl overflow-hidden border border-blue-100">
@@ -325,25 +399,63 @@
     </main>
 </div>
 
-<!-- Script pour la gestion du modal d'avis -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    flatpickr("#date_picker", {
+        dateFormat: "Y-m-d",
+                minDate: "today",
+                disableMobile: "true"
+    });
+
+    let ModalDateHeure = document.querySelector('#modificationDateModal');
+
+    let service_id = document.querySelector('#service_id');
+
+    let date_picker = document.querySelector('#date_picker');
+
+    let time_picker = document.querySelector('#time_picker');
+
+    let reservation_id = document.querySelector('#reservation_id');
+
+    function fermerModalDate()
+    {
+        ModalDateHeure.classList.add('hidden');
+    }
+
+
+    function modaldatemodifier(id,reservation_date,reservation_time,id_service)
+    {
+        reservation_id.value = id;
+        service_id.value = id_service;
+        date_picker.value = reservation_date;
+        time_picker.value = reservation_time;
+        ModalDateHeure.classList.remove('hidden');
+    }
+        
         const modal = document.getElementById('review-modal');
         const overlay = document.querySelector('.modal-overlay');
         const closeBtn = document.getElementById('close-modal');
         const reviewBtn = document.getElementById('give-review-button');
+
+        function fermerModal()
+        {
+            document.querySelector('#annulationModal').classList.toggle('hidden');
+        }
+   
+
+        function openmodalconfirmation()
+        {
+                document.querySelector('#annulationModal').classList.remove('hidden');
         
-        // Fonction pour ouvrir la modal
+        }
+        
         function openModal() {
             modal.classList.remove('hidden');
         }
         
-        // Fonction pour fermer la modal
         function closeModal() {
             modal.classList.add('hidden');
         }
         
-        // Event listeners
         if (reviewBtn) {
             reviewBtn.addEventListener('click', openModal);
         }
@@ -355,7 +467,8 @@
         if (overlay) {
             overlay.addEventListener('click', closeModal);
         }
-    });
+
+
 </script>
 
 @endsection

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use App\Repositories\Contracts\AvisInterface;
 use App\Repositories\Repository\AvisRepository;
 use App\Repositories\Contracts\AdresseInterface;
@@ -35,6 +37,12 @@ class HomeController extends Controller
         $this->CategorieRepository = $CategorieRepository;
         $this->ReservationRepository = $ReservationRepository;
         $this->AdresseRepository = $AdresseRepository;
+    }
+
+    public function IndexHome()
+    {
+        $categories = $this->CategorieRepository->GetCategoriesLimit();
+        return view('home',compact('categories'));
     }
 
     public function indexService(Request $request)
@@ -179,9 +187,9 @@ class HomeController extends Controller
 
     public function ReservationDateTime(Request $request)
     {
-    if($request->date && $request->time)
+    if($request->date && $request->time && $request->id)
     {
-        $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->date,$request->time);
+        $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->date,$request->time,$request->id);
         if(!$reservation)
         {
             return response()->json(["valide_date" => "Date Never Taked"]);
@@ -191,105 +199,109 @@ class HomeController extends Controller
             return response()->json(["error_date" => "Already Taked Date"]);
         }
     }
-
-
 }
 
-
-public function IndexReserve(Request $request)
+public function StoreDateReservation(Request $request)
 {
-    $date_reservation = $request->reservation_date ?? 0;
-    $reservation_time = $request->reservation_time ?? 0;
-    $id_service = $request->id_service ?? 0;
-    $prestataire_id = $request->prestataire_id ?? 0;
-
-  session()->put('reservation',[
-        "date_reservation" => $request->reservation_date,
-        "reservation_time" => $request->reservation_time,
-        "id_service" => $request->id_service,
-        "prestataire_id" => $request->prestataire_id,
+    $validated = $request->validate([
+        "reservation_date" => "required",
+        "reservation_time" => "required",
+        "id_service" => "required",
+        "prestataire_id" => "required"
     ]);
 
+
+    session()->put('reservation',[
+        "reservation_date" => $request->reservation_date,
+        "reservation_time" => $request->reservation_time,
+        "id_service" => $request->id_service,
+        "prestataire_id" => $request->prestataire_id
+    ]);
+
+
+    return redirect('/reservation/step/complete');
+}
+
+public function FormReservation()
+{
+   
     $data = session('reservation');
-
-
     $service = $this->ServiceRepository->GetServiceDetails($data['id_service']);
+    $AvisAverage = $this->AvisRepository->CalculateAverageFeedback($service->Prestataire->id);
+    $TotalAvisPrestataire = $this->AvisRepository->CountFeedbackPrestataire($service->Prestataire->id);
+    $totalprix = $service->Prix * $service->duration;
+    
+    return view('reservation-informations',compact('data','AvisAverage','TotalAvisPrestataire','service','totalprix'));
+}
+
+public function StoreReservation(Request $request)
+{
+  
+    $data = session('reservation');
+    $reservation = $this->ReservationRepository->FindReservationByDateAndTime($data['reservation_date'], $data['reservation_time'],$data['id_service']);
+    
+    $validated = $request->validate([
+        "address" => "required|string|min:8",
+        "postal_code" => "required",
+        "city" => "required|string",
+        "pays" => "required",
+        "terms" => "required"
+    ]);
+
+    if ($reservation){
+return redirect('/reservation/service/' . $data['id_service'])->with('error', 'Cette date et heure sont déjà réservées. Merci de choisir une nouvelle date et heure.');
+}
+
+$adress = $this->AdresseRepository->create([
+                    "address" => $validated['address'],
+                    "postal_code" => $validated['postal_code'],
+                    "city" => $validated['city'],
+                    "country" => $validated['pays']
+                ]);
+
+                $reservation = $this->ReservationRepository->insert([
+                                    "client_id" => Auth::user()->id,
+                                    "prestataire_id" => $data['prestataire_id'],
+                                    "service_id" => $data['id_service'],
+                                    "addresse_id" => $adress->id,
+                                    "reservation_date" => $data['reservation_date'],
+                                    "reservation_time" => $data['reservation_time'],
+                                    "created_at" => now(),
+                                    "status" => "En attente Paiement"
+                                ]);
+                
+                                $service = $this->ServiceRepository->GetServiceDetails($data['id_service']);
 
     $AvisAverage = $this->AvisRepository->CalculateAverageFeedback($service->Prestataire->id);
     $TotalAvisPrestataire = $this->AvisRepository->CountFeedbackPrestataire($service->Prestataire->id);
+                                session()->put('confirmation',[
+                                    "id" => $reservation,
+                                                    "PrenomPrestataire" => $service->Prestataire->Prenom,
+                                                    "NomPrestataire" => $service->Prestataire->Nom,
+                                                    "reservation_date" => $data['reservation_date'],
+                                                    "amount" => $request->amount,
+                                                    "titre" => $request->titre,
+                                                    "Email" => $request->Email,
+                                                    "reservation_time" => $data['reservation_time'],
+                                                    "TitreService" => $service->titre,
+                                                    "address" => $validated['address'],
+                                                    "postal_code" => $validated['postal_code'],
+                                                    "city" => $validated['city'],
+                                                    "pays" => $validated['pays']
+                                                ]);
 
-    $totalprix = $service->Prix * $service->duration;
+                                                return redirect(route('payment'));
 
-  
-    $reservation = $this->ReservationRepository->FindReservationByDateAndTime($data['date_reservation'], $data['reservation_time']);
-    if ($reservation){
-        return redirect('/reservation/service/' . $id_service)
-            ->with('error', 'Cette date et heure sont déjà réservées. Merci de choisir une nouvelle date et heure.');
-    } else {
-            $validated = $request->validate([
-                "address" => "required|string",
-                "postal_code" => "required",
-                "city" => "required|string",
-                "pays" => "required|string"
-            ]);
-
-            if($request->address) {
-                $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->date, $request->time);
-                if ($reservation){
-                    return redirect('/reservation/service/' . $id_service)
-                        ->with('error', 'Cette date et heure sont déjà réservées. Merci de choisir une nouvelle date et heure.');
-                }
-
-            $adress = $this->AdresseRepository->create([
-                "address" => $validated['address'],
-                "postal_code" => $validated['postal_code'],
-                "city" => $validated['city'],
-                "country" => $validated['pays']
-            ]);
-
-            $reservation = $this->ReservationRepository->insert([
-                "client_id" => Auth::user()->id,
-                "prestataire_id" => $data['prestataire_id'],
-                "service_id" => $data['id_service'],
-                "addresse_id" => $adress->id,
-                "reservation_date" => $request->date,
-                "reservation_time" => $request->time,
-                "created_at" => now(),
-                "status" => "En attente"
-            ]);
-            session()->put('confirmation',[
-                "PrenomPrestataire" => $service->Prestataire->Prenom,
-                "NomPrestataire" => $service->Prestataire->Nom,
-                "reservation_date" => $request->date,
-                "reservation_time" => $request->time,
-                "TitreService" => $service->titre,
-                "address" => $validated['address'],
-                "postal_code" => $validated['postal_code'],
-                "city" => $validated['city'],
-                "pays" => $validated['pays']
-            ]);
-            return redirect('/reservation-confirmation');
-        
-        }
-    }
-
-    return view('reservation-informations', compact(
-        'date_reservation',
-        'reservation_time',
-        'service',
-        'AvisAverage',
-        'TotalAvisPrestataire',
-        'totalprix',
-        'id_service',
-        'prestataire_id'
-    ));
 }
-
 
 
 public function ConfirmationReservation()
 {
     $confirmation = session('confirmation');
+    if(!$confirmation)
+    {
+        return redirect('/services');
+    }
 
     return view('reservation-confirmation',compact('confirmation'));
 }
@@ -299,6 +311,26 @@ public function Prestataires()
 $prestataires = $this->PrestataireRepository->GetPrestataires();
 // dd($prestataires);
     return view('prestataires',compact('prestataires'));
+}
+
+public function IndexCategories()
+{
+    $categories = $this->CategorieRepository->GetCategoriesPaginate();
+
+    return view('categories',compact('categories'));
+}
+
+public function IndexCategorieServices($id)
+{
+    $services = $this->ServiceRepository->GetServicesByCategorieID($id);
+    dd($services);
+
+    // $avisaverage = $this->AvisRepository->CalculateAverageFeedback($services->Professional->id);
+
+
+    $categorie = $this->CategorieRepository->find($id);
+
+    return view('categorie-services',compact('services','categorie'));
 }
 
 }

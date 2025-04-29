@@ -28,6 +28,7 @@
                 </div>
                 
                 <!-- User Info -->
+                 <a href="/admin/settings">
                 <div class="flex items-center space-x-3 px-4 py-4 border-b border-gray-100">
                     <img src="/storage/{{Auth::user()->Photo}}" 
                          alt="Admin Profile" class="w-10 h-10 rounded-full object-cover">
@@ -36,6 +37,7 @@
                         <p class="text-xs text-gray-500">Admin</p>
                     </div>
                 </div>
+                </a>
                 
                 <!-- Navigation -->
                 <nav class="flex-1 py-4 overflow-y-auto">
@@ -47,14 +49,6 @@
                         <a href="/admin/utilisateurs" class="@yield('Utilisateurs') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
                             <i class="fas fa-users mr-3 text-gray-400 group-hover:text-indigo-500"></i>
                             Utilisateurs
-                        </a>
-                        <a href="/admin/Prestataires" class="@yield('Prestataires') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
-                            <i class="fas fa-briefcase mr-3 text-gray-400 group-hover:text-indigo-500"></i>
-                            Prestataires
-                        </a>
-                        <a href="/admin/clients" class="@yield('Clients') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
-                            <i class="fas fa-user-friends mr-3 text-gray-400 group-hover:text-indigo-500"></i>
-                            Clients
                         </a>
                         <a href="/admin/categories" class="@yield('Catégories') group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg text-gray-700 hover:bg-indigo-50 hover:text-indigo-700">
                             <i class="fas fa-tags mr-3 text-gray-400 group-hover:text-indigo-500"></i>
@@ -119,12 +113,14 @@
                             
                             <!-- Profile Dropdown -->
                             <div class="relative">
+                                <a href="/admin/settings">
                                 <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
                                     <img src="/storage/{{Auth::user()->Photo}}" 
                                         alt="Profile" class="w-8 h-8 rounded-full object-cover">
                                     <span class="hidden md:block text-sm font-medium">{{Auth::user()->Nom}}</span>
                                     <i class="fas fa-chevron-down text-xs"></i>
                                 </button>
+                                </a>
                             </div>
                         </div>
                     </div>

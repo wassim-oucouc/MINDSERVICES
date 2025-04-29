@@ -23,9 +23,9 @@ class UtilisateurRepository implements UtilisateurInterface
         $users = Utilisateur::find($id)->with('Role','Professional','Client')->first();
         return $users;
     }
-    public function UpdateUtilisateur($id,array $data)
+    public function UpdateUtilisateur($id,$data)
     {
-        $user  = Utilisateur::find($id);
+        $user  = Utilisateur::findOrfail($id);
         $user->update($data);
 
         return $user;
@@ -70,6 +70,44 @@ class UtilisateurRepository implements UtilisateurInterface
     public function GetAllUsers()
     {
         $users = Utilisateur::with('Client','Professional','Role')->paginate(5);
+
+        return $users;
+    }
+
+    public function BanUser($id)
+    {
+        $user = Utilisateur::find($id);
+
+        $user->Status = 'Suspendu';
+
+        $user->save();
+    }
+
+    public function UnbanUser($id)
+    {
+        $user = Utilisateur::find($id);
+        $user->Status = 'Active';
+        $user->save();
+    }
+
+    public function GetStatisticUsers()
+    {
+        $totaluser = Utilisateur::all()->count();
+        $totalprestataire = Utilisateur::where('role_id',1)->count();
+        $totalclients = Utilisateur::where('role_id',2)->count();
+        $totalusersbanni = Utilisateur::where('Status','Suspendu')->count();
+
+        return $statistic = [
+            "totalusers" => $totaluser,
+            "totalprestataire" => $totalprestataire,
+            "totalclients" => $totalclients,
+            "totalusersbanni" => $totalusersbanni
+        ];
+    }
+
+    public function GetLastUsers()
+    {
+        $users = Utilisateur::with('Role')->latest()->limit(5)->get();
 
         return $users;
     }

@@ -29,6 +29,7 @@
         </div>
     </div>
 @endif
+
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                     <div>
                         <h2 class="text-3xl font-bold text-white">Finalisez votre réservation</h2>
@@ -81,11 +82,11 @@
                                 <div class="flex flex-wrap">
                                     <div class="mr-6 mb-2">
                                         <span class="text-indigo-200">Date:</span>
-                                        <span class="text-white font-medium ml-1">{{$date_reservation}}</span>
+                                        <span class="text-white font-medium ml-1">{{$data['reservation_date']}}</span>
                                     </div>
                                     <div>
                                         <span class="text-indigo-200">Heure:</span>
-                                        <span class="text-white font-medium ml-1">{{$reservation_time}}</span>
+                                        <span class="text-white font-medium ml-1">{{$data['reservation_time']}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -106,29 +107,56 @@
             </div>
         </section>
 
-        <!-- Section principale pour les informations client -->
         <main class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1">
                 <form id="client-info-form" action="/reservation/step/complete" method="POST">
                     @csrf
-                    <input type="hidden" name="date" value="{{$date_reservation}}">
-                    <input type="hidden" name="time" value="{{$reservation_time}}">
-                    <input type="hidden" name="id_service" value ="{{$id_service}}">
-                    <input type="hidden" name="prestataire_id" value ="{{$prestataire_id}}">
-                    
-                    <!-- Message d'alerte -->
+                    <input type="hidden" name="Email" value = "{{Auth::user()->Email}}">
+                    <input type="hidden" name="amount" value ="{{$totalprix}}">
+                    <input type="hidden" name="titre" value = "{{$service->titre}}">
+                    @if($errors->any())
+  <div class=" mx-auto my-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg shadow-md">
+    <ul class="list_errors list-disc pl-5">
+      @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach
+    </ul>
+  </div>
+@endif
                     <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg mb-6">
                         <p class="font-semibold text-blue-700">Dernière étape!</p>
                         <p class="text-blue-600">Veuillez compléter vos informations pour finaliser votre réservation.</p>
                     </div>
 
-                    <!-- Informations personnelles -->
-                    <section class="mb-8">
-                        <h2 class="text-xl font-semibold mb-4">Vos informations personnelles</h2>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <!-- Ajoutez ici les champs pour les informations personnelles -->
-                        </div>
-                    </section>
+                  <!-- Informations personnelles -->
+<section class="mb-8">
+    <h2 class="text-xl font-semibold mb-4">Vos informations personnelles</h2>
+    <div class="bg-white border border-gray-200 rounded-lg p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+            <!-- Nom -->
+            <div>
+                <p class="text-gray-600 text-sm">Nom</p>
+                <p class="font-medium">{{ Auth::user()->Nom }}</p>
+            </div>
+            
+            <!-- Prénom -->
+            <div>
+                <p class="text-gray-600 text-sm">Prénom</p>
+                <p class="font-medium">{{ Auth::user()->Prenom }}</p>
+            </div>
+        </div>
+        
+        <!-- Email -->
+        <div class="mb-1">
+            <p class="text-gray-600 text-sm">Email</p>
+            <p class="font-medium">{{ Auth::user()->Email }}</p>
+        </div>
+        
+        <div class="mt-4 text-xs text-gray-500">
+            <p>Si vous souhaitez modifier ces informations, veuillez accéder à votre profil.</p>
+        </div>
+    </div>
+</section>
 
                     <!-- Adresse de service -->
                     <section class="mb-8">
@@ -170,9 +198,15 @@
                         </div>
                     </section>
 
-                  
-                        
-                      
+                    <!-- Option de paiement Stripe (checkbox) -->
+                    <div class="mb-6">
+                        <div class="flex items-start">
+                        <input type="checkbox" name="terms" required style="width: 20px; height: 20px; border-radius: 50%;">
+                        <label for="stripe_payment" class="ml-2 text-sm text-gray-600">
+                                Payer avec Stripe (Paiement sécurisé)
+                            </label>
+                        </div>
+                    </div>
 
                     <!-- Politique de confidentialité et conditions -->
                     <div class="mb-6">
@@ -201,10 +235,11 @@
                         </div>
                     </section>
                     
-                    <!-- Bouton de soumission -->
-                    <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-                        Confirmer et réserver
+                    <!-- Bouton de soumission modifié -->
+                    <button type="submit" name="reserver" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        Payer
                     </button>
+                
                 </form>
             </div>
             
@@ -226,12 +261,12 @@
                     
                     <div class="mb-3">
                         <span class="text-gray-600">Date:</span>
-                        <span class="font-medium ml-1">{{$date_reservation}}</span>
+                        <span class="font-medium ml-1">{{$data['reservation_date']}}</span>
                     </div>
                     
                     <div class="mb-3">
                         <span class="text-gray-600">Heure:</span>
-                        <span class="font-medium ml-1">{{$reservation_time}}</span>
+                        <span class="font-medium ml-1">{{$data['reservation_time']}}</span>
                     </div>
                     
                     <div class="border-t border-gray-200 my-4"></div>

@@ -130,16 +130,16 @@
         </div>
 
         <div class="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            <!-- Service 1 -->
+           @foreach($categories as $categorie)
             <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                 <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Plomberie">
+                    <img class="w-full h-full object-cover" src="/storage/{{$categorie->Photo}}" alt="Plomberie">
                     <div class="absolute inset-0 bg-black bg-opacity-20"></div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Plomberie</h3>
+                    <h3 class="text-lg font-medium text-gray-900">{{$categorie->Nom}}</h3>
                     <p class="mt-2 text-base text-gray-500">
-                        Résolution de problèmes de plomberie, installation et entretien
+                    {{$categorie->Description}}
                     </p>
                     <div class="mt-4">
                         <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
@@ -148,101 +148,9 @@
                     </div>
                 </div>
             </div>
+            @endforeach
 
-            <!-- Service 2 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Électricité">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Électricité</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Installation électrique, dépannage et mise aux normes
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 3 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Jardinage">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Jardinage</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Entretien de jardin, tonte de pelouse et taille de haies
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 4 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Ménage">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Ménage</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Nettoyage régulier ou ponctuel de votre domicile
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 5 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Rénovation">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Rénovation</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Travaux de peinture, carrelage et rénovation intérieure
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service 6 -->
-            <div class="group relative bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <div class="h-48 bg-gray-200 relative">
-                    <img class="w-full h-full object-cover" src="/api/placeholder/400/250" alt="Informatique">
-                    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-lg font-medium text-gray-900">Informatique</h3>
-                    <p class="mt-2 text-base text-gray-500">
-                        Dépannage informatique et assistance technique
-                    </p>
-                    <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Découvrir <i class="fas fa-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            
         </div>
 
         <div class="mt-10 text-center">

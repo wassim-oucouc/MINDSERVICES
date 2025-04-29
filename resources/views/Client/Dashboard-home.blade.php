@@ -50,27 +50,62 @@
             </div>
         </div>
 
-        <!-- Résumé des statistiques -->
         <div class="mb-8">
-            <h2 class="text-xl font-semibold text-gray-900 mb-4">Aperçu</h2>
-            <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-                @foreach (['totalreservation' => 'Total Services réservés', 'reservationconfirmer' => 'Reservation Confirmée', 'reservationpending' => 'Reservation En attente', 'reservationannuler' => 'Reservation Annulée'] as $key => $label)
-                <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
-                    <div class="p-5">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center">
-                                <i class="fas {{ $key === 'totalreservation' ? 'fa-calendar-check' : ($key === 'reservationconfirmer' ? 'fa-check-circle' : ($key === 'reservationpending' ? 'fa-clock' : 'fa-times')) }} text-blue-600"></i>
-                            </div>
-                            <div class="ml-3">
-                                <h3 class="text-lg font-medium text-gray-900">{{$statistic[$key]}}</h3>
-                                <p class="text-sm text-gray-500">{{ $label }}</p>
-                            </div>
-                        </div>
-                    </div>
+    <h2 class="text-xl font-semibold text-gray-900 mb-4">Aperçu</h2>
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Total Services réservés -->
+        <div class="bg-white shadow-lg rounded-xl p-5 border border-gray-100">
+            <div class="flex items-center">
+                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center">
+                    <i class="fas fa-calendar-check text-blue-600"></i>
                 </div>
-                @endforeach
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-gray-900">{{$statistic['totalreservation']}}</h3>
+                    <p class="text-sm text-gray-500">Total Services réservés</p>
+                </div>
             </div>
         </div>
+
+        <!-- Reservation Confirmée -->
+        <div class="bg-white shadow-lg rounded-xl p-5 border border-gray-100">
+            <div class="flex items-center">
+                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center">
+                    <i class="fas fa-check-circle text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-gray-900">{{$statistic['reservationconfirmer']}}</h3>
+                    <p class="text-sm text-gray-500">Reservation Confirmée</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservation En attente -->
+        <div class="bg-white shadow-lg rounded-xl p-5 border border-gray-100">
+            <div class="flex items-center">
+                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center">
+                    <i class="fas fa-clock text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-gray-900">{{$statistic['reservationpending']}}</h3>
+                    <p class="text-sm text-gray-500">Reservation En attente</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservation Annulée -->
+        <div class="bg-white shadow-lg rounded-xl p-5 border border-gray-100">
+            <div class="flex items-center">
+                <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-100 to-teal-100 flex items-center justify-center">
+                    <i class="fas fa-times text-blue-600"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-gray-900">{{$statistic['reservationannuler']}}</h3>
+                    <p class="text-sm text-gray-500">Reservation Annulée</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
         <!-- Sections principales -->
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -206,10 +241,6 @@
                                 <div class="flex items-center text-sm text-gray-500">
                                     <i class="fas fa-calendar mr-1.5 text-gray-400"></i>
                                     {{$reservation->reservation_date}}, {{$reservation->reservation_time}}
-                                </div>
-                                <div class="flex items-center text-sm text-gray-500">
-                                    <i class="fas fa-map-marker-alt mr-1.5 text-gray-400"></i>
-                                    À domicile
                                 </div>
                             </div>
                             <div class="mt-4 flex justify-end">

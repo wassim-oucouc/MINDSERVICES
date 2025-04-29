@@ -156,8 +156,6 @@ class AuthController extends Controller
         if(Auth::check())
         {
             Auth::logout();
-            session::flush();
-            $request->session()->invalidate();
             return redirect('/login');
         }
         return redirect('/login');

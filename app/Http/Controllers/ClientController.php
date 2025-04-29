@@ -43,8 +43,10 @@ class ClientController extends Controller
 
     public function reservationRead()
     {
+        $client_id = Auth::user()->id;
         $reservation = $this->ReservationRepository->GetReservationsClient();
-        return view('Client.Dashboard-services-reservés',compact('reservation'));
+        $CountReservation = $this->ReservationRepository->GetTotalReservationByID($client_id);
+        return view('Client.Dashboard-services-reservés',compact('reservation','CountReservation'));
     }
 
     public function GetReservationDetails(Request $request)
@@ -69,6 +71,11 @@ class ClientController extends Controller
 
     public function UpdateClientProfile(Request $request)
 {
+
+    if(!Auth::user()->HasPermission('edit_information'))
+    {
+        abort(404);
+    }
     $client = $this->clientRepository->GetclientDetails();
 if($request->nom)
 {
@@ -321,6 +328,47 @@ public function CreateFeedbackReservation(Request $request,$id)
 
             }
         }
+    }
+
+
+    public function RequestCancelReservation(Request $request)
+    {
+        if($request->reservation_id)
+        {
+            $cancel = $this->ReservationRepository->RequestCancel($request->reservation_id);
+            if(!$cancel)
+            {
+              
+                return redirect()->back()->with('success',"Votre Demande d'Annulation a éte bien pris en charge");
+            }
+
+        }
+    }
+
+    public function UpdateReservationDetails(Request $request)
+    {
+        $reservation_id = $request->reservation_id;
+        $service_id = $request->service_id;
+
+        $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->new_date,$request->time,$service_id);
+
+        if($reservation)
+        {
+            return redirect('/client/reservation/details/'.$reservation_id)->with('error',"La date et l'heure sélectionnées pour ce service sont déjà réservées. Veuillez choisir un autre créneau disponible");
+        }
+        else
+        {
+
+        $updatereservation = $this->ReservationRepository->update($reservation_id,[
+            "reservation_date" => $request->new_date,
+            "reservation_time" => $request->time
+        ]);
+
+        return redirect('/client/reservation/details/'.$reservation_id)->with('modifier','La modification a été effectuée avec succès.');
+    }
+
+
+
     }
 
 

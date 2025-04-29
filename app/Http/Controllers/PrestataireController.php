@@ -38,8 +38,10 @@ class PrestataireController extends Controller
     }
     public function IndexHome()
     {   
+        
         $id_prestataire = Auth::user()->id;
        $avis =  $this->AvisRepository->GetFeedbackLimit($id_prestataire);
+       $statistic = $this->AvisRepository->getstatisticbyprestataire($id_prestataire);
        $reservation = $this->ReservationRepository->GetReservationsPaginate($id_prestataire);
        $totalReservationPending = $this->ReservationRepository->CountReservationEncours($id_prestataire);
        $totalServiceActif = $this->ServiceRepository->GetServiceActif($id_prestataire);
@@ -51,12 +53,16 @@ class PrestataireController extends Controller
         "totalReservationTerminer" => $totalReservationTerminer
        ];
        
-        return view('Prestataire.Dashboard-Home',compact('avis','reservation','totals'));
+        return view('Prestataire.Dashboard-Home',compact('avis','reservation','totals','statistic'));
     }
 
 
     public function IndexServices()
     {
+        if(!Auth::user()->HasPermission('manage_services'))
+        {
+            abort(404);
+        }
         $id_prestataire = Auth::user()->id;
         $statistic = $this->ServiceRepository->statisticServiceByPrestataire($id_prestataire);
         $services = $this->ServiceRepository->GetServicesByPrestataire($id_prestataire);
@@ -67,17 +73,25 @@ class PrestataireController extends Controller
 
     public function IndexServiceCreation()
     {
+        if(!Auth::user()->HasPermission('manage_services'))
+        {
+            abort(404);
+        }
         $categories = $this->CategorieRepository->ReadCategories();
         return view('Prestataire.Dashboard-Creation-service',compact('categories'));
     }
 
     public function ServiceCreation(Request $request)
     {
+        if(!Auth::user()->HasPermission('manage_services'))
+        {
+            abort(404);
+        }
         $validated = $request->validate([
-            'name' => 'required|string',
-            'description' => 'required|string',
+            'name' => 'required|string|min:28',
+            'description' => 'required|string|min:28',
             'prix' => 'required',
-            'image' => 'required',
+            'image' => 'nullable|image',
             'categorie' => 'required',
             "duration" => "required",
             "availability" => "required"
@@ -95,8 +109,9 @@ class PrestataireController extends Controller
             "availability" => $validated['availability'],
             'prestataire_id' => Auth::user()->id,
             'categorie_id' => $id,
+            "status" => "Actif",
             'created_at' => now(),
-            'updated_at' => now(),
+            'updated_at' => now()
         ]);
 
         return redirect('/professional/services');
@@ -107,14 +122,18 @@ class PrestataireController extends Controller
 
         public function EditService(Request $request)
         {
-   
-        
+            if(!Auth::user()->HasPermission('manage_services'))
+        {
+            abort(404);
+        }
                 $validated = $request->validate([
                     'name' => 'required|string',
                     'description' => 'required|string|min:20',
                     'prix' => 'required|string',
                     'categorie' => 'required|string',
-                    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048' // facultatif
+                    "availability" => "required|string",
+                    "duration" => "required",
+                    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
                 ]);
 
                 $id = $request->id_edit;
@@ -122,19 +141,30 @@ class PrestataireController extends Controller
                 if($request->hasFile('image'))
                 {
                 $path = $request->file('image')->store('service','public');
+                $service = $this->ServiceRepository->Update($id,[
+                    'titre' => $validated['name'],
+                    'Description' => $validated['description'],
+                    "duration" => $validated['duration'],
+                    "availability" => $validated['availability'],
+                     'Photo' => $path,
+                    'Prix' => $validated['prix'],
+                    'categorie_id' => $id_categorie[0]['id'],
+                    'updated_at' => now(),
+                ]);
                 }
                 $id_categorie = $this->CategorieRepository->GetIdByName($validated['categorie']) ?? 0;
-
 
 
                 $service = $this->ServiceRepository->Update($id,[
                     'titre' => $validated['name'],
                     'Description' => $validated['description'],
-                    'Photo' => $path,
+                    'duration' => $validated['duration'],
+                    "availability" => $validated['availability'],
                     'Prix' => $validated['prix'],
                     'categorie_id' => $id_categorie[0]['id'],
                     'updated_at' => now(),
                 ]);
+            
                 
                 return redirect()->back()->with('success','Le service a été mis à jour avec succès');
             
@@ -142,6 +172,10 @@ class PrestataireController extends Controller
 
     public function DeleteService(Request $request,$id)
     {
+        if(!Auth::user()->HasPermission('manage_services'))
+        {
+            abort(404);
+        }
         if (!$id) {
             abort(404);
         }
@@ -152,6 +186,10 @@ class PrestataireController extends Controller
 
     public function GestionReservationIndex()
     {
+        if(!Auth::user()->HasPermission('manage_reservations'))
+        {
+            abort(404);
+        }
         $prestataire_id = Auth::user()->id;
         $reservations = $this->ReservationRepository->GetReservationsByPrestataire($prestataire_id);
 
@@ -161,13 +199,31 @@ class PrestataireController extends Controller
 
     public function CancelReservation(Request $request,$id)
     {
+        if(!Auth::user()->HasPermission('manage_reservations'))
+        {
+            abort(404);
+        }
         $reservation = $this->ReservationRepository->CancelReservationById($id);
 
         return redirect('/professional/reservation');
     }
 
+    public function CancelReservationWithDetails(Request $request,$id)
+    {
+        if(!Auth::user()->HasPermission('manage_reservations'))
+        {
+            abort(404);
+        }
+        $reservation = $this->ReservationRepository->CancelReservationById($id);
+
+        return redirect('/professional/reservation/details/'.$id);
+    }
     public function ConfirmReservation(Request $request,$id)
     {
+        if(!Auth::user()->HasPermission('manage_reservations'))
+        {
+            abort(404);
+        }
         $reservation = $this->ReservationRepository->ConfirmReservationByid($id);
 
         return redirect('/professional/reservation');
@@ -175,6 +231,10 @@ class PrestataireController extends Controller
 
     public function ReservationDetails($id)
     {
+        if(!Auth::user()->HasPermission('manage_reservations'))
+        {
+            abort(404);
+        }
         $reservation = $this->ReservationRepository->GetDetailsReservation($id);
         return view('Prestataire.Dashboard-Reservation-details',compact('reservation'));
     }
@@ -182,8 +242,9 @@ class PrestataireController extends Controller
     public function AvisIndex()
     {
         $prestataire_id = Auth::user()->id;
+        $statistic = $this->AvisRepository->getstatisticbyprestataire($prestataire_id);
          $avis = $this->AvisRepository->GetFeedbacksByPrestataire($prestataire_id);
-        return view('Prestataire.Dashboard-Avis',compact('avis','prestataire_id'));
+        return view('Prestataire.Dashboard-Avis',compact('avis','prestataire_id','statistic'));
     }
 
     public function ProfileSettingsIndex()
@@ -302,6 +363,17 @@ class PrestataireController extends Controller
                 return redirect()->back()->with('imagechanged','Votre photo de profil a été mise à jour avec succès.');
             }
 
+
+    }
+
+    public function ValidationReservation(Request $request,$id)
+    {
+        $reservation_id = $id;
+
+        $reservation = $this->ReservationRepository->ValidateReservationByID($reservation_id);
+
+
+        return redirect('/professional/reservation/details/'.$id);
 
     }
 }

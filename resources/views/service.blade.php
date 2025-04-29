@@ -150,7 +150,7 @@
                                 <div class="ml-3 flex-1">
                                     <div class="flex items-center justify-between">
                                         <h3 class="text-sm font-medium text-gray-900">{{$review->Client->Prenom}} {{$review->Client->Nom}}</h3>
-                                        <p class="text-sm text-gray-500">Il y a {{$review->created_at->locale('fr')->diffForHumans()}}</p>
+                                        <p class="text-sm text-gray-500">{{$review->created_at->locale('fr')->diffForHumans()}}</p>
                                     </div>
                                     <div class="flex text-yellow-400 mt-1">
                                     @for( $i = 1 ; $i <= 5 ; $i++)
@@ -275,16 +275,7 @@
                         </p>
                     </div>
                     
-                    <!-- Partage -->
-                    <div class="px-6 py-4 border-t border-gray-100 flex items-center justify-center space-x-4">
-                        <button class="inline-flex items-center text-gray-700 hover:text-blue-600">
-                            <i class="far fa-heart mr-1"></i> Favoris
-                        </button>
-                        <span class="text-gray-300">|</span>
-                        <button class="inline-flex items-center text-gray-700 hover:text-blue-600">
-                            <i class="fas fa-share-alt mr-1"></i> Partager
-                        </button>
-                    </div>
+             
                 </div>
             </div>
         </div>

@@ -97,11 +97,11 @@
         <!-- Section principale de réservation -->
         <main class="flex flex-col lg:flex-row gap-6">
             <div class="flex-1">
-                <form id = "reservation" action="/reservation/step/complete" method = "POST">
+                <form id = "reservation" action= "/reservation/step/store" method = "POST">
                     @csrf
                     <input id = "reservation_date" value = "" type="hidden" name="reservation_date">
                     <input id = "reservation_time" value = "" type="hidden" name="reservation_time">
-                    <input type="hidden" name="id_service" value = "{{$service->id}}">
+                    <input id = "service_id" type="hidden" name="id_service" value = "{{$service->id}}">
                     <input type="hidden" name="prestataire_id" value = "{{$service->Prestataire->id}}">
                 <!-- Message d'alerte -->
                 <div class="bg-gray-100 p-4 rounded-lg mb-6">

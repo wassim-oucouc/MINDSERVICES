@@ -16,7 +16,7 @@
                         <h1 class="text-2xl font-extrabold text-white tracking-tight">Modifier mon Profil</h1>
                     </div>
                     <div class="mt-4 md:mt-0">
-                        <a href="/client/profil" class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-blue-700 bg-white hover:bg-gray-50 transition-colors duration-200">
+                        <a href="/client/profile" class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-blue-700 bg-white hover:bg-gray-50 transition-colors duration-200">
                             <i class="fas fa-arrow-left mr-2"></i> Retour au profil
                         </a>
                     </div>
@@ -139,7 +139,7 @@
                                     <button id="submit" type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                                         <i class="fas fa-save mr-2"></i> Enregistrer les modifications
                                     </button>
-                                    <a href="/client/profil" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                                    <a href="/client/profile" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                                         <i class="fas fa-times mr-2"></i> Annuler
                                     </a>
                                 </div>

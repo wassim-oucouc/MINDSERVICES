@@ -98,7 +98,7 @@
         <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
             <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-blue-50 to-teal-50">
                 <h3 class="text-lg font-semibold text-gray-800">Services réservés</h3>
-                <span class="text-xs text-white bg-gradient-to-r from-blue-600 to-teal-500 px-2.5 py-1 rounded-full font-medium">8 services</span>
+                <span class="text-xs text-white bg-gradient-to-r from-blue-600 to-teal-500 px-2.5 py-1 rounded-full font-medium">{{$CountReservation}} services</span>
             </div>
             
             <ul class="divide-y divide-gray-200">
@@ -142,6 +142,16 @@
                                     <span class="w-1.5 h-1.5 bg-sky-400 rounded-full mr-1.5"></span>
                                     En cours
                                 </span>
+                                @elseif($value->status == 'En attente Paiement')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-orange-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1.5"></span>
+                                    En attente Paiement
+                                </span>
+                                @elseif($value->status == 'annulation demandée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
+                                    annulation demandée
+                                </span>
                                 @endif
                             </div>
                         </div>
@@ -154,27 +164,28 @@
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-calendar-alt mr-1.5 h-3 w-3 text-blue-500"></i>
-                                {{$value->created_at->format('d/m/Y')}}
+                                {{$value->reservation_date}}
                             </div>
                             <div class="flex items-center">
                                 <i class="fas fa-map-marker-alt mr-1.5 h-3 w-3 text-blue-500"></i>
-                                À domicile
+                                {{$value->Professional->Ville}}
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-1.5 h-3 w-3 text-blue-500"></i>
+                                {{$value->reservation_time}}
                             </div>
                         </div>
                         
                         <!-- Boutons d'action - Style amélioré -->
                         <div class="mt-4 flex justify-end space-x-2">
-                            @if($value->status == 'En attente')
-                            <button class="px-3 py-1.5 text-xs border border-gray-300 rounded-lg shadow-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200">
-                                <i class="fas fa-times-circle mr-1 text-gray-500"></i> Annuler
-                            </button>
-                            <a href="/client/reservation/details/{{$value->id}}" class="px-3 py-1.5 text-xs border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 transition-colors duration-200">
+                        <a href="/client/reservation/details/{{$value->id}}" class="px-3 py-1.5 text-xs border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 transition-colors duration-200">
                                 <i class="fas fa-info-circle mr-1"></i> Voir Détails
                             </a>
                             <a href="mailto:{{$value->Prestataire->Email}}" class="px-3 py-1.5 text-xs border border-transparent rounded-lg shadow-sm font-medium text-white bg-gray-600 hover:bg-gray-700 transition-colors duration-200">
                                 <i class="fas fa-envelope mr-1"></i> Contacter
                             </a>
-                            @elseif($value->status == 'Terminée')
+    
+                            @if($value->status == 'Terminée')
                             <form action="/client/reservation/avis/{{$value->Service->id}}" method="POST">
                                 @csrf 
                                 <input type="hidden" name="prestataire_id" value="{{$value->Prestataire->id}}">
@@ -182,13 +193,6 @@
                                     <i class="fas fa-star mr-1"></i> Donner L'avis
                                 </button>
                             </form>
-                            <a href="/client/reservation/details/{{$value->id}}" class="px-3 py-1.5 text-xs border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 transition-colors duration-200">
-                                <i class="fas fa-info-circle mr-1"></i> Voir Détails
-                            </a>
-                            @elseif($value->status == 'Annulée' || $value->status == 'Confirmée')
-                            <a href="/client/reservation/details/{{$value->id}}" class="px-3 py-1.5 text-xs border border-transparent rounded-lg shadow-sm font-medium text-white bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 transition-colors duration-200">
-                                <i class="fas fa-info-circle mr-1"></i> Voir Détails
-                            </a>
                             @endif
                         </div>
                     </div>

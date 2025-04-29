@@ -11,3 +11,16 @@
 [21-Apr-2025 14:15:02 UTC] PHP Warning:  Module "fileinfo" is already loaded in Unknown on line 0
 [21-Apr-2025 14:15:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bcmath' (tried: C:\php\ext\bcmath (Le module spécifié est introuvable), C:\php\ext\php_bcmath.dll (Le module spécifié est introuvable)) in Unknown on line 0
 [21-Apr-2025 14:15:02 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'iconv' (tried: C:\php\ext\iconv (Le module spécifié est introuvable), C:\php\ext\php_iconv.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:46 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'modulename.extension' (tried: C:\php\ext\modulename.extension (Le module spécifié est introuvable), C:\php\ext\php_modulename.extension.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:46 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'msql.dll' (tried: C:\php\ext\msql.dll (Le module spécifié est introuvable), C:\php\ext\php_msql.dll.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:46 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'msql.so' (tried: C:\php\ext\msql.so (Le module spécifié est introuvable), C:\php\ext\php_msql.so.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  Module "openssl" is already loaded in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'pdo' (tried: C:\php\ext\pdo (Le module spécifié est introuvable), C:\php\ext\php_pdo.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  Module "pdo_mysql" is already loaded in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'tokenizer' (tried: C:\php\ext\tokenizer (Le module spécifié est introuvable), C:\php\ext\php_tokenizer.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'xml' (tried: C:\php\ext\xml (Le module spécifié est introuvable), C:\php\ext\php_xml.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'ctype' (tried: C:\php\ext\ctype (Le module spécifié est introuvable), C:\php\ext\php_ctype.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'json' (tried: C:\php\ext\json (Le module spécifié est introuvable), C:\php\ext\php_json.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:47 UTC] PHP Warning:  Module "fileinfo" is already loaded in Unknown on line 0
+[25-Apr-2025 19:47:48 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'bcmath' (tried: C:\php\ext\bcmath (Le module spécifié est introuvable), C:\php\ext\php_bcmath.dll (Le module spécifié est introuvable)) in Unknown on line 0
+[25-Apr-2025 19:47:48 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'iconv' (tried: C:\php\ext\iconv (Le module spécifié est introuvable), C:\php\ext\php_iconv.dll (Le module spécifié est introuvable)) in Unknown on line 0

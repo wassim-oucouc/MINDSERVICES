@@ -11,7 +11,21 @@ class Utilisateur extends Authenticatable
     Protected $fillable = ['id','Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
 
     Protected $table = "utilisateur";
+
     use HasFactory;
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,'permission_role');
+    }
+
+    public function HasPermission($permission)
+    {
+        if (!$this->role) {
+            return false;
+        }
+        return $this->Role->permissions()->where('name',$permission)->exists();
+    }
 
     public function Role()
     {

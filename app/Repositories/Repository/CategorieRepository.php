@@ -55,7 +55,7 @@ class CategorieRepository implements CategorieInterface
             'categorie.Photo',
             'categorie.created_at'
         )
-        ->paginate(1);
+        ->paginate(5);
     
         return $categories;
     }
@@ -83,5 +83,32 @@ class CategorieRepository implements CategorieInterface
         $categories = Categorie::all();
 
         return $categories;
+    }
+    public function GetStatisticCategorie()
+    {
+        $totalcategorie = Categorie::all()->count();
+
+
+        return $totalcategorie;
+    }
+
+    public function GetCategoriesLimit()
+    {
+       $categories =  Categorie::limit(4)->get();
+
+       return $categories;
+    }
+
+    public function GetCategoriesPaginate()
+    {
+        $categories = Categorie::paginate(10);
+        return $categories;
+    }
+
+    public function GetServicesCategorieID($id)
+    {
+        $services = Categorie::where('id',$id)->with('Service.Avis')->paginate(10);
+
+        return $services;
     }
 }

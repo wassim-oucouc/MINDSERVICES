@@ -124,10 +124,16 @@ class AvisRepository implements AvisInterface
     {
         $totalavis = Avis::where('prestataire_id',$id)->count();
 
+        $totalavisapprouver = Avis::where('prestataire_id',$id)->where('status','Approuvé')->count();
+
         $averagenote = DB::table('avis')->where('prestataire_id',$id)->avg('Note');
 
-        
+$statistic = [
+    "totalavis" => $totalavis,
+    "totalavisapprouver" => $totalavisapprouver,
+    "averagenote" => $averagenote
+];
 
-        return $averagenote;
+        return $statistic;
     }
 }

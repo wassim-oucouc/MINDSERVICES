@@ -1,156 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <base href = "/public">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINDSERVICES - Inscription Client</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fc;
-        }
-        .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        /* CSS-only animations */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
-        .slide-in {
-            opacity: 0;
-            animation: slideIn 0.6s ease-in-out forwards;
-        }
-        .scale-in {
-            opacity: 0;
-            animation: scaleIn 0.7s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideIn {
-            from { transform: translateX(-30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        /* Delayed animations for staggered effect */
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        
-        /* Form styling */
-        .input-field {
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            background-color: #f1f5f9;
-        }
-        .input-field:focus {
-            border-color: #4F46E5;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
-            background-color: #ffffff;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
-        }
-        .btn-client {
-            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
-            transition: all 0.3s ease;
-            transform: translateY(0);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
-        }
-        .btn-client:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
-        }
-        .btn-client:active {
-            transform: translateY(0);
-        }
-        .floating-label {
-            position: absolute;
-            pointer-events: none;
-            left: 12px;
-            top: 12px;
-            transition: 0.2s ease-in-out all;
-            font-size: 14px;
-            color: #6B7280;
-        }
-        .input-field:focus ~ .floating-label,
-        .input-field:not(:placeholder-shown) ~ .floating-label {
-            top: -10px;
-            left: 10px;
-            font-size: 12px;
-            background: #fff;
-            padding: 0 6px;
-            color: #4F46E5;
-        }
-        /* Card hover effects */
-        .hover-card {
-            transition: all 0.3s ease;
-        }
-        .hover-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-    </style>
-</head>
-<body class="text-gray-800">
-<nav class="bg-white shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex items-center">
-                <a href="index.html" class="flex-shrink-0 flex items-center">
-                    <h1 class="text-xl font-bold text-indigo-600 cursor-pointer font-sans">MIND<span class="text-indigo-800">SERVICE</span></h1>
-                </a>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="/" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
-                    <a href="services.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="providers.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
-                    <a href="about.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
-                    <a href="contact.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
-                </div>
-            </div>
-            <!-- Version desktop des boutons -->
-            <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="#">Connexion</a>
-                <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="professional-register.html">Espace Professionnel</a>
-                <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="client-register.html">Espace Client</a>
-            </div>
-            <div class="flex items-center sm:hidden">
-                <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Menu mobile modifié -->
-    <div class="sm:hidden hidden" id="mobile-menu">
-        <div class="pt-2 pb-3 space-y-1">
-            <a href="index.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Accueil</a>
-            <a href="services.html" class="block pl-3 pr-4 py-2 text-base font-medium text-indigo-600 bg-indigo-50">Services</a>
-            <a href="providers.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Prestataires</a>
-            <a href="about.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">À propos</a>
-            <a href="contact.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Contact</a>
-            <div class="flex flex-col space-y-2 mt-4">
-                <a href="#" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Connexion</a>
-                <a href="professional-register.html" class="block text-center bg-indigo-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-indigo-700 transition-colors mx-3">Espace Professionnel</a>
-                <a href="client-register.html" class="block text-center bg-green-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-green-700 transition-colors mx-3">Espace Client</a>
-            </div>
-        </div>
-    </div>
-</nav>
+@extends('layout.app')
+
+@section('title', 'Register Client')
+@section('content')
 
     <!-- Registration Section -->
     <section class="py-10 slide-in">
@@ -283,14 +134,7 @@
                                 </div>
                                 <div class="flex items-start">
                                     <div class="flex items-center h-6">
-                                        <input type="checkbox" id="terms" required
-                                            class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition-all cursor-pointer">
-                                    </div>
-                                    <div class="ml-3">
-                                        <label for="terms" class="text-sm text-gray-700">
-                                            J'accepte les <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">conditions d'utilisation</a> et la <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">politique de confidentialité</a>
-                                        </label>
-                                    </div>
+                        
                                 </div>
                                 <button id="inscription" type="submit" name="send" class="w-full btn-client text-white px-6 py-4 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-lg">
                                     Créer mon compte
@@ -365,5 +209,4 @@
     </footer>
     
     <script src="/js/register-client.js"></script>
-</body>
-</html>
+@endsection

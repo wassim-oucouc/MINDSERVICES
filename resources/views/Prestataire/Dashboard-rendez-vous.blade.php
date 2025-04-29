@@ -117,32 +117,42 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($reservation->status == 'En attente')
-                                    <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center w-fit">
-                                        <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></span>
-                                        En attente
-                                    </span>
-                                    @elseif($reservation->status == 'Confirmée')
-                                    <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center w-fit">
-                                        <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></span>
-                                        Confirmée
-                                    </span>
-                                    @elseif($reservation->status == 'Terminée')
-                                    <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800 flex items-center w-fit">
-                                        <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                        Terminée
-                                    </span>
-                                    @elseif($reservation->status == 'Annulée')
-                                    <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center w-fit">
-                                        <span class="w-1.5 h-1.5 bg-red-500 rounded-full mr-1.5"></span>
-                                        Annulée
-                                    </span>
-                                    @elseif($reservation->status == 'En cours')
-                                    <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-indigo-100 text-indigo-800 flex items-center w-fit">
-                                        <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full mr-1.5"></span>
-                                        En cours
-                                    </span>
-                                    @endif
+                                @if($reservation->status == 'En attente')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full mr-1.5"></span>
+                                    En attente
+                                </span>
+                                @elseif($reservation->status == 'Confirmée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full mr-1.5"></span>
+                                    Confirmée
+                                </span>
+                                @elseif($reservation->status == 'Terminée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full mr-1.5"></span>
+                                    Terminée
+                                </span>
+                                @elseif($reservation->status == 'Annulée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
+                                    Annulée
+                                </span>
+                                @elseif($reservation->status == 'En cours')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-sky-400 rounded-full mr-1.5"></span>
+                                    En cours
+                                </span>
+                                @elseif($reservation->status == 'En attente Paiement')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-orange-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-orange-400 rounded-full mr-1.5"></span>
+                                    En attente Paiement
+                                </span>
+                                @elseif($reservation->status == 'annulation demandée')
+                                <span class="px-2.5 py-1 text-xs font-medium rounded-full bg-red-100 text-sky-800 flex items-center">
+                                    <span class="w-1.5 h-1.5 bg-red-400 rounded-full mr-1.5"></span>
+                                    annulation demandée
+                                </span>
+                                @endif
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right">
                                     <div class="flex justify-end items-center space-x-2">

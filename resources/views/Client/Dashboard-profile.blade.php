@@ -170,55 +170,10 @@
                 <!-- Services favoris -->
                 <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-100">
                     <div class="p-6">
-                        <h2 class="text-xl font-semibold text-gray-900 mb-6">Mes services favoris</h2>
                         <div class="space-y-4">
-                            <!-- Service favori 1 -->
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors duration-200">
-                                <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
-                                    <i class="fas fa-broom text-blue-600 text-lg"></i>
-                                </div>
-                                <div class="ml-4 flex-1">
-                                    <h3 class="text-sm font-medium text-gray-900">Ménage à Domicile</h3>
-                                    <p class="text-xs text-gray-500">à partir de 25€/h</p>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700 ml-2">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Service favori 2 -->
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors duration-200">
-                                <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
-                                    <i class="fas fa-wrench text-blue-600 text-lg"></i>
-                                </div>
-                                <div class="ml-4 flex-1">
-                                    <h3 class="text-sm font-medium text-gray-900">Plomberie</h3>
-                                    <p class="text-xs text-gray-500">à partir de 45€/h</p>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700 ml-2">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
-
-                            <!-- Service favori 3 -->
-                            <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:border-blue-300 transition-colors duration-200">
-                                <div class="flex-shrink-0 h-12 w-12 rounded-lg bg-gradient-to-br from-blue-100 to-teal-100 flex items-center justify-center">
-                                    <i class="fas fa-laptop text-blue-600 text-lg"></i>
-                                </div>
-                                <div class="ml-4 flex-1">
-                                    <h3 class="text-sm font-medium text-gray-900">Assistance Informatique</h3>
-                                    <p class="text-xs text-gray-500">à partir de 35€/h</p>
-                                </div>
-                                <button class="text-red-500 hover:text-red-700 ml-2">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
+                           
                         </div>
-                        <div class="mt-4 text-center">
-                            <a href="/services" class="text-blue-600 hover:text-blue-500 text-sm font-medium">
-                                Découvrir plus de services <i class="fas fa-arrow-right ml-1"></i>
-                            </a>
-                        </div>
+
                     </div>
                 </div>
 

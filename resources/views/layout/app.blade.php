@@ -17,6 +17,101 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/fr.js"></script>
     <style>
         body {
+            <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fc;
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        /* CSS-only animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        .slide-in {
+            opacity: 0;
+            animation: slideIn 0.6s ease-in-out forwards;
+        }
+        .scale-in {
+            opacity: 0;
+            animation: scaleIn 0.7s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        /* Delayed animations for staggered effect */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Form styling */
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: #f1f5f9;
+        }
+        .input-field:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+            background-color: #ffffff;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+        }
+        .btn-client {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+        .btn-client:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+        }
+        .btn-client:active {
+            transform: translateY(0);
+        }
+        .floating-label {
+            position: absolute;
+            pointer-events: none;
+            left: 12px;
+            top: 12px;
+            transition: 0.2s ease-in-out all;
+            font-size: 14px;
+            color: #6B7280;
+        }
+        .input-field:focus ~ .floating-label,
+        .input-field:not(:placeholder-shown) ~ .floating-label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            background: #fff;
+            padding: 0 6px;
+            color: #4F46E5;
+        }
+        /* Card hover effects */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fc;
         }

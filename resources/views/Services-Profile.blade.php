@@ -87,7 +87,7 @@
                             <div class="flex justify-between items-start mb-2">
                                 <h3 class="text-lg font-bold text-gray-900">{{$service->titre}}</h3>
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                    Plomberie
+                                {{$service->Category->Nom}}
                                 </span>
                             </div>
                             <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{$service->Description}}</p>
