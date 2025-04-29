@@ -8,13 +8,44 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Utilisateur extends Authenticatable
 {
-    Protected $Fillable = ['Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
+    Protected $fillable = ['id','Prenom','Nom','Email','Password','Photo','role_id','Status','created_at','updated_at'];
 
     Protected $table = "utilisateur";
+
     use HasFactory;
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class,'permission_role');
+    }
+
+    public function HasPermission($permission)
+    {
+        if (!$this->role) {
+            return false;
+        }
+        return $this->Role->permissions()->where('name',$permission)->exists();
+    }
 
     public function Role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class,'role_id');
     }
+
+    public function Professional()
+    {
+        return $this->hasOne(Prestataire::class,'utilisateur_id');
+    }
+
+    public function Client()
+    {
+        return $this->hasOne(Client::class,'id_client');
+    }
+
+    public function Avis()
+    {
+        return $this->hasMany(Avis::class,'prestataire_id');
+    }
+
+    
 }

@@ -2,10 +2,10 @@
 
 namespace App\Repositories\Contracts;
 
-interface UserInterface
+interface UtilisateurInterface
 {
     public function find($id);
-    public function Update($id,array $data);
+    public function UpdateUtilisateur($id,array $data);
     public function Delete($id);
     public function create(array $data);
 }

@@ -4,12 +4,114 @@
     <base href="/public">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/fr.js"></script>
     <style>
         body {
+            <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fc;
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        /* CSS-only animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+        .slide-in {
+            opacity: 0;
+            animation: slideIn 0.6s ease-in-out forwards;
+        }
+        .scale-in {
+            opacity: 0;
+            animation: scaleIn 0.7s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        /* Delayed animations for staggered effect */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Form styling */
+        .input-field {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background-color: #f1f5f9;
+        }
+        .input-field:focus {
+            border-color: #4F46E5;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+            background-color: #ffffff;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+        }
+        .btn-client {
+            background: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+        .btn-client:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(79, 70, 229, 0.35);
+        }
+        .btn-client:active {
+            transform: translateY(0);
+        }
+        .floating-label {
+            position: absolute;
+            pointer-events: none;
+            left: 12px;
+            top: 12px;
+            transition: 0.2s ease-in-out all;
+            font-size: 14px;
+            color: #6B7280;
+        }
+        .input-field:focus ~ .floating-label,
+        .input-field:not(:placeholder-shown) ~ .floating-label {
+            top: -10px;
+            left: 10px;
+            font-size: 12px;
+            background: #fff;
+            padding: 0 6px;
+            color: #4F46E5;
+        }
+        /* Card hover effects */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fc;
         }
@@ -61,18 +163,39 @@
                 </a>
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
                     <a href="/" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
-                    <a href="services.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="providers.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
+                    <a href="/services" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
+                    <a href="/prestataires" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
                     <a href="about.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
                     <a href="/contact" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
                 </div>
             </div>
             <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
+                @if(Auth::check())
+                @if(Auth::user()->role_id == 2)
+                    <a href="/client/overview">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                @elseif(Auth::user()->role_id == 1)
+                <a href="/professional/dashboard">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                @elseif(Auth::user()->role_id == 3)
+                <a href="/admin/dashboard">
+                            <img src="/storage/{{Auth::user()->Photo}}" class="cursor-pointer	h-9 w-9 rounded-full flex items-center justify-center">
+                            </a>
+                            @endif      
+                            @else
+                            <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
                 <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="/login">Connexion</a>
                 <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="/pro/register">Espace Professionnel</a>
                 <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="/client/register">Espace Client</a>
+            </div>           
+                            @endif
+    </div>    
+          
             </div>
-            <div class="flex items-center sm:hidden">ton">
+             
+            <div class="flex items-center sm:hidden">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
                 <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-but
@@ -163,5 +286,7 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
+    <script src = "/js/services-home.js" ></script>
+    <script src = "/js/Reservation.js"></script>
     </body>
     </html>

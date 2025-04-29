@@ -8,6 +8,9 @@ const ButtonSuivant = document.querySelector('#suivant');
 const ButtonRetour = document.querySelector('#retour');
 const ButtonInscription = document.querySelector('#inscription');
 
+
+
+
 let Array = [];
 form2.style.display = "none";
 
@@ -31,7 +34,7 @@ ButtonSuivant.addEventListener('click', function (event) {
             document.querySelector('.error').textContent = "";
             document.querySelector('.errorban').classList.toggle('bg-red-100');
             }
-            document.querySelector('#dop').classList.toggle('active');
+            document.querySelector('#dop').classList.toggle('bg-indigo-600');
             document.querySelector('#text-etape').textContent = "Étape 2 : Informations Fiscal"
             form1.style.display = "none";
             form2.style.display = "block";
@@ -49,9 +52,14 @@ ButtonSuivant.addEventListener('click', function (event) {
 });
 
 ButtonRetour.addEventListener('click', function () {
+    console.log('sis')
     if (form2.style.display = "block") {
+        console.log('isopened')
+        if( document.querySelector('.errorban'))
+        {
         document.querySelector('.errorban').classList.toggle('bg-red-100');
-        document.querySelector('#dop').classList.toggle('active');
+        }
+        document.querySelector('#dop').classList.toggle('bg-indigo-600');
         document.querySelector('#text-etape').textContent = "Étape 1 : Informations de base"
         form2.style.display = "none";
         form1.style.display = "block";
@@ -70,6 +78,7 @@ function ValidationFormFirst() {
     let telephone = document.querySelector('#telephone-error');
     let image = document.querySelector('#image-error');
     let service = document.querySelector('#service-error');
+
 
 
 
@@ -99,6 +108,7 @@ function ValidationFormFirst() {
     }
 
     if (NomInput == "" || !RegexName.test(NomInput)) {
+        document.querySelector('#nom').style.borderColor = "red";
         nom.textContent = "Enter a Valid Name";
         isvalid = false;
     }
@@ -149,13 +159,14 @@ function ValidationFormFirst() {
     }
     if (serviceInput == "") {
         service.textContent = "Choisi Service Principale";
-        document.querySelector('#service').style.borderColor = "green";
+        document.querySelector('#service').style.borderColor = "red";
         isvalid = false;
     }
     else {
         service.textContent = "";
-        document.querySelector('#service').borderColor = "red";
+        document.querySelector('#service').style.borderColor = "green";
     }
+   
 
     return isvalid;
 
@@ -163,6 +174,7 @@ function ValidationFormFirst() {
 
 
 function ValidationFormSecond() {
+    const checkbox = document.querySelector('#terms');
     let AdresseInput = document.querySelector('#adresse').value;
     let VilleInput = document.querySelector('#Ville').value;
     let PostalCodeInput = document.querySelector('#PostalCode').value;

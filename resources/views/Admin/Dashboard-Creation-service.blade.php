@@ -87,6 +87,23 @@
     <p class="mt-2 text-xs text-gray-500">Indiquez le prix en euros (€).</p>
 </div>
 <div>
+    <label for="Duration" class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
+    <div class="relative">
+        <input type="number" id="duration" name="duration" step="1"
+            class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            placeholder="Entrez la duration">
+        <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">/H</span>
+    </div>
+    <p class="mt-2 text-xs text-gray-500">Indiquez la duration.</p>
+</div>
+<div>
+    <label for="availability" class="block text-sm font-medium text-gray-700 mb-2">availability</label>
+    <div class="relative">
+        <input type="text" id="availability" name="availability" step="1"
+            class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+            placeholder="Entrez la availability">
+    </div>
+<div>
     <label for="categorie" class="block text-sm font-medium text-gray-700 mb-2">Categorie</label>
     <select id="categorie" name="categorie"
         class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">

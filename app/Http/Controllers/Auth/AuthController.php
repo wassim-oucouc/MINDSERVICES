@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use session;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,9 +18,9 @@ class AuthController extends Controller
     private $UtilisateurRepository;
     Private $Nom;
 
-    public function __construct()
+    public function __construct(UtilisateurRepository $UtilisateurRepository)
     {
-        $this->UtilisateurRepository = new UtilisateurRepository();
+        $this->UtilisateurRepository =  $UtilisateurRepository;
     }
     public function RegisterProfessional(Request $request)
     {
@@ -99,7 +100,7 @@ class AuthController extends Controller
              "created_at" => now(),
              'updated_at' => now(),]
             ,[
-                "Numero_Telephone" => $validated['NumeroTele'],
+                "telephone" => $validated['NumeroTele'],
                 "pays" => $validated['pays'],
             ]);
 
@@ -121,7 +122,7 @@ class AuthController extends Controller
 
      if(!$user || !hash::check($request->Password,$user->Password))
      {
-        return redirect()->back()->with('error','Email Or Password is Incorrect');
+        return redirect()->back()->with('error',"L'adresse e-mail ou le mot de passe est incorrect");
      }
 
    else  if($user && hash::check($request->Password,$user->Password))
@@ -136,7 +137,7 @@ class AuthController extends Controller
         return redirect('/professional/dashboard');
         break;
       case 2 : 
-        return redirect('/client/dashboard');
+        return redirect('/client/overview');
         break;
     
      case 3 : 
@@ -155,8 +156,6 @@ class AuthController extends Controller
         if(Auth::check())
         {
             Auth::logout();
-            session::flush();
-            $request->session()->invalidate();
             return redirect('/login');
         }
         return redirect('/login');

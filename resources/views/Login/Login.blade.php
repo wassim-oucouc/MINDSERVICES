@@ -1,65 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINDSERVICE - Connexion</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-    </style>
-</head>
-<body class="font-poppins bg-gray-50 min-h-screen flex flex-col">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="flex-shrink-0 flex items-center">
-                        <h1 class="text-xl font-bold text-indigo-600 cursor-pointer font-sans">MIND<span class="text-indigo-800">SERVICE</span></h1>
-                    </a>
-                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                        <a href="index.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
-                        <a href="services.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                        <a href="providers.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
-                        <a href="about.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
-                        <a href="contact.html" class="navbar-link text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
-                    </div>
-                </div>
-                <!-- Version desktop des boutons -->
-                <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                    <a class="text-indigo-600 border-b-2 border-indigo-500 px-3 py-2 text-sm font-medium" href="login.html">Connexion</a>
-                    <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="professional-register.html">Espace Professionnel</a>
-                    <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="client-register.html">Espace Client</a>
-                </div>
-                <div class="flex items-center sm:hidden">
-                    <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Menu mobile -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="pt-2 pb-3 space-y-1">
-                <a href="index.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Accueil</a>
-                <a href="services.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Services</a>
-                <a href="providers.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Prestataires</a>
-                <a href="about.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">À propos</a>
-                <a href="contact.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Contact</a>
-                <div class="flex flex-col space-y-2 mt-4">
-                    <a href="login.html" class="block pl-3 pr-4 py-2 text-base font-medium text-indigo-600 bg-indigo-50">Connexion</a>
-                    <a href="professional-register.html" class="block text-center bg-indigo-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-indigo-700 transition-colors mx-3">Espace Professionnel</a>
-                    <a href="client-register.html" class="block text-center bg-green-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-green-700 transition-colors mx-3">Espace Client</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+@extends('layout.app')
+
+@section('title', 'Login')
+@section('content')
 
     <!-- Login Section -->
     <section class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-indigo-50 via-blue-50 to-white">
@@ -74,18 +16,18 @@
                 <p class="text-gray-600 mb-8 text-center">Connectez-vous à votre espace</p>
                 
                 <!-- Message d'erreur conditionnel -->
-                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 hidden" id="error-message">
+                @if(session('error'))
+                <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6" id="error-message">
                     <div class="flex">
                         <div class="flex-shrink-0">
                             <i class="fas fa-exclamation-circle text-red-500"></i>
                         </div>
-                        @if(session('error'))
                         <div class="ml-3">
                             <p class="text-sm">{{session('error')}}</p>
                         </div>
-                        @endif
                     </div>
                 </div>
+                @endif
                 
                 <form id="loginForm" method="POST" action="/login" class="space-y-6">
                     @csrf
@@ -227,24 +169,20 @@
     </footer>
 
     <script>
-        // Toggle mobile menu
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Toggle password visibility
         const togglePassword = document.getElementById('togglePassword');
         const password = document.getElementById('password');
         
         togglePassword.addEventListener('click', function(e) {
-            // Prevent form submission
             e.preventDefault();
             
             const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
             password.setAttribute('type', type);
             
-            // Toggle eye icon
             if (type === 'text') {
                 this.querySelector('i').classList.remove('fa-eye');
                 this.querySelector('i').classList.add('fa-eye-slash');
@@ -254,5 +192,4 @@
             }
         });
     </script>
-</body>
-</html>
+@endsection

@@ -1,5 +1,3 @@
-Modification de Service Template (Front-end seulement)
-
 @extends('layout.admin')
 
 @section('title', 'Modifier un Service')
@@ -91,15 +89,13 @@ Modification de Service Template (Front-end seulement)
                         </div>
                         <div>
                             <label for="categorie" class="block text-sm font-medium text-gray-700 mb-2">Categorie</label>
-                            <select id="categorie" name="categorie"
-                                class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
-                                <option value="{{$services->Categorie->Nom}}" selected>{{$services->Categorie->Nom}}</option>
-                                @foreach($categories as $value)
-                                @if($value->Nom == $services->Categorie->Nom)
-                                @else
-                                <option value="{{$services->Categorie->Nom}}" selected>{{$services->Categorie->Nom}}</option>
-                                @endif                  
-                                @endforeach
+                            <select id="categorie" name="categorie" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                            <option value="{{$services->category->Nom}}" selected>{{$services->category->Nom}}</option>
+                            @foreach($categories as $value)
+                            @if($value->Nom != $services->category->Nom)
+                            <option value="{{$value->Nom}}" selected>{{$value->Nom}}</option>
+                            @endif               
+                            @endforeach
                             </select>
                             <p class="mt-2 text-xs text-gray-500">Sélectionnez categorie du produit.</p>
                         </div>

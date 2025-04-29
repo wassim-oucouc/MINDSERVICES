@@ -1,100 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <base href="/public">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINDSERVICES - Inscription Professionnel</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fc;
-        }
-        .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1664575602276-acd073f104c1?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-        /* CSS-only animations */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-in-out forwards;
-        }
-        .slide-in {
-            opacity: 0;
-            animation: slideIn 0.6s ease-in-out forwards;
-        }
-        .scale-in {
-            opacity: 0;
-            animation: scaleIn 0.7s ease-in-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes slideIn {
-            from { transform: translateX(-30px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes scaleIn {
-            from { transform: scale(0.95); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        /* Delayed animations for staggered effect */
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-    </style>
-</head>
-<body class="text-gray-800">
-<nav class="bg-white shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex items-center">
-                <a href="index.html" class="flex-shrink-0 flex items-center">
-                    <h1 class="text-xl font-bold text-indigo-600 cursor-pointer font-sans">MIND<span class="text-indigo-800">SERVICE</span></h1>
-                </a>
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="index.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Accueil</a>
-                    <a href="services.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Services</a>
-                    <a href="providers.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Prestataires</a>
-                    <a href="about.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">À propos</a>
-                    <a href="contact.html" class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium">Contact</a>
-                </div>
-            </div>
-            <div class="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-4">
-                <a class="text-gray-500 hover:text-gray-900 px-3 py-2 text-sm font-medium" href="#">Connexion</a>
-                <a class="bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors" href="professional-register.html">Espace Professionnel</a>
-                <a class="bg-green-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-green-700 transition-colors" href="client-register.html">Espace Client</a>
-            </div>
-            <div class="flex items-center sm:hidden">
-                <button type="button" class="text-gray-500 hover:text-gray-900 focus:outline-none" id="mobile-menu-button">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="sm:hidden hidden" id="mobile-menu">
-        <div class="pt-2 pb-3 space-y-1">
-            <a href="index.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Accueil</a>
-            <a href="services.html" class="block pl-3 pr-4 py-2 text-base font-medium text-indigo-600 bg-indigo-50">Services</a>
-            <a href="providers.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Prestataires</a>
-            <a href="about.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">À propos</a>
-            <a href="contact.html" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Contact</a>
-            <div class="flex flex-col space-y-2 mt-4">
-                <a href="#" class="block pl-3 pr-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-indigo-600">Connexion</a>
-                <a href="professional-register.html" class="block text-center bg-indigo-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-indigo-700 transition-colors mx-3">Espace Professionnel</a>
-                <a href="client-register.html" class="block text-center bg-green-600 text-white px-4 py-2 rounded-md text-base font-medium hover:bg-green-700 transition-colors mx-3">Espace Client</a>
-            </div>
-        </div>
-    </div>
-</nav>
+@extends('layout.app')
+
+@section('title', 'Register Professional')
+@section('content')
 
 <div class="container mx-auto px-4 py-6 fade-in">
     <div class="flex justify-center items-center space-x-2">
@@ -216,14 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-start">
-                                    <div class="flex items-center h-6">
-                                        <input type="checkbox" id="terms" class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition-all cursor-pointer">
-                                    </div>
-                                    <div class="ml-3">
-                                        <label for="terms" class="text-sm text-gray-700">
-                                            J'accepte les <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">conditions d'utilisation</a> et la <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">politique de confidentialité</a>
-                                        </label>
-                                    </div>
+        
                                 </div>
                                 <button id="suivant" name="send" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-700 text-white px-6 py-4 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-lg">
                                     Suivant
@@ -242,7 +142,7 @@
                                 <div class="relative">
                                     <input name="Ville" class="w-full px-4 py-3.5 rounded-lg border-2 border-transparent bg-gray-100 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all" type="text" id="Ville" placeholder=" ">
                                     <label class="absolute left-3 top-2 text-gray-500 transition-all transform -translate-y-1/2" for="Ville">Ville</label>
-                                    <span id="ville-error" class="text-red-500 text-xs">Le mot de passe est requis.</span>
+                                    <span id="ville-error" class="text-red-500 text-xs"></span>
                                 </div>
                                 <div class="relative">
                                     <input name="PostalCode" class="w-full px-4 py-3.5 rounded-lg border-2 border-transparent bg-gray-100 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all" type="tel" id="PostalCode" placeholder=" ">
@@ -278,14 +178,7 @@
                                     </div>
                                 </div>
                                 <div class="flex items-start">
-                                    <div class="flex items-center h-6">
-                                        <input value="{{ csrf_token() }}" type="checkbox" id="terms" class="h-5 w-5 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition-all cursor-pointer">
-                                    </div>
-                                    <div class="ml-3">
-                                        <label for="terms" class="text-sm text-gray-700">
-                                            J'accepte les <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">conditions d'utilisation</a> et la <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">politique de confidentialité</a>
-                                        </label>
-                                    </div>
+                                 
                                 </div>
                                 <div class="flex flex-col space-y-4">
                                     <button id="retour" type="button" class="w-full text-gray-600 border border-gray-300 hover:bg-gray-50 px-6 py-3 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-lg">
@@ -466,5 +359,4 @@
     </div>
 </footer>
 <script src="/js/register.js"></script>
-</body>
-</html>
+@endsection
