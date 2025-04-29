@@ -46,7 +46,9 @@ Route::get('/pro/register',function(){
 Route::group(['middleware' => 'CheckRole:admin'], function(){
 
     Route::get('/admin/dashboard',[AdminController::class,'IndexHome'])->middleware('CheckRole:admin');
-
+    Route::get('/admin/settings',function(){
+        return view('/Admin.Dashboard-settings');
+    });
     Route::get('/admin/categories',function(){
         return view('Admin.Dashboard-categorie');
     });
@@ -212,9 +214,7 @@ Route::post('/payment',[StripePaymentController::class,'payment'])->name('paymen
 Route::get('/success',[StripePaymentController::class,'success'])->name('payment.success');
 });
 
-Route::get('/admin/settings',function(){
-    return view('/Admin.Dashboard-settings');
-});
+
 
 // Route::get('/payment/success', function () {
 //     return view('success');  
