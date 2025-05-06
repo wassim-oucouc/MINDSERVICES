@@ -4,17 +4,14 @@ let services = document.querySelector('#services');
 
 let pagination = document.querySelector('#pagination');
 
-
 let FiltrageButton = document.querySelector('#fitrage');
 
 
-//add event listener pour button de recherche
 ButtonSearch.addEventListener('click',function(event){
 event.preventDefault();
     $data = new FormData(document.querySelector('#searchForm'));
     SendDataSearch($data);
 });
-
 
 
 FiltrageButton.addEventListener('click',function(event){
@@ -30,7 +27,6 @@ FiltrageButton.addEventListener('click',function(event){
 
 
 
-// Recherche par service et ville
 async function SendDataSearch($data) {
     try
     {

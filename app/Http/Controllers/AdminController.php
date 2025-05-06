@@ -304,9 +304,10 @@ class AdminController extends Controller
         abort(403);
     }
         $Avis = $this->AvisRepository->ReadAvis();
+        $statistic = $this->AvisRepository->GetStatisticAvisAll();
         // dd($Avis);
 
-        return view('Admin.Dashboard-Avis',compact('Avis'));
+        return view('Admin.Dashboard-Avis',compact('Avis','statistic'));
     }
 
     public function DeleteAvis(Request $request)
@@ -592,6 +593,39 @@ class AdminController extends Controller
     public function CancelReservation(Request $request, $id)
     {
         $this->ReservationRepository->CancelReservation($id);
+        return redirect('/admin/rendez-vous');
+    }
+
+    public function UpdateReservationDetailsAdmin(Request $request)
+    {
+        $reservation_id = $request->reservation_id;
+        $service_id = $request->service_id;
+
+        $reservation = $this->ReservationRepository->FindReservationByDateAndTime($request->new_date,$request->time,$service_id);
+
+        if($reservation)
+        {
+            return redirect('/admin/rendez-vous')->with('error',"La date et l'heure sélectionnées pour ce service sont déjà réservées. Veuillez choisir un autre créneau disponible");
+        }
+        else
+        {
+
+        $updatereservation = $this->ReservationRepository->update($reservation_id,[
+            "reservation_date" => $request->new_date,
+            "reservation_time" => $request->time
+        ]);
+
+        return redirect('/admin/rendez-vous')->with('modifier','La modification a été effectuée avec succès.');
+    }
+
+
+
+    }
+
+    public function DeleteReservation(Request $request,$id)
+    {
+        $reservation = $this->ReservationRepository->DeleteReservationByID($id);
+
         return redirect('/admin/rendez-vous');
     }
     

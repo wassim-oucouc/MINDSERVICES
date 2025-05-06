@@ -49,7 +49,7 @@ class AvisRepository implements AvisInterface
         ->join('service', 'service.id','=','avis.Service_id')
         ->join('utilisateur AS Client','Client.id', '=','avis.client_id')
         ->join('utilisateur AS Professional', 'Professional.id','=','avis.prestataire_id')
-        ->get();
+        ->paginate(10);
 
         return $Avis;
     }
@@ -88,7 +88,7 @@ class AvisRepository implements AvisInterface
 
         $Avis = Avis::where('prestataire_id',$id)
         ->where('status','Approuvé')
-        ->with('Client')
+        ->with('Client','Service')
         ->orderBy('id','DESC')
         ->limit(4)
         ->get();
@@ -135,5 +135,20 @@ $statistic = [
 ];
 
         return $statistic;
+    }
+
+    public function GetStatisticAvisAll()
+    {
+        $totalavis = Avis::count();
+        $totalavispending = Avis::where('status','En attente')->count();
+        $AvgAvis = Avis::avg('Note');
+        $totalavisapprouver = Avis::where('status','Approuvé')->count();
+
+        return $statistic = [
+            "totalavis" => $totalavis,
+            "totalavispending" => $totalavispending,
+            "AvgAvis" => $AvgAvis,
+            "totalavisapprouver" => $totalavisapprouver
+        ];
     }
 }

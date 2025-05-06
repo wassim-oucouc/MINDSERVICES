@@ -102,6 +102,7 @@
                             </button>
                             
                             <!-- Profile Dropdown -->
+                             <a href="/professional/settings">
                             <div class="relative">
                                 <button class="flex items-center space-x-2 text-gray-700 hover:text-gray-900 focus:outline-none">
                                     <img src="/storage/{{Auth::user()->Photo}}" 
@@ -110,6 +111,7 @@
                                     <i class="fas fa-chevron-down text-xs"></i>
                                 </button>
                             </div>
+                            </a>
                         </div>
                     </div>
                 </div>

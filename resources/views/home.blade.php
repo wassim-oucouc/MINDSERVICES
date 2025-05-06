@@ -122,7 +122,7 @@
         <div class="lg:text-center">
             <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">Découvrez</h2>
             <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-                Nos services populaires
+                Nos categories populaires
             </p>
             <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
                 Des professionnels qualifiés pour tous vos besoins
@@ -142,7 +142,7 @@
                     {{$categorie->Description}}
                     </p>
                     <div class="mt-4">
-                        <a href="services.html" class="text-indigo-600 hover:text-indigo-500 font-medium">
+                        <a href="/categorie/services/{{$categorie->id}}" class="text-indigo-600 hover:text-indigo-500 font-medium">
                             Découvrir <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
@@ -155,7 +155,7 @@
 
         <div class="mt-10 text-center">
             <a href="services.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
-                Voir tous les services <i class="fas fa-arrow-right ml-2"></i>
+                Voir tous les categories <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
     </div>
@@ -265,12 +265,12 @@
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
             <div class="inline-flex rounded-md shadow">
-                <a href="client-register.html" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
+                <a href="/client/register" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50">
                     S'inscrire comme client
                 </a>
             </div>
             <div class="ml-3 inline-flex rounded-md shadow">
-                <a href="professional-register.html" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600">
+                <a href="/pro/register" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600">
                     Devenir prestataire
                 </a>
             </div>

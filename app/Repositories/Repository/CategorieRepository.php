@@ -94,7 +94,7 @@ class CategorieRepository implements CategorieInterface
 
     public function GetCategoriesLimit()
     {
-       $categories =  Categorie::limit(4)->get();
+       $categories =  Categorie::limit(6)->get();
 
        return $categories;
     }

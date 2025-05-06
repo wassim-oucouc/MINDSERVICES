@@ -12,19 +12,7 @@
                 </button>
                 <h2 class="text-xl font-semibold text-gray-800">Gestion des Rendez-vous</h2>
             </div>
-            <div class="flex items-center space-x-4">
-                <div class="relative">
-                    <input type="text" placeholder="Rechercher..." class="bg-gray-100 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all w-64">
-                    <i class="fas fa-search absolute right-3 top-2.5 text-gray-500"></i>
-                </div>
-                <button class="p-2 text-gray-500 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full relative transition-colors">
-                    <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
-                </button>
-                <button class="p-2 text-gray-500 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full transition-colors">
-                    <i class="fas fa-cog text-xl"></i>
-                </button>
-            </div>
+     
         </header>
 
         <!-- Appointments content -->
@@ -36,31 +24,7 @@
                         <h3 class="text-lg font-semibold text-gray-900">Liste des Rendez-vous</h3>
                         <p class="text-sm text-gray-500 mt-1">Gérez tous vos rendez-vous clients</p>
                     </div>
-                    <div class="flex flex-wrap gap-3">
-                        <div class="relative">
-                            <select class="bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm appearance-none cursor-pointer">
-                                <option>Tous les statuts</option>
-                                <option>En attente</option>
-                                <option>Confirmés</option>
-                                <option>En cours</option>
-                                <option>Terminés</option>
-                                <option>Annulés</option>
-                            </select>
-                            <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-500 pointer-events-none"></i>
-                        </div>
-                        <div class="relative">
-                            <select class="bg-white border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm appearance-none cursor-pointer">
-                                <option>Trier par: Date (récent)</option>
-                                <option>Trier par: Date (ancien)</option>
-                                <option>Trier par: Durée</option>
-                                <option>Trier par: Statut</option>
-                            </select>
-                            <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-500 pointer-events-none"></i>
-                        </div>
-                        <button class="bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg px-4 py-2.5 text-sm font-medium flex items-center transition-colors">
-                            <i class="fas fa-calendar-plus mr-2"></i>
-                            Nouveau
-                        </button>
+                     
                     </div>
                 </div>
             </div>

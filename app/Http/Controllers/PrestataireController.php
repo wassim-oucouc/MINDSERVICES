@@ -88,9 +88,9 @@ class PrestataireController extends Controller
             abort(404);
         }
         $validated = $request->validate([
-            'name' => 'required|string|min:28',
-            'description' => 'required|string|min:28',
-            'prix' => 'required',
+            'name' => 'required|string|min:15|max:70 ',
+            'description' => 'required|string|min:28|max:400',
+            'prix' => 'required|max:20',
             'image' => 'nullable|image',
             'categorie' => 'required',
             "duration" => "required",
@@ -140,6 +140,7 @@ class PrestataireController extends Controller
 
                 if($request->hasFile('image'))
                 {
+                    $id_categorie = $this->CategorieRepository->GetIdByName($validated['categorie']) ?? 0;
                 $path = $request->file('image')->store('service','public');
                 $service = $this->ServiceRepository->Update($id,[
                     'titre' => $validated['name'],

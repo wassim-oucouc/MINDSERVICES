@@ -14,19 +14,7 @@
                     </button>
                     <h2 class="text-xl font-semibold text-gray-800">Gestion des Rendez-vous</h2>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="relative">
-                        <input type="text" placeholder="Rechercher..." class="bg-gray-100 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white">
-                        <i class="fas fa-search absolute right-3 top-2.5 text-gray-500"></i>
-                    </div>
-                    <button class="p-2 text-gray-500 hover:text-indigo-600 focus:outline-none relative">
-                        <i class="fas fa-bell text-xl"></i>
-                        <span class="absolute top-0 right-0 h-4 w-4 bg-red-500 rounded-full text-xs text-white flex items-center justify-center">3</span>
-                    </button>
-                    <button class="p-2 text-gray-500 hover:text-indigo-600 focus:outline-none">
-                        <i class="fas fa-cog text-xl"></i>
-                    </button>
-                </div>
+               
             </header>
 
             <!-- Appointments content -->
@@ -36,93 +24,83 @@
                     <div class="flex items-center space-x-4 mb-4 md:mb-0">
                         <h3 class="font-semibold text-gray-900">Liste des Rendez-vous</h3>
                     </div>
-                    <div class="flex flex-wrap gap-4">
-                        <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option>Tous les statuts</option>
-                            <option>En attente</option>
-                            <option>Confirmés</option>
-                            <option>Terminés</option>
-                            <option>Annulés</option>
-                        </select>
-                        <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option>Tous les prestataires</option>
-                            <option>Paul Martin</option>
-                            <option>Camille Laurent</option>
-                            <option>Lucas Petit</option>
-                            <option>Emma Bernard</option>
-                        </select>
-                        <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option>Trier par: Date (récent)</option>
-                            <option>Trier par: Date (ancien)</option>
-                            <option>Trier par: Durée</option>
-                            <option>Trier par: Statut</option>
-                        </select>
-                    </div>
+                   
                 </div>
 
-                <!-- Appointments Table -->
-                <div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-8">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="bg-gray-50 border-b border-gray-200">
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        <div class="flex items-center space-x-2">
-                                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500">
-                                            <span>ID</span>
-                                        </div>
-                                    </th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prestataire</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Heure</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durée</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
-                                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-200">
-                                <@foreach($reservation as $reserv)
-                                <tr class="table-row hover:bg-indigo-50 transition-colors">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
-                                            <span class="text-sm text-gray-900">#{{$reserv->id}}</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="/storage/{{$reserv->Client->Photo}}" alt="Client" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">{{$reserv->Client->Prenom}} {{$reserv->Client->Nom}}</div>
-                                                <div class="text-xs text-gray-500">{{$reserv->Client->Email}}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <div class="h-8 w-8 flex-shrink-0">
-                                                <img src="/storage/{{$reserv->Prestataire->Photo}}" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
-                                            </div>
-                                            <div class="ml-3">
-                                                <div class="text-sm font-medium text-gray-900">{{$reserv->Prestataire->Prenom}} {{$reserv->Prestataire->Nom}}</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{$reserv->Service->titre}}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{$reserv->reservation_date}}</div>
-                                        <div class="text-xs text-gray-500">{{$reserv->reservation_time}}</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">{{$reserv->Service->duration}}/h</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($reserv->status == 'Confirmée')
+                @if(session('error'))
+    <div class="mb-4 p-3 bg-red-100 text-red-800 rounded">
+        {{ session('error') }}
+    </div>
+@endif
+@if(session('modifier'))
+    <div class="mb-4 p-3 bg-green-100 text-green-800 rounded">
+        {{ session('modifier') }}
+    </div>
+@endif
+
+               <!-- Appointments Table -->
+<div class="bg-white rounded-xl shadow-sm overflow-hidden border border-gray-200 mb-8">
+    <div class="overflow-x-auto">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200">
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500">
+                            <span>ID</span>
+                        </div>
+                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prestataire</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date & Heure</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Durée</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+                @foreach($reservation as $reserv)
+                <tr class="table-row hover:bg-indigo-50 transition-colors">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <input type="checkbox" class="rounded text-indigo-600 focus:ring-indigo-500 mr-3">
+                            <span class="text-sm text-gray-900">#{{$reserv->id}}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 flex-shrink-0">
+                                <img src="/storage/{{$reserv->Client->Photo}}" alt="Client" class="h-8 w-8 rounded-full object-cover">
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm font-medium text-gray-900">{{$reserv->Client->Prenom}} {{$reserv->Client->Nom}}</div>
+                                <div class="text-xs text-gray-500">{{$reserv->Client->Email}}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="h-8 w-8 flex-shrink-0">
+                                <img src="/storage/{{$reserv->Prestataire->Photo}}" alt="Prestataire" class="h-8 w-8 rounded-full object-cover">
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm font-medium text-gray-900">{{$reserv->Prestataire->Prenom}} {{$reserv->Prestataire->Nom}}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{$reserv->Service->titre}}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{$reserv->reservation_date}}</div>
+                        <div class="text-xs text-gray-500">{{$reserv->reservation_time}}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900">{{$reserv->Service->duration}}/h</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        @if($reserv->status == 'Confirmée')
                             <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-green-100 text-green-800 flex items-center inline-flex">
                                 <span class="w-2 h-2 bg-green-400 rounded-full mr-1.5"></span>
                                 Confirmée
@@ -147,58 +125,66 @@
                                 <span class="w-2 h-2 bg-blue-400 rounded-full mr-1.5"></span>
                                 En cours
                             </span>
-                            @elseif($reserv->status == 'annulation demandée')
+                        @elseif($reserv->status == 'annulation demandée')
                             <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-orange-100 text-orange-800 flex items-center inline-flex">
                                 <span class="w-2 h-2 bg-orange-400 rounded-full mr-1.5"></span>
                                 annulation demandée
                             </span>
-                            @elseif($reserv->status == 'En attente Paiement')
+                        @elseif($reserv->status == 'En attente Paiement')
                             <span class="px-3 py-1.5 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800 flex items-center inline-flex">
                                 <span class="w-2 h-2 bg-yellow-400 rounded-full mr-1.5"></span>
                                 En attente Paiement
                             </span>
                         @endif
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button onclick="openmodal(
-    {{$reserv->id}},
-    '{{$reserv->status}}',
-    '{{$reserv->Prestataire->Prenom}}',
-    '{{$reserv->Prestataire->Nom}}',
-    '{{$reserv->Prestataire->Email}}',
-    '{{$reserv->Prestataire->Photo}}',
-    '{{$reserv->Client->Prenom}}',
-    '{{$reserv->Client->Nom}}',
-    '{{$reserv->Client->Email}}',
-    '{{$reserv->Client->Photo}}',
-    '{{$reserv->reservation_date}}',
-    '{{$reserv->reservation_time}}',
-    '{{$reserv->Service->titre}}',
-    '{{$reserv->Service->duration}}',
-    '{{$reserv->created_at}}',
-    '{{$reserv->Service->Prix}}'
-)" class="text-indigo-600 hover:text-indigo-900 mx-1">                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="text-red-600 hover:text-red-900 mx-1">
-                                            <i class="fas fa-times-circle"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <button onclick="openmodal(
+                            {{$reserv->id}},
+                            {{json_encode($reserv->status)}},
+                            {{json_encode($reserv->Prestataire->Prenom)}},
+                            {{json_encode($reserv->Prestataire->Nom)}},
+                            {{json_encode($reserv->Prestataire->Email)}},
+                            {{json_encode($reserv->Prestataire->Photo)}},
+                            {{json_encode($reserv->Client->Prenom)}},
+                            {{json_encode($reserv->Client->Nom)}},
+                            {{json_encode($reserv->Client->Email)}},
+                            {{json_encode($reserv->Client->Photo)}},
+                            {{json_encode($reserv->reservation_date)}},
+                            {{json_encode($reserv->reservation_time)}},
+                            {{json_encode($reserv->Service->titre)}},
+                            {{json_encode($reserv->Service->duration)}},
+                            {{json_encode($reserv->created_at)}},
+                            {{json_encode($reserv->Service->Prix)}})" class="text-indigo-600 hover:text-indigo-900 mx-1">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    <div>
+                        <button onclick="modaldatemodifier({{$reserv->id}},'{{$reserv->reservation_date}}','{{$reserv->reservation_time}}',{{$reserv->Service->id}})" class="text-indigo-600 hover:text-indigo-900 mx-1">
+                            <i class="fas fa-edit"></i>
+                        </button>
+</div>
+                        <div>
+                        <form action="/admin/rendez-vous/details/delete/{{$reserv->id}}" method = "POST">
+                            @csrf 
+                            @method('DELETE')
+                        <button class="text-red-600 hover:text-red-900 mx-1">
+                            <i class="fas fa-times-circle"></i>
+                        </button>
+                        </form>
+</div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
                 <!-- Modal Backdrop (hidden by default) -->
 <div id="reservationModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
     <!-- Modal Content -->
     <div class="bg-white rounded-xl shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <!-- Modal Header -->
         <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between bg-indigo-50">
-            <h3 class="text-xl font-semibold text-indigo-700">Détails du Rendez-vous #<span id="modal-reservation-id">123</span></h3>
+            <h3  class="text-xl font-semibold text-indigo-700">Détails du Rendez-vous</h3>
             <button  onclick = "closemodal()" id="closeModal" class="text-gray-500 hover:text-indigo-600 focus:outline-none">
                 <i class="fas fa-times text-xl"></i>
             </button>
@@ -309,10 +295,6 @@
                 <i class="fas fa-print mr-2"></i>
                 Imprimer
             </button>
-            <button id = "modifierreservation" class="px-4 py-2 bg-indigo-600 rounded-lg text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors">
-                <i class="fas fa-edit mr-2"></i>
-                Modifier
-            </button>
             <form id = "cancelreservation" action ="/admin/rendez-vous/cancel/{{$reserv->id}}" method = "POST" >
                 @csrf 
                 @method('PUT')
@@ -320,8 +302,60 @@
                 <i class="fas fa-times-circle mr-2"></i>
                 Annuler le RDV
             </button>
+</form>
         </div>
     </div>
+</div>
+
+<!-- Modal pour modifier la date de réservation -->
+<div id="modificationDateModal" class="fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-white/30 hidden">
+  <div class="bg-white/80 backdrop-blur-md rounded-2xl p-6 w-full max-w-md shadow-2xl border border-gray-200">
+  @if(session('error'))
+    <div class="mb-4 p-3 bg-red-100 text-red-800 rounded">
+        {{ session('error') }}
+    </div>
+@endif
+<form action="/admin/rendez-vous/details/update" method="POST">
+      @csrf
+      @method('PUT')
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Modifier la date de réservation</h2>
+    <p class="text-gray-700 mb-4">Veuillez choisir une nouvelle date et heure pour votre réservation :</p>
+    
+   
+      <input type="hidden" id = "reservation_id" name="reservation_id" value="{{$reserv->id}}">
+      <input type="hidden" id = "service_id" name="service_id">
+      
+      <div class="mb-4">
+        <label for="new_date" class="block text-sm font-medium text-gray-700 mb-1">Nouvelle date</label>
+        <input type="date" id="date_picker" name="new_date" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      
+      <div class="mb-6">
+        <label for="new_time" class="block text-sm font-medium text-gray-700 mb-1">Nouvelle heure</label>
+        <select id = "time_picker" name = "time" class="w-full border rounded-lg p-2" id="time-select">
+                            <option value="" disabled selected>Sélectionnez une heure</option>
+                            <option value="09:00">09:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+      </div>
+      
+      <div class="flex justify-center space-x-4">
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors duration-200">
+          Confirmer
+        </button>
+        <button type="button" onclick="fermerModalDate()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors duration-200">
+          Annuler
+        </button>
+        </form>
+      </div>
+ 
+  </div>
 </div>
                 
 
@@ -349,6 +383,42 @@ let modal_duration = document.querySelector('#modal-duration');
 let modal_price = document.querySelector('#modal-price');
 let created_at = document.querySelector('#created_at');
  let modal_status = document.querySelector('#modal-status');
+ let ModalDateHeure = document.querySelector('#modificationDateModal');
+let service_id = document.querySelector('#service_id');
+
+let date_picker = document.querySelector('#date_picker');
+
+let time_picker = document.querySelector('#time_picker');
+
+let reservation_id = document.querySelector('#reservation_id');
+
+let reservation_id_text = document.querySelector('#modal_reservation_id');
+
+
+
+ flatpickr("#date_picker", {
+        dateFormat: "Y-m-d",
+                minDate: "today",
+                disableMobile: "true"
+    });
+
+ 
+
+    function fermerModalDate()
+    {
+        ModalDateHeure.classList.add('hidden');
+    }
+
+
+    function modaldatemodifier(id,reservation_date,reservation_time,id_service)
+    {
+        document.querySelector('#modal_reservation_id').textContent = 50 
+        reservation_id.value = id;
+        service_id.value = id_service;
+        date_picker.value = reservation_date;
+        time_picker.value = reservation_time;
+        ModalDateHeure.classList.remove('hidden');
+    }
 
  function closemodal()
 {

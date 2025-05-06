@@ -65,7 +65,7 @@
                         </div>
                         <div class="flex items-center mb-3">
                             <i class="fas fa-user   text-indigo-500 w-6"></i>
-                            <span class="ml-2 font text-gray-700">{{$prestatairedetails->created_at}}</span>
+                            <span class="ml-2 font text-gray-700">{{$prestatairedetails->created_at->locale('fr')->diffForHumans()}}</span>
                         </div>
                     </div>
 
@@ -142,28 +142,32 @@
         <h2 class="text-2xl font-bold mb-8 text-center">Ce que nos clients disent de {{$prestatairedetails->Utilisateur->Prenom}} {{$prestatairedetails->Utilisateur->Nom}}</h2>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            @foreach($avisPrestataire as $avis)
             <div class="bg-indigo-800 rounded-xl p-6">
                 <div class="flex text-yellow-400 mb-3">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
+                @for( $i = 1 ; $i <= 5 ; $i++)
+                                    @if($i <= $AvisAverage)
+                                    <i class="fas fa-star"></i> 
+                                    @else
+                                    <i class="far fa-star"></i>
+                                    @endif 
+                                    @endfor
                 </div>
                 <p class="text-indigo-100 italic mb-4">
-                    "Commentaire du client."
+                    {{$avis->Commentaire}}
                 </p>
                 <div class="flex items-center">
                     <div class="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center">
-                        <span class="text-white font-semibold text-xs">AB</span>
+                        <img src = "/storage/{{$avis->Client->Photo}}" class="h-8 w-8 rounded-full bg-indigo-500 flex items-center justify-center text-white font-semibold text-xs">
                     </div>
                     <div class="ml-2">
-                        <p class="text-sm font-medium">Alice B.</p>
-                        <p class="text-xs text-indigo-200">Service Titre</p>
+                        <p class="text-sm font-medium">{{$avis->Client->Prenom}}</p>
+                        <p class="text-xs text-indigo-200">{{$avis->Service->titre}}</p>
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 

@@ -109,12 +109,10 @@
                                 </div>
                                 <div class="relative">
                                     <select name="service" class="w-full px-4 py-3.5 rounded-lg border-2 border-transparent bg-gray-100 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all appearance-none" id="service">
+                                    @foreach($services as $service)
                                         <option value="" disabled selected></option>
-                                        <option value="training">Entraîneur personnel</option>
-                                        <option value="cleaning">Nettoyage de maison</option>
-                                        <option value="webdesign">Conception de sites Web</option>
-                                        <option value="gardening">Jardinage</option>
-                                        <option value="other">Autre (précisez)</option>
+                                        <option value="{{$service}}">{{$service}}</option>
+                                        @endforeach
                                     </select>
                                     <label class="absolute left-3 top-2 text-gray-500 transition-all transform -translate-y-1/2" for="service">Service principal proposé</label>
                                     <span id="service-error" class="text-red-500 text-xs"></span>
@@ -152,24 +150,9 @@
                                 <div class="relative">
                                     <select id="pays" name="pays" class="w-full px-4 py-3.5 rounded-lg border-2 border-transparent bg-gray-100 focus:border-indigo-600 focus:ring-2 focus:ring-indigo-500 transition-all appearance-none">
                                         <option value="" disabled selected></option>
-                                        <option value="france">France</option>
-                                        <option value="spain">Espagne</option>
-                                        <option value="germany">Allemagne</option>
-                                        <option value="italy">Italie</option>
-                                        <option value="morocco">Maroc</option>
-                                        <option value="netherlands">Pays-Bas</option>
-                                        <option value="unitedkingdom">Royaume-Uni</option>
-                                        <option value="usa">États-Unis</option>
-                                        <option value="canada">Canada</option>
-                                        <option value="brazil">Brésil</option>
-                                        <option value="japan">Japon</option>
-                                        <option value="southkorea">Corée du Sud</option>
-                                        <option value="australia">Australie</option>
-                                        <option value="sweden">Suède</option>
-                                        <option value="switzerland">Suisse</option>
-                                        <option value="belgium">Belgique</option>
-                                        <option value="austria">Autriche</option>
-                                        <option value="portugal">Portugal</option>
+                                       @foreach($countryList as $country)
+                                       <option value="{{$country}}" >{{$country}}</option>
+                                       @endforeach
                                     </select>
                                     <label class="absolute left-3 top-2 text-gray-500 transition-all transform -translate-y-1/2" for="pays">Pays</label>
                                     <span id="pays-error" class="text-red-500 text-xs"></span>
@@ -192,7 +175,7 @@
                         </div>
                     </form>
                     <p class="mt-8 text-center text-gray-600">
-                        Vous avez déjà un compte ? <a href="#" class="text-indigo-600 hover:text-indigo-800 font-medium">Connectez-vous</a>
+                        Vous avez déjà un compte ? <a href="/login" class="text-indigo-600 hover:text-indigo-800 font-medium">Connectez-vous</a>
                     </p>
                 </div>
             </div>

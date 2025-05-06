@@ -179,5 +179,14 @@ public function ValidateReservationByID($id)
     return $reservation;
 
 }
+public function DeleteReservationByID($id)
+{
+    $Reservation = Reservation::find($id);
+
+    if($Reservation)
+    {
+        $Reservation->delete();
+    }
+}
 
 }

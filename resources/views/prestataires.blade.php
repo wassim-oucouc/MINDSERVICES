@@ -37,7 +37,7 @@
             @foreach($prestataires as $prestataire)
                 <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow duration-300">
                     <!-- Bannière du profil -->
-                    <div class="h-32 bg-cover bg-center relative" style="background-image: url('/images/profile-banners/banner-{{rand(1,5)}}.jpg');">
+                    <div class="h-32 bg-cover bg-center relative" style="background-image: url('https://images.pexels.com/photos/14030860/pexels-photo-14030860.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2;">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
                     

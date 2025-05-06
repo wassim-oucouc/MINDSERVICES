@@ -118,7 +118,7 @@ public function GetServicesAll()
 
 public function GetServicesByCategorieID($id)
 {
-    $services = Service::with('Category','Professional','Avis')->withCount(['Avis' => function($avis){
+    $services = Service::with('Category','Professional','Avis')->where('categorie_id',$id)->withCount(['Avis' => function($avis){
         $avis->where('status','Approuvé');
     }])->withAvg('Avis','Note')->paginate(10);
 
@@ -158,7 +158,7 @@ $Service = DB::table('Service')
 ->leftJoin('avis','avis.service_id','=','Service.id')
 ->Join('categorie','service.categorie_id','=','categorie.id')
 ->where('prestataire.Ville',$City)
-->where('Service.titre','LIKE',substr($Name,0,3).'%')
+->where('Service.titre','LIKE','%'. substr($Name,0,3).'%')
 ->where('Service.status','Actif')
 ->select('Service.id','Service.titre','prestataire.Ville','prestataire.zip_code','categorie.Nom','Service.Description','Service.Photo','Service.Prix','Service.duration','Service.availability','Service.categorie_id','Service.prestataire_id','Service.created_at','Service.updated_at','Service.status',
 db::raw('COUNT(avis.Note) AS note_count'),
@@ -172,13 +172,13 @@ return $Service;
 public function GetServicebycategorie($array)
 {
     $query = Service::join('Categorie','categorie.id','=','service.categorie_id')
-    ->leftJoin('avis','avis.service_id','=','Service.id')
-    ->join('prestataire', 'prestataire.id', '=', 'service.prestataire_id')
+    ->leftjoin('avis','avis.service_id','=','Service.id')
+    ->leftjoin('prestataire', 'prestataire.id', '=', 'service.prestataire_id')
 ->select('prestataire.Ville','categorie.Nom AS categorieNom','Service.id','Service.titre','prestataire.zip_code','Service.Description','Service.Photo','Service.Prix','Service.duration','Service.availability','Service.categorie_id','Service.prestataire_id','Service.created_at','Service.updated_at','Service.status',
 db::raw('COUNT(avis.Note) AS note_count'),
 db::raw('AVG(avis.Note) AS Note_avg'))
 ->where('Service.status','Actif')
-->whereIn('Categorie.Nom',$array)
+->whereIn('categorie.Nom',$array)
 ->groupby('Service.id','Service.titre','prestataire.Ville','prestataire.zip_code','categorie.Nom','Service.Description','Service.Photo','Service.Prix','Service.duration','Service.availability','Service.categorie_id','Service.prestataire_id','Service.created_at','Service.updated_at','Service.status')
 ->get();
 

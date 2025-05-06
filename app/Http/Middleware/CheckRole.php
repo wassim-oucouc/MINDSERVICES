@@ -17,15 +17,24 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next,$role)
     {
-        if(!Auth::check() || Auth::user()->role->nom != $role)
+        if(!Auth::check())
+        {
+            return redirect('/login');           
+        }
+
+        if(Auth::user()->role->nom != $role)
         {
             if(Auth::user()->role->nom == 'prestataire')
             {
             return redirect('/professional/dashboard');
          }
-         else if(Auth::user->role->nom == 'client')
+         else if(Auth::user()->role->nom == 'client')
          {
             return redirect('/client/overview');
+         }
+         else if(Auth::user()->role->nom == 'admin')
+         {
+            return redirect('/admin/dashboard');
          }
         }
          else

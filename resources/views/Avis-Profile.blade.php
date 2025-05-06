@@ -66,23 +66,7 @@
                 </div>
                               
 
-            <!-- Filtres d'avis -->
-            <div class="flex flex-wrap gap-3 mb-6">
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition">
-                    Peinture
-                </button>
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition">
-                    5 étoiles
-                </button>
-                <div class="inline-flex ml-auto">
-                    <select class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                        <option>Plus récents</option>
-                        <option>Plus anciens</option>
-                        <option>Meilleure note</option>
-                        <option>Note la plus basse</option>
-                    </select>
-                </div>
-            </div>
+          
 
             <!-- Liste des avis -->
             <div class="space-y-6">

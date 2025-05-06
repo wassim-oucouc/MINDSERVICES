@@ -63,13 +63,14 @@ class HomeController extends Controller
     public function GetProfile(Request $request)
     {
         $prestatairedetails = $this->PrestataireRepository->GetDetailsPrestataire($request->id);
+        $avisPrestataire = $this->AvisRepository->GetFeedbackLimit($request->id);
         if(!$prestatairedetails)
         {
             return view('page-notfound');
         }
         $AvisAverage = $this->AvisRepository->CalculateAverageFeedback($request->id);
         $TotalAvisPrestataire = $this->AvisRepository->CountFeedbackPrestataire($request->id);
-        return view('profile',compact('prestatairedetails','AvisAverage','TotalAvisPrestataire'));
+        return view('profile',compact('prestatairedetails','AvisAverage','TotalAvisPrestataire','avisPrestataire'));
     }
 
     public function GetProfileAvis(Request $request)
@@ -106,6 +107,7 @@ class HomeController extends Controller
     public function IndexServiceSearch(Request $request)
     {
         $ServicePaginate = $this->ServiceRepository->GetServicesAll();
+     
         $categories = $this->CategorieRepository->GetAllCategories();
 
         if($request->location && $request->service)
@@ -323,12 +325,18 @@ public function IndexCategories()
 public function IndexCategorieServices($id)
 {
     $services = $this->ServiceRepository->GetServicesByCategorieID($id);
-    dd($services);
+
+   
 
     // $avisaverage = $this->AvisRepository->CalculateAverageFeedback($services->Professional->id);
 
 
     $categorie = $this->CategorieRepository->find($id);
+
+    if(!$categorie)
+    {
+        return view('page-notfound');
+    }
 
     return view('categorie-services',compact('services','categorie'));
 }
