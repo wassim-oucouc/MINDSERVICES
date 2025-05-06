@@ -6,7 +6,6 @@
     <!-- Section principale -->
     <div class="bg-gradient-to-b from-gray-50 to-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
             <!-- Partie supérieure : bannière et photo de profil -->
             <div class="relative mb-8">
                 <div class="h-48 sm:h-64 w-full rounded-xl overflow-hidden bg-indigo-700">
@@ -52,29 +51,7 @@
                 </div>
             </div>
 
-            <!-- Filtres de services -->
-            <div class="flex flex-wrap gap-3 mb-6">
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-indigo-50 text-indigo-700 border border-indigo-300 hover:bg-indigo-100 transition">
-                    Tous les services
-                </button>
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition">
-                    Plomberie
-                </button>
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition">
-                    Électricité
-                </button>
-                <button class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 transition">
-                    Peinture
-                </button>
-                <div class="inline-flex ml-auto">
-                <select class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                        <option>Prix: croissant</option>
-                        <option>Prix: décroissant</option>
-                        <option>Popularité</option>
-                        <option>Récemment ajoutés</option>
-                    </select>
-                </div>
-            </div>
+           
 
             <!-- Liste des services -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

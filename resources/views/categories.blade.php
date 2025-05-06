@@ -39,7 +39,7 @@
                     </p>
                     <div class="mt-4">
                         <a href="/categorie/services/{{$categorie->id}}" class="text-indigo-600 hover:text-indigo-500 font-medium">
-                            Voir les prestataires <i class="fas fa-arrow-right ml-1"></i>
+                            Voir Les Services <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>

@@ -34,9 +34,9 @@
             <div class="p-6 fade-in">
                 <!-- Breadcrumbs -->
                 <div class="flex items-center text-sm text-gray-500 mb-6">
-                    <a href="#" class="hover:text-indigo-600">Tableau de bord</a>
+                    <a href="/professional/dashboard" class="hover:text-indigo-600">Tableau de bord</a>
                     <i class="fas fa-chevron-right mx-2 text-xs"></i>
-                    <a href="#" class="hover:text-indigo-600">Services</a>
+                    <a href="/professional/services" class="hover:text-indigo-600">Services</a>
                     <i class="fas fa-chevron-right mx-2 text-xs"></i>
                     <span class="text-gray-700">Création</span>
                 </div>
@@ -61,8 +61,8 @@
                         @csrf
                         <!-- Nom de la catégorie -->
                         <div>
-                            <label for="categoryName" class="block text-sm font-medium text-gray-700 mb-2">Nom de Service *</label>
-                            <input type="text" id="name" name="name" required
+                            <label for="categoryName" class="block text-sm font-medium text-gray-700 mb-2">Nom de Service*</label>
+                            <input type="text" id="name" value = "{{old('name')}}" name="name" required
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 placeholder="Entrez le nom de Service">
                             <p class="mt-2 text-xs text-gray-500">Ce nom sera affiché sur votre site web.</p>
@@ -71,7 +71,7 @@
                         <!-- Description -->
                         <div>
                             <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description de Service</label>
-                            <textarea id="description" name="description" rows="4"
+                            <textarea id="description" value = "{{old('description')}}" name="description" rows="4"
                                 class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
                                 placeholder="Entrez une description détaillée de Service"></textarea>
                             <p class="mt-2 text-xs text-gray-500">Décrivez cette catégorie pour aider vos clients à comprendre ce qu'elle contient.</p>
@@ -79,7 +79,7 @@
                         <div>
     <label for="Prix" class="block text-sm font-medium text-gray-700 mb-2">Prix</label>
     <div class="relative">
-        <input type="number" id="Prix" name="prix" step="0.01"
+        <input type="number" id="Prix" value = "{{old('prix')}}" name="prix" step="0.01"
             class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             placeholder="Entrez le prix">
         <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">€</span>
@@ -89,7 +89,7 @@
 <div>
     <label for="Duration" class="block text-sm font-medium text-gray-700 mb-2">Duration</label>
     <div class="relative">
-        <input type="number" id="duration" name="duration" step="1"
+        <input type="number" id="duration" value = "{{old('duration')}}" name="duration" step="1"
             class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             placeholder="Entrez la duration">
         <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">/H</span>
@@ -99,13 +99,13 @@
 <div>
     <label for="availability" class="block text-sm font-medium text-gray-700 mb-2">availability</label>
     <div class="relative">
-        <input type="text" id="availability" name="availability" step="1"
+        <input type="text" id="availability" value = "{{old('availability')}}" name="availability" step="1"
             class="w-full px-4 py-3 pl-10 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
             placeholder="Entrez la availability">
     </div>
 <div>
     <label for="categorie" class="block text-sm font-medium text-gray-700 mb-2">Categorie</label>
-    <select id="categorie" name="categorie"
+    <select id="categorie" value = "{{old('categorie')}}" name="categorie"
         class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
         @foreach($categories as $value)
         <option value="{{$value->Nom}}">{{$value->Nom}}</option>

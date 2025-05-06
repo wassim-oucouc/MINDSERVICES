@@ -226,6 +226,10 @@
                             <span>{{$service->titre}}</span>
                             <span>{{$service->Prix}}€</span>
                         </div>
+                        <div class="flex justify-between mb-3">
+                            <span>Durée estimée du service</span>
+                            <span>{{$service->duration}}/h</span>
+                        </div>
                         
                         <div class="border-t border-gray-300 my-3"></div>
                         
@@ -274,6 +278,12 @@
                     <div class="flex justify-between mb-3">
                         <span>Prix du service</span>
                         <span>{{$service->Prix}}€</span>
+                    </div>
+                    <div class="border-t border-gray-200 my-4"></div>
+                    
+                    <div class="flex justify-between mb-3">
+                        <span>Durée estimée du service</span>
+                        <span>{{$service->duration}}/h</span>
                     </div>
                     
                     <div class="border-t border-gray-200 my-3"></div>

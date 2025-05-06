@@ -34,8 +34,9 @@
 
                 <!-- Dashboard content -->
                 <div class="p-6">
-                  <!-- Stats cards -->
+                 <!-- Stats cards -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    
     <!-- Réservations en cours -->
     <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-all">
         <div class="flex items-center justify-between">
@@ -43,7 +44,7 @@
                 <p class="text-sm text-gray-500 mb-1">Réservations en cours</p>
                 <h3 class="text-2xl font-bold">{{$totals['totalReservationPending']}}</h3>
             </div>
-            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center">
                 <i class="fas fa-calendar-check text-white text-xl"></i>
             </div>
         </div>
@@ -74,19 +75,22 @@
             </div>
         </div>
     </div> 
-      <!-- Services actifs -->
-      <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-all">
+
+    <!-- Total Avis -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-lg transition-all">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-sm text-gray-500 mb-1">Total Avis</p>
                 <h3 class="text-2xl font-bold">{{$statistic['totalavis']}}</h3>
             </div>
-            <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center">
-                <i class="fas fa-concierge-bell text-white text-xl"></i>
+            <div class="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+                <i class="fas fa-star text-white text-xl"></i>
             </div>
         </div>
     </div> 
+    
 </div>
+
 
                     
                     <!-- Main content area -->
@@ -102,13 +106,11 @@
                                 </div>
                             </div>
                             <div class="h-80 w-full">
-                                <!-- Chart placeholder -->
-                                <div class="w-full h-full bg-gray-50 rounded-lg flex items-center justify-center">
-                                <div>
-  <canvas id="myChart"></canvas>
+    <!-- Chart placeholder -->
+    <div class="w-full h-full bg-gray-50 rounded-lg flex items-center justify-center">
+        <canvas id="myChart" width="700" height="200"></canvas>
+    </div>
 </div>
-                                </div>
-                            </div>
                         </div>
                         
                         <!-- Recent reviews -->
@@ -149,68 +151,7 @@
     </div>
     </div>
                     
-                    <!-- Recent activities and opportunities -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <!-- Recent activity -->
-                        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-                            <div class="flex justify-between items-center mb-6">
-                                <h3 class="font-semibold text-lg">Activités Récentes</h3>
-                                <div>
-                                    <select class="bg-gray-100 rounded-lg text-sm font-medium px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                        <option>Aujourd'hui</option>
-                                        <option>Cette semaine</option>
-                                        <option>Ce mois</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="space-y-4">
-                                <div class="flex items-start">
-                                    <div class="w-8 h-8 rounded-full bg-indigo-600 flex-shrink-0 flex items-center justify-center text-white">
-                                        <i class="fas fa-comment-dots text-xs"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium">Nouveau message de Claire Dupont</h4>
-                                        <p class="text-xs text-gray-500">Il y a 30 minutes</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-8 h-8 rounded-full bg-green-500 flex-shrink-0 flex items-center justify-center text-white">
-                                        <i class="fas fa-check text-xs"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium">Projet "Conception site web" accepté</h4>
-                                        <p class="text-xs text-gray-500">Il y a 2 heures</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-8 h-8 rounded-full bg-yellow-500 flex-shrink-0 flex items-center justify-center text-white">
-                                        <i class="fas fa-star text-xs"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium">Nouvel avis 5 étoiles reçu</h4>
-                                        <p class="text-xs text-gray-500">Il y a 3 heures</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-8 h-8 rounded-full bg-blue-500 flex-shrink-0 flex items-center justify-center text-white">
-                                        <i class="fas fa-euro-sign text-xs"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium">Paiement reçu pour le projet "Logo entreprise"</h4>
-                                        <p class="text-xs text-gray-500">Il y a 5 heures</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-start">
-                                    <div class="w-8 h-8 rounded-full bg-purple-500 flex-shrink-0 flex items-center justify-center text-white">
-                                        <i class="fas fa-bell text-xs"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <h4 class="text-sm font-medium">Rappel: Deadline projet "Application mobile"</h4>
-                                        <p class="text-xs text-gray-500">Il y a 8 heures</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                   
                         
                         <!-- Opportunities -->
                       <!-- Composant de Réservations Récentes -->
@@ -226,95 +167,105 @@
         </a>
     </div>
     
-    <!-- Liste des réservations -->
-    <div class="space-y-4">
-        @foreach($reservation as $order)
-        <div class="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <!-- Image du service -->
-                    <img class="w-12 h-12 rounded-full object-cover shadow-sm" src="/storage/{{$order->Service->Photo}}" alt="{{$order->Service->titre}}">
+<!-- Liste des réservations -->
+<div class="space-y-4 w-full">
+    @foreach($reservation as $order)
+    <div class="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <!-- Image du service -->
+                <img class="w-12 h-12 rounded-full object-cover shadow-sm" src="/storage/{{$order->Service->Photo}}" alt="{{$order->Service->titre}}">
+                <!-- Informations du service -->
+                <div>
+                    <h4 class="font-medium text-gray-800">{{$order->Service->titre}}</h4>
+                    <p class="text-sm text-gray-500 mt-1">{{$order->Service->Prix}} €</p>
                     
-                    <!-- Informations du service -->
-                    <div>
-                        <h4 class="font-medium text-gray-800">{{$order->Service->titre}}</h4>
-                        <p class="text-sm text-gray-500 mt-1">{{$order->Service->Prix}} €</p>
-                        
-                        <!-- Badge de statut -->
-                        <div class="flex items-center mt-2">
-                            @switch($order->status)
-                                @case('En attente')
-                                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
-                                        <span class="w-2 h-2 bg-amber-400 rounded-full mr-1.5"></span>
-                                        En attente
-                                    </span>
-                                    @break
-                                @case('Confirmée')
-                                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
-                                        <span class="w-2 h-2 bg-blue-400 rounded-full mr-1.5"></span>
-                                        Confirmée
-                                    </span>
-                                    @break
-                                @case('Terminée')
-                                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
-                                        <span class="w-2 h-2 bg-gray-400 rounded-full mr-1.5"></span>
-                                        Terminée
-                                    </span>
-                                    @break
-                                @case('Annulée')
-                                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
-                                        <span class="w-2 h-2 bg-red-400 rounded-full mr-1.5"></span>
-                                        Annulée
-                                    </span>
-                                    @break
-                                @case('En cours')
-                                    <span class="px-3 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
-                                        <span class="w-2 h-2 bg-sky-400 rounded-full mr-1.5"></span>
-                                        En cours
-                                    </span>
-                                    @break
-                            @endswitch
-                        </div>
+                    <!-- Badge de statut -->
+                    <div class="flex items-center mt-2">
+                        @switch($order->status)
+                            @case('En attente')
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-amber-100 text-amber-800 flex items-center">
+                                    <span class="w-2 h-2 bg-amber-400 rounded-full mr-1.5"></span>
+                                    En attente
+                                </span>
+                                @break
+                            @case('Confirmée')
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800 flex items-center">
+                                    <span class="w-2 h-2 bg-blue-400 rounded-full mr-1.5"></span>
+                                    Confirmée
+                                </span>
+                                @break
+                            @case('Terminée')
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-800 flex items-center">
+                                    <span class="w-2 h-2 bg-gray-400 rounded-full mr-1.5"></span>
+                                    Terminée
+                                </span>
+                                @break
+                            @case('Annulée')
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-red-100 text-red-800 flex items-center">
+                                    <span class="w-2 h-2 bg-red-400 rounded-full mr-1.5"></span>
+                                    Annulée
+                                </span>
+                                @break
+                            @case('En cours')
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-sky-100 text-sky-800 flex items-center">
+                                    <span class="w-2 h-2 bg-sky-400 rounded-full mr-1.5"></span>
+                                    En cours
+                                </span>
+                                @break
+                        @endswitch
                     </div>
                 </div>
-                
-                <!-- Bouton de détails -->
-                <a href="/professional/reservation/details/{{$order->id}}" class="transform hover:scale-105 transition-transform">
-                    <button class="bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
-                        Voir détails
-                    </button>
-                </a>
             </div>
+            
+            <!-- Bouton de détails -->
+            <a href="/professional/reservation/details/{{$order->id}}" class="transform hover:scale-105 transition-transform">
+                <button class="bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                    Voir détails
+                </button>
+            </a>
         </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
-            </main>
-        </div>
+</div>
+</div>
+</div>
+        </main>
+    </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <script>
-              const ctx = document.getElementById('myChart').getContext('2d');
+           <script>
+       var chartData = {
+        labels: ['Réservations en cours', 'Services actifs', 'Services terminés', 'Total Avis'],
+        datasets: [{
+            label: 'Performance Mensuelle',
+            data: [
+                {{$totals['totalReservationPending']}},
+                {{$totals['totalServiceActif']}},
+                {{$totals['totalReservationTerminer']}},
+                {{$statistic['totalavis']}}
+            ],
+            backgroundColor: ['#4F7CAC', '#81C784', '#7986CB', '#FFD54F'],
+            borderColor: ['#4F7CAC', '#81C784', '#7986CB', '#FFD54F'],
+            borderWidth: 1
+        }]
+    };
 
-new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      borderWidth: 1
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', 
+        data: chartData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
 
 
             // Toggle sidebar

@@ -8,7 +8,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <!-- Partie supérieure: catégorie clickable et titre -->
         <div class="mb-6">
-            <a href="/categories/{{$service->category->Nom}}" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors">
+            <a href="/categorie/services/{{$service->category->id}}" class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition-colors">
                 <i class="fas fa-tag mr-2"></i> {{$service->category->Nom}}
             </a>
             <h1 class="mt-4 text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">{{$service->titre}}</h1>
@@ -73,7 +73,7 @@
         <i class="far fa-star"></i>
     @endif
                                 </div>
-                                <span class="text-gray-700 font-medium">{{ $AvisAverage }}</span>
+                                <span class="text-gray-700 font-medium">{{ $TotalAvisPrestataire }}</span>
                                 <span class="text-gray-500 ml-1">({{$TotalAvisPrestataire}} avis)</span>
                             </div>
                             <p class="text-gray-600 font-medium mt-2">

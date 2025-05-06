@@ -66,7 +66,7 @@
                     <div class="flex space-x-3">
                         <a target = "_blank" href="/service/details/{{$reservation->Service->id}}">
                     <button  class=" rounded-md px-3 py-1.5 bg-green-500 text-white  mx-1">
-    🖨️
+    
     <span>Details Service</span>
 </button>
 </a>

@@ -100,10 +100,7 @@
                 <div class="flex flex-wrap items-center justify-between mb-6">
                     <div class="flex items-center space-x-4 mb-4 md:mb-0">
                         <a href="/admin/create/user">
-                        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-indigo-700 transition-colors">
-                            <i class="fas fa-plus"></i>
-                            <span>Ajouter Utilisateur</span>
-                        </button>
+                        
                         </a>
                         <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg flex items-center space-x-2 hover:bg-gray-200 transition-colors">
                             <i class="fas fa-filter"></i>

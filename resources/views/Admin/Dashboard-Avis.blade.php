@@ -10,29 +10,20 @@
         <div class="flex items-center">
             <h2 class="text-xl font-semibold text-gray-800">Gestion des Avis</h2>
         </div>
-        <div class="flex items-center space-x-4">
-            <div class="relative">
-                <input type="text" placeholder="Rechercher..." class="bg-gray-100 rounded-full py-2 px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white">
-                <i class="fas fa-search absolute right-3 top-2.5 text-gray-500"></i>
-            </div>
-        </div>
+       
     </section>
 
-    <!-- Stats cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+ <!-- Stats cards -->
+ <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-500">Total des avis</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">358</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['totalavis']}}</p>
                 </div>
                 <div class="h-12 w-12 bg-indigo-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-comment-dots text-indigo-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>23% depuis le mois dernier</span>
             </div>
         </div>
 
@@ -40,15 +31,10 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-500">Avis en attente</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">42</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['totalavispending']}}</p>
                 </div>
                 <div class="h-12 w-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                    <i class="fas fa-clock text-yellow-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-yellow-600">
-                <i class="fas fa-exclamation-circle mr-1"></i>
-                <span>Nécessite votre attention</span>
             </div>
         </div>
 
@@ -56,34 +42,26 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-500">Note moyenne</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">4.7/5</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{number_format($statistic['AvgAvis'],2)}}</p>
                 </div>
                 <div class="h-12 w-12 bg-green-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-star text-green-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>0.3 depuis le mois dernier</span>
             </div>
         </div>
 
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-500">Taux d'approbation</p>
-                    <p class="text-2xl font-semibold text-gray-900 mt-1">92%</p>
+                    <p class="text-sm font-medium text-gray-500">Avis Approuver</p>
+                    <p class="text-2xl font-semibold text-gray-900 mt-1">{{$statistic['totalavisapprouver']}}</p>
                 </div>
                 <div class="h-12 w-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <i class="fas fa-thumbs-up text-blue-600 text-xl"></i>
                 </div>
-            </div>
-            <div class="mt-4 flex items-center text-sm text-green-600">
-                <i class="fas fa-arrow-up mr-1"></i>
-                <span>5% depuis le mois dernier</span>
-            </div>
         </div>
     </div>
+</div>
 
     <!-- Filters -->
     <div class="flex flex-wrap items-center justify-between mb-6">
@@ -91,31 +69,10 @@
             <h3 class="font-semibold text-gray-900">Liste des Avis</h3>
             <div class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-indigo-100 text-indigo-600">
                 <i class="fas fa-info-circle"></i>
-                <span class="text-sm font-medium">42 avis en attente de modération</span>
+                <span class="text-sm font-medium">{{$statistic['totalavispending']}} avis en attente de modération</span>
             </div>
         </div>
-        <div class="flex flex-wrap gap-4">
-            <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>Tous les statuts</option>
-                <option>En attente</option>
-                <option>Approuvés</option>
-                <option>Refusés</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>Toutes les notes</option>
-                <option>5 étoiles</option>
-                <option>4 étoiles</option>
-                <option>3 étoiles</option>
-                <option>2 étoiles</option>
-                <option>1 étoile</option>
-            </select>
-            <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                <option>Trier par: Date (récent)</option>
-                <option>Trier par: Date (ancien)</option>
-                <option>Trier par: Note (élevée)</option>
-                <option>Trier par: Note (basse)</option>
-            </select>
-        </div>
+      
     </div>
 
     <!-- Reviews List -->
@@ -243,9 +200,7 @@
                                 </div>
                             @elseif($value->status == "Approuvé")
                                 <div class="flex flex-row justify-end">
-                                    <button class="text-indigo-600 hover:text-indigo-900 mx-1">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
+                        
                                     <form action="/admin/update/avis/{{ $value->id }}" method="POST">
                                         @csrf
                                         @method('PUT')
@@ -270,22 +225,12 @@
         </div>
     </div>
 
-    <!-- Pagination -->
-    <div class="flex justify-between items-center mt-8">
+     <!-- Pagination -->
+     <div class="flex justify-between items-center mt-8">
         <div class="text-sm text-gray-600">
-            Affichage de 1-5 sur 4,257 avis
+            {{$Avis->links()}}
         </div>
-        <div class="flex space-x-2">
-            <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-indigo-600 hover:bg-indigo-50 transition-colors">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="px-4 py-2 bg-indigo-600 border border-indigo-600 rounded-lg text-white">1</button>
-            <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-indigo-600 hover:bg-indigo-50 transition-colors">2</button>
-            <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-indigo-600 hover:bg-indigo-50 transition-colors">3</button>
-            <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-indigo-600 hover:bg-indigo-50 transition-colors">4</button>
-            <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-indigo-600 hover:bg-indigo-50 transition-colors">
-                <i class="fas fa-chevron-right"></i>
-            </button>
         </div>
+</div>
     </div>
 @endsection

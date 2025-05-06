@@ -107,24 +107,11 @@
                                 <div class="relative input-group">
                                     <select id="pays" name="pays" class="w-full px-4 py-3.5 rounded-lg input-field focus:outline-none font-medium transition-all appearance-none" required>
                                         <option value="" disabled selected></option>
-                                        <option value="france">France</option>
-                                        <option value="spain">Espagne</option>
-                                        <option value="germany">Allemagne</option>
-                                        <option value="italy">Italie</option>
-                                        <option value="morocco">Maroc</option>
-                                        <option value="netherlands">Pays-Bas</option>
-                                        <option value="unitedkingdom">Royaume-Uni</option>
-                                        <option value="usa">États-Unis</option>
-                                        <option value="canada">Canada</option>
-                                        <option value="brazil">Brésil</option>
-                                        <option value="japan">Japon</option>
-                                        <option value="southkorea">Corée du Sud</option>
-                                        <option value="australia">Australie</option>
-                                        <option value="sweden">Suède</option>
-                                        <option value="switzerland">Suisse</option>
-                                        <option value="belgium">Belgique</option>
-                                        <option value="austria">Autriche</option>
-                                        <option value="portugal">Portugal</option>
+                                        <option value="" disabled selected></option>
+                                       @foreach($countryList as $country)
+                                       <option value="{{$country}}" >{{$country}}</option>
+                                       @endforeach
+                                    </select>
                                     </select>
                                     <label class="floating-label" for="pays">Pays</label>
                                     <span id="pays-error" class="text-red-500 text-xs"></span>
@@ -150,63 +137,7 @@
         </div>
     </section>
 
-    <footer class="bg-white border-t border-gray-200 mt-10">
-        <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-1">
-                    <h1 class="text-xl font-bold text-indigo-600 cursor-pointer font-sans">MIND<span class="text-indigo-800">SERVICE</span></h1>
-                    <p class="mt-2 text-sm text-gray-600">La plateforme qui connecte les experts et les clients pour des services de qualité.</p>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-gray-600">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-600">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-600">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-gray-600">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider">Services</h3>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Tous les services</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Développement Web</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Design</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Marketing</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Conseil</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider">Entreprise</h3>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">À propos</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Carrières</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Blog</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Presse</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-sm font-semibold text-gray-900 uppercase tracking-wider">Légal</h3>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Conditions d'utilisation</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Politique de confidentialité</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Politique de cookies</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">RGPD</a></li>
-                        <li><a href="#" class="text-sm text-gray-600 hover:text-indigo-600">Mentions légales</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-200 pt-8 mt-8 text-center">
-                <p class="text-sm text-gray-500">&copy; 2025 MINDSERVICE. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
+   
     
     <script src="/js/register-client.js"></script>
-@endsection
+@endsection 
